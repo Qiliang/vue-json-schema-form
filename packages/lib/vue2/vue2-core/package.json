@@ -10,9 +10,7 @@
         "form",
         "jsonSchema"
     ],
-    "publishConfig": {
-        "access": "public"
-    },
+    "private": true,
     "dependencies": {
         "@lljj/vjsf-utils": "1.19.0"
     },

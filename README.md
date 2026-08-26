@@ -4,16 +4,14 @@
 
 ## vue-json-schema-form
 
-基于 Vue2 / Vue3、 [JSON Schema](https://json-schema.org/understanding-json-schema/index.html) 生成带完整校验的Form表单，你的 :star2: :star2: :star2: 就是最大的支持
+基于 Vue2、 [JSON Schema](https://json-schema.org/understanding-json-schema/index.html) 生成带完整校验的Form表单，你的 :star2: :star2: :star2: 就是最大的支持
+
+本仓库仅维护并发布 **Vue2 + ElementUI** 版本（npm: `@xiaoql/vue-json-schema-form`）。
 
 [查看文档](https://vue-json-schema-form.lljj.me) - [Playground](https://form.lljj.me) - [可视化表单Schema生成器](https://form.lljj.me/schema-generator.html)
 
 ## ui框架支持
 * [vue2 ElementUi](https://github.com/lljj-x/vue-json-schema-form/tree/master/packages/lib/vue2/vue2-form-element)
-* [vue2 Iview3](https://github.com/lljj-x/vue-json-schema-form/tree/master/packages/lib/vue2/vue2-form-iview3)
-* [vue3 Element Plus](https://github.com/lljj-x/vue-json-schema-form/tree/master/packages/lib/vue3/vue3-form-element)
-* [vue3 Antdv](https://github.com/lljj-x/vue-json-schema-form/tree/master/packages/lib/vue3/vue3-form-ant)
-* [vue3 NaiveUi](https://github.com/lljj-x/vue-json-schema-form/tree/master/packages/lib/vue3/vue3-form-naive)
 
 
 ![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vue-json-schema-form.gif)

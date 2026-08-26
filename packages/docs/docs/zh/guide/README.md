@@ -8,99 +8,32 @@
 * [Vue可视化活动编辑器](https://form.lljj.me/vue-editor.html)
 * [可视化表单Schema生成器](https://form.lljj.me/schema-generator.html "Vue JSON Schema Form 可视化表单Schema生成器")
 
-## 多版本选择
-支持如下Vue版本和Ui框架，结合你的项目框架选择版本。
+## 包说明
+本仓库仅维护 `Vue2` + `ElementUi` 版本。
 
-**各版本api和使用形式99%一致，仅有如下差异：**
-::: warning 各版本差异
-* vue3 emit事件都会去掉on前缀，详细看这里 [事件 Emit Event](/zh/guide/basic-config.html#事件-emit-event)
-* vue3 antd Vue `v-model` 不使用 `modelValue` props，这里需要做个转换，[详细参见](/zh/guide/#vue3-ant-v-model-%E7%89%B9%E6%AE%8A%E5%A4%84%E7%90%86)
-:::
-
-### @lljj/vue-json-schema-form
+### @xiaoql/vue-json-schema-form
 * 适配ui库：`Vue2` `ElementUi`
   * 注意需要全局注册Element相关组件，也可根据控制台提示按需use
-* package name: `@lljj/vue-json-schema-form`
-* umd cdn地址：[@lljj/vue-json-schema-form cdn](https://npm.elemecdn.com/@lljj/vue-json-schema-form/dist/vueJsonSchemaForm.umd.min.js)
+* package name: `@xiaoql/vue-json-schema-form`
 * umd script 标签形式引入暴露全局变量 `window.vueJsonSchemaForm`，`window.vueJsonSchemaForm.default` 暴露组件，同时会注册 `VueForm` 全局组件
 * [playground](https://form.lljj.me/#/demo?type=Simple)
 
-### @lljj/vue2-form-iview3
-* 适配ui库：`Vue2` `iview3`
-  * 注意需要全局注册 iview3 相关组件，也可根据控制台提示按需use
-* package name: `@lljj/vue2-form-iview3`
-* umd cdn地址：[@lljj/vue2-form-iview3 cdn](https://npm.elemecdn.com/@lljj/vue2-form-iview3/dist/vue2-form-iview3.umd.min.js)
-* umd script 标签形式引入暴露全局变量 `window.vue2FormIview3`，`window.vue2FormIview3.default` 暴露组件，同时会注册 `vue2FormIview3` 全局组件
-* [playground](https://form.lljj.me/#/demo?type=Simple&ui=VueIview3Form)
-
-### @lljj/vue3-form-element
-* 适配ui库：`Vue3` `ElementPlus`
-    * 注意需要全局注册 ElementPlus 相关组件，也可根据控制台提示按需use
-* package name : `@lljj/vue3-form-element`
-* umd cdn地址：[@lljj/vue3-form-element cdn](https://npm.elemecdn.com/@lljj/vue3-form-element/dist/vue3-form-element.umd.min.js)
-* umd script 标签形式引入暴露全局变量 `window.vue3FormElement`，`window.vue3FormElement.default` 暴露组件
-* [playground](https://form.lljj.me/v3/#/demo?type=Simple)
-
-### @lljj/vue3-form-naive
-* 适配ui库：`Vue3` `naive`
-  * 注意需要全局注册 vue3 naive 相关组件，也可根据控制台提示按需use
-* package name : `@lljj/vue3-form-naive`
-* umd cdn地址：[@lljj/vue3-form-naive cdn](https://npm.elemecdn.com/@lljj/vue3-form-naive/dist/vue3-form-naive.umd.min.js)
-* umd script 标签形式引入暴露全局变量 `window.vue3FormNaive`，`window.vue3FormNaive.default` 暴露组件
-* [playground](https://form.lljj.me/v3/#/demo?type=Simple&ui=VueNaiveForm)
-
-### @lljj/vue3-form-ant
-* 适配ui库：`Vue3` `antdv`
-    * 注意需要全局注册 vue3 antdv 相关组件，也可根据控制台提示按需use
-* package name : `@lljj/vue3-form-ant`
-* umd cdn地址：[@lljj/vue3-form-ant cdn](https://npm.elemecdn.com/@lljj/vue3-form-ant/dist/vue3-form-ant.umd.min.js)
-* umd script 标签形式引入暴露全局变量 `window.vue3FormAnt`，`window.vue3FormAnt.default` 暴露组件
-* [playground](https://form.lljj.me/v3/#/demo?type=Simple&ui=VueAntForm)
-
-::: warning antd 4x 版本注意：
-* v4版本请使用，import { JsonSchemaFormAntdV4 } from "@lljj/vue3-form-ant";
-* v3版本还是建议使用 default export
-:::
-
-#### vue3 ant、naiveUi v-model 特殊处理
-例如 `a-input` 组件，ant vue3需要使用 `v-model:value`，但在整个框架内部 `v-model` 都是使用 `modelValue`，所以这里就需要对不一致的props通过中间组件组做转换。
-
-你可以自行转换，也可以使用内置方法 `modelValueComponent` 转换，如下：
-```js
-// 返回一个接受 modelValue 和 update:modelValue v-model的组件
-import { modelValueComponent } from '@lljj/vue3-form-ant';
-const MyFixInputComponent = modelValueComponent('a-input', {
-    model: 'value' // 这里要根据ant组件 model的参数传递
-});
-
-// naive 也是类似操作
-import { modelValueComponent } from '@lljj/vue3-form-naive';
-const MyFixInputComponent = modelValueComponent('n-input', {
-    model: 'value' // 这里要根据naive组件 model的参数传递
-});
-```
-
-:::tip
-这样使用起来还是有些麻烦，目前已经对常用的Widget组件做了内置，
-参见 [ant、naiveUi vue 附加全局Widget组件](/zh/guide/components.html#vue3-ant、naiveui-特有的全局组件)
-:::
-
 ## 快速开始
-> **后续的文档都以 `@lljj/vue-json-schema-form` 为例**
+> **后续的文档都以 `@xiaoql/vue-json-schema-form` 为例**
 
 ### npm
 
 ``` bash
 # 安装
-npm install --save @lljj/vue-json-schema-form
+npm install --save @xiaoql/vue-json-schema-form
 
 # yarn
-yarn add @lljj/vue-json-schema-form
+yarn add @xiaoql/vue-json-schema-form
 ```
 
 * 使用
 ```js
-import VueForm from '@lljj/vue-json-schema-form';
+import VueForm from '@xiaoql/vue-json-schema-form';
 import Vue from 'vue';
 
 // 全局注册 或者可以在组件内注册
@@ -110,7 +43,7 @@ Vue.component('VueForm', VueForm);
 ### script引入
 ```html
 # script引入
-<script src="//npm.elemecdn.com/@lljj/vue-json-schema-form/dist/vueJsonSchemaForm.umd.min.js"></script>
+<script src="//unpkg.com/@xiaoql/vue-json-schema-form/dist/vueJsonSchemaForm.umd.min.js"></script>
 ```
 
 ## DEMO

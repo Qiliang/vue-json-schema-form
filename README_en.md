@@ -1,5 +1,7 @@
 # vue-json-schema-form
-Quickly building HTML form based on `Vue`, `JSON Schema` and `ElementUi`.
+Quickly building HTML form based on `Vue2`, `JSON Schema` and `ElementUi`.
+
+This fork only maintains and publishes the Vue2 + ElementUI package (`@xiaoql/vue-json-schema-form`).
 
 ## Experience quickly
 * [Live playground](https://form.lljj.me/ "Vue JSON Schema Form Demo")
@@ -12,10 +14,10 @@ Quickly building HTML form based on `Vue`, `JSON Schema` and `ElementUi`.
 
 ``` bash
 # npm
-npm install --save @lljj/vue-json-schema-form
+npm install --save @xiaoql/vue-json-schema-form
 
 # yarn
-yarn add @lljj/vue-json-schema-form
+yarn add @xiaoql/vue-json-schema-form
 ```
 
 ```vue
@@ -28,7 +30,7 @@ yarn add @lljj/vue-json-schema-form
 </template>
 
 <script >
-    import VueForm from '@lljj/vue-json-schema-form';
+    import VueForm from '@xiaoql/vue-json-schema-form';
 
     export default {
         name: 'Demo',

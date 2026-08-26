@@ -5,7 +5,7 @@ on:
     branches: [master]
     paths:
       - 'package.json'
-      - 'packages/lib/**/package.json'
+      - 'packages/lib/vue2/vue2-form-element/package.json'
       - 'scripts/publish-npm.js'
       - '.github/workflows/publish.yml'
   workflow_dispatch:

@@ -4,10 +4,17 @@
  * 需通过 schema / uiSchema 配置：
  * - ui:action 试听接口地址（必填，否则按钮禁用）
  * - ui:ttsParams 当前 TTS 配置对象（可用 {{ parentFormData }}）
+ * - ui:providerSchema TTS provider 的 JSON Schema（用于解析显示名；也可由宿主注入）
  * - ui:btnText 试听按钮文案
  * - ui:downloadBtnText 下载按钮文案
  * - ui:rows 大于 1 时使用多行输入
  */
+
+let providerSchemaRef = null;
+
+export function setTtsProviderSchema(schema) {
+    providerSchemaRef = schema && typeof schema === 'object' ? schema : null;
+}
 
 function guessExt(contentType) {
     if (contentType.includes('wav')) return 'wav';
@@ -25,22 +32,74 @@ function sanitizeFilePart(value, fallback = 'unknown') {
     return text || fallback;
 }
 
-function buildTtsDownloadName(ttsParams, ext) {
+function providerOptions(schema) {
+    if (!schema) return [];
+    const opts = schema.oneOf || schema.anyOf;
+    return Array.isArray(opts) ? opts : [];
+}
+
+function matchProviderOption(schema, name) {
+    for (const opt of providerOptions(schema)) {
+        const nameProp = opt && opt.properties && opt.properties.name;
+        const constName = nameProp
+            ? (nameProp.const != null
+                ? nameProp.const
+                : (nameProp.default != null
+                    ? nameProp.default
+                    : (nameProp.enum && nameProp.enum[0])))
+            : undefined;
+        if (constName === name) return opt;
+    }
+    return null;
+}
+
+function resolveVoiceLabel(voiceSchema, voiceValue) {
+    if (voiceValue == null || voiceValue === '') return 'voice';
+
+    const oneOf = voiceSchema && voiceSchema.oneOf;
+    if (Array.isArray(oneOf)) {
+        for (const opt of oneOf) {
+            if (opt && opt.const === voiceValue && opt.title) {
+                return String(opt.title);
+            }
+        }
+    }
+
+    const enums = voiceSchema && voiceSchema.enum;
+    const names = voiceSchema && voiceSchema.enumNames;
+    if (Array.isArray(enums) && Array.isArray(names)) {
+        const idx = enums.indexOf(voiceValue);
+        if (idx >= 0 && names[idx]) return String(names[idx]);
+    }
+
+    return String(voiceValue);
+}
+
+function buildTtsDownloadName(ttsParams, ext, providerSchema) {
+    const schema = providerSchema || providerSchemaRef;
     const provider = ttsParams && typeof ttsParams === 'object'
         ? ttsParams.provider
         : undefined;
-    const name = sanitizeFilePart(provider && provider.name, 'provider');
+    const nameVal = provider && provider.name;
+    const option = matchProviderOption(schema, nameVal);
+    const nameLabel = (option && option.title) || nameVal || 'provider';
+
     const voiceRaw = provider
         ? (provider.voice && provider.voice.value != null
             ? provider.voice.value
             : provider.voice)
         : undefined;
-    const voice = sanitizeFilePart(voiceRaw, 'voice');
+    const voiceLabel = resolveVoiceLabel(
+        option && option.properties && option.properties.voice,
+        voiceRaw
+    );
+
     const rateRaw = provider ? provider.speech_rate : undefined;
-    const rate = (rateRaw === undefined || rateRaw === null || rateRaw === '')
+    const rateLabel = (rateRaw === undefined || rateRaw === null || rateRaw === '')
         ? 'default'
-        : sanitizeFilePart(rateRaw, 'default');
-    return `${name}+${voice}+${rate}.${ext}`;
+        : String(rateRaw);
+
+    return `${sanitizeFilePart(nameLabel, 'provider')}+${sanitizeFilePart(voiceLabel, 'voice')}+${sanitizeFilePart(rateLabel, 'default')}.${ext}`;
 }
 
 export default {
@@ -63,6 +122,10 @@ export default {
             default: '下载'
         },
         ttsParams: {
+            type: Object,
+            default: null
+        },
+        providerSchema: {
             type: Object,
             default: null
         },
@@ -127,7 +190,7 @@ export default {
             const a = document.createElement('a');
             a.href = this.audioUrl;
             a.download = this.downloadName
-                || buildTtsDownloadName(this.ttsParams, 'wav');
+                || buildTtsDownloadName(this.ttsParams, 'wav', this.providerSchema);
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -181,7 +244,8 @@ export default {
                 const blob = await response.blob();
                 this.downloadName = buildTtsDownloadName(
                     this.ttsParams,
-                    guessExt(contentType)
+                    guessExt(contentType),
+                    this.providerSchema
                 );
                 this.audioUrl = URL.createObjectURL(blob);
                 this.audio = new Audio(this.audioUrl);

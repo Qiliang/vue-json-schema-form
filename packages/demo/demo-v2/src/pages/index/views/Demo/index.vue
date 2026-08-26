@@ -1,7 +1,6 @@
 <template>
     <div :class="$style.container">
         <EditorHeader
-            :show-version="true"
             default-active="2"
         >
             <div :class="$style.btns">
@@ -201,16 +200,6 @@ import schemaTypes from 'demo-common/schemaTypes';
 
 const VueElementForm = () => import('@lljj/vue-json-schema-form');
 
-const VueIview3Form = async () => {
-    // eslint-disable-next-line
-    const [iview, ivewForm] = await Promise.all([
-        import('demo-common/components/iView/index.js'),
-        import('@lljj/vue2-form-iview3')
-    ]);
-
-    return ivewForm;
-};
-
 const typeItems = Object.keys(schemaTypes);
 
 export default {
@@ -219,8 +208,6 @@ export default {
         CodeEditor,
         EditorHeader,
         VueElementForm,
-        // eslint-disable-next-line vue/no-unused-components
-        VueIview3Form,
     },
     data() {
         return {
@@ -230,9 +217,6 @@ export default {
             formComponents: [{
                 name: 'ElementUi',
                 component: 'VueElementForm'
-            }, {
-                name: 'Iview3',
-                component: 'VueIview3Form'
             }],
             customFormats: {
                 price(value) {

@@ -2,24 +2,7 @@
  * Created by Liu.Jun on 2020/5/17 10:18 下午.
  */
 
-let sliderName = 'el-slider';
-const sliderNameRules = {
-    'ui=VueAntForm': 'SliderWidget',
-    'ui=VueIview3Form': 'slider'
-};
-
-const curUrl = window.location.href;
-Object.entries(sliderNameRules).some(([key, value]) => {
-    const isInclude = ~curUrl.indexOf(key);
-
-    if (isInclude) {
-        sliderName = value;
-        return true;
-    }
-
-    return false;
-});
-
+const sliderName = 'el-slider';
 
 export default {
     schema: {

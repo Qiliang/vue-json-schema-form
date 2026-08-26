@@ -20,24 +20,6 @@
             ></Menu>
         </div>
         <div :class="$style.btns">
-            <el-select
-                v-if="showVersion"
-                :model-value="version"
-                :value="version"
-                placeholder="版本"
-                size="small"
-                style="margin-right: 6px;width: 84px;"
-                @change="handleVersionChange"
-            >
-                <el-option
-                    value="vue2"
-                    label="vue2"
-                ></el-option>
-                <el-option
-                    value="vue3"
-                    label="vue3"
-                ></el-option>
-            </el-select>
             <slot></slot>
         </div>
     </div>
@@ -55,19 +37,7 @@ export default {
         version: {
             default: 'vue2',
             type: String
-        },
-        showVersion: {
-            default: false,
-            type: Boolean
         }
-    },
-    methods: {
-        handleVersionChange(val) {
-            // eslint-disable-next-line no-unused-vars
-            const { ui, ...query } = this.$route.query;
-            const genRoute = this.$router.resolve({ query });
-            window.location.href = `${(val === 'vue3' ? '/v3/' : '/')}${genRoute.href}`;
-        },
     }
 };
 </script>

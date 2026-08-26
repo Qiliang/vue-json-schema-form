@@ -1,5 +1,5 @@
 /**
- * 将本仓库中可发布的 lib 包以 @xiaoql scope 发布到 npm。
+ * 将 Vue2 ElementUI 包以 @xiaoql scope 发布到 npm。
  * 源码仍保留 @lljj 包名，便于后续合并上游；仅在发布时改名。
  *
  * 规则：本地 version 在 npm 上还不存在时才 publish。
@@ -14,14 +14,7 @@ const SCOPE_TO = '@xiaoql/';
 const REPO_URL = 'https://github.com/Qiliang/vue-json-schema-form';
 
 const PACKAGE_DIRS = [
-    'packages/lib/utils',
-    'packages/lib/vue2/vue2-core',
     'packages/lib/vue2/vue2-form-element',
-    'packages/lib/vue2/vue2-form-iview3',
-    'packages/lib/vue3/vue3-core',
-    'packages/lib/vue3/vue3-form-element',
-    'packages/lib/vue3/vue3-form-ant',
-    'packages/lib/vue3/vue3-form-naive',
 ];
 
 function run(cmd, options = {}) {
@@ -122,7 +115,7 @@ function main() {
     }
 
     if (!results.published.length) {
-        console.log('没有需要发布的新版本。请修改 packages/lib/**/package.json 中的 version 后再推送。');
+        console.log('没有需要发布的新版本。请修改 packages/lib/vue2/vue2-form-element/package.json 中的 version 后再推送。');
     }
 }
 

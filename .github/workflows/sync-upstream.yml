@@ -27,6 +27,7 @@ jobs:
           pr_body: |
             自动从上游仓库同步更新。
 
-            请检查是否与本地定制功能（例如 TtsPreviewWidget）冲突后再合并。
+            本仓库仅保留 Vue2 ElementUI（vue2-form-element），以及构建依赖 utils / vue2-core。
+            请检查是否与本地定制功能冲突，并避免把已删除的 Vue3 / iView 等包重新合入。
           pr_label: 'upstream-sync'
           github_token: ${{ secrets.GITHUB_TOKEN }}
