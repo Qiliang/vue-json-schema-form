@@ -1,0 +1,32 @@
+name: Sync upstream
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync from lljj-x/vue-json-schema-form
+        uses: repo-sync/pull@v2
+        with:
+          source_repo: 'https://github.com/lljj-x/vue-json-schema-form.git'
+          source_branch: 'master'
+          destination_branch: 'master'
+          pr_title: 'chore: sync upstream lljj-x/vue-json-schema-form'
+          pr_body: |
+            自动从上游仓库同步更新。
+
+            请检查是否与本地定制功能（例如 TtsPreviewWidget）冲突后再合并。
+          pr_label: 'upstream-sync'
+          github_token: ${{ secrets.GITHUB_TOKEN }}

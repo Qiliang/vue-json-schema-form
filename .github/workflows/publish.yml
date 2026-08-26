@@ -1,0 +1,42 @@
+name: Publish to npm
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'package.json'
+      - 'packages/lib/**/package.json'
+      - 'scripts/publish-npm.js'
+      - '.github/workflows/publish.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org
+          scope: '@xiaoql'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build libraries
+        run: yarn lib:build
+
+      - name: Publish packages with new versions
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: node scripts/publish-npm.js

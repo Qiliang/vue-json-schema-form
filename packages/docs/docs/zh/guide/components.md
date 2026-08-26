@@ -8,6 +8,7 @@
 * [RadioWidget](#radiowidget)
 * [SelectWidget](#selectwidget)
 * [UploadWidget](#uploadwidget)
+* [TtsPreviewWidget](#ttspreviewwidget)
 * [TimePickerWidget](#timepickerwidget)
 * [DatePickerWidget](#datepickerwidget)
 * [DateTimePickerWidget](#datetimepickerwidget)
@@ -140,6 +141,44 @@ export default {
 </script>
 ```
 :::
+
+## TtsPreviewWidget
+* TTS 试听组件：输入试听文本，调用后端合成接口并播放音频
+* 页面体验地址：[Playground TtsPreview 组件](https://form.lljj.me/#/demo?type=TtsPreview)
+
+### props
+* `value/v-model` `required`，类型：`String`，试听文本
+* `action` 试听接口地址；未配置时按钮禁用
+* `ttsParams` 当前 TTS 配置对象，会作为请求体中的 `tts` 字段提交
+* `btnText` 试听按钮文案，默认 `试听`
+* `rows` 大于 1 时使用多行输入
+* `placeholder` 输入框占位文案
+
+请求约定：
+```http
+POST {action}
+Content-Type: application/json
+
+{ "text": "<试听文本>", "tts": <ttsParams> }
+```
+成功时接口应返回 `audio/*`（推荐 `audio/wav`）。
+
+schema 中可直接配置（也可用 uiSchema）：
+```js
+{
+  preview_text: {
+    type: 'string',
+    title: '试听',
+    default: '你好，欢迎使用智能语音。',
+    'ui:widget': 'TtsPreviewWidget',
+    'ui:action': '/bot/tts/preview',
+    'ui:btnText': '试听',
+    // 将父对象（TTS 配置）传给 widget
+    'ui:ttsParams': '{{ parentFormData }}',
+    'ui:rows': 2
+  }
+}
+```
 
 ## TimePickerWidget
 > 内部使用 `timPick` 组件，支持参数透传

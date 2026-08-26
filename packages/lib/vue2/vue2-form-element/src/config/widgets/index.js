@@ -9,6 +9,7 @@ import DatePickerWidget from './DatePickerWidget';
 import DateTimePickerWidget from './DateTimePickerWidget';
 import TimePickerWidget from './TimePickerWidget';
 import UploadWidget from './UploadWidget';
+import TtsPreviewWidget from './TtsPreviewWidget';
 
 // webpack -> rollup
 // const files = require.context('.', true, /\.js|vue$/);
@@ -27,7 +28,8 @@ const widgetComponents = {
     TimePickerWidget,
     DatePickerWidget,
     DateTimePickerWidget,
-    UploadWidget
+    UploadWidget,
+    TtsPreviewWidget
 };
 
 export default widgetComponents;

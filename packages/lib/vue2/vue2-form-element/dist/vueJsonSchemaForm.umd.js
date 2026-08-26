@@ -1,4 +1,4 @@
-/** @license @lljj/vue-json-schema-form (c) 2020-2023 Liu.Jun License: Apache-2.0 */
+/** @license @lljj/vue-json-schema-form (c) 2020-2026 Liu.Jun License: Apache-2.0 */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue')) :
   typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory) :
@@ -23,6 +23,42 @@
     }
 
     return _typeof(obj);
+  }
+
+  function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+      var info = gen[key](arg);
+      var value = info.value;
+    } catch (error) {
+      reject(error);
+      return;
+    }
+
+    if (info.done) {
+      resolve(value);
+    } else {
+      Promise.resolve(value).then(_next, _throw);
+    }
+  }
+
+  function _asyncToGenerator(fn) {
+    return function () {
+      var self = this,
+          args = arguments;
+      return new Promise(function (resolve, reject) {
+        var gen = fn.apply(self, args);
+
+        function _next(value) {
+          asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+        }
+
+        function _throw(err) {
+          asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+        }
+
+        _next(undefined);
+      });
+    };
   }
 
   function _defineProperty(obj, key, value) {
@@ -3587,7 +3623,7 @@
   // For test cases: https://mathiasbynens.be/demo/url-regex
   // @todo Delete current URL in favour of the commented out URL rule when this issue is fixed https://github.com/eslint/eslint/issues/7983.
   // var URL = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u{00a1}-\u{ffff}0-9]+-)*[a-z\u{00a1}-\u{ffff}0-9]+)(?:\.(?:[a-z\u{00a1}-\u{ffff}0-9]+-)*[a-z\u{00a1}-\u{ffff}0-9]+)*(?:\.(?:[a-z\u{00a1}-\u{ffff}]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/iu;
-  var URL = /^(?:(?:http[s\u017F]?|ftp):\/\/)(?:(?:[\0-\x08\x0E-\x1F!-\x9F\xA1-\u167F\u1681-\u1FFF\u200B-\u2027\u202A-\u202E\u2030-\u205E\u2060-\u2FFF\u3001-\uD7FF\uE000-\uFEFE\uFF00-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+(?::(?:[\0-\x08\x0E-\x1F!-\x9F\xA1-\u167F\u1681-\u1FFF\u200B-\u2027\u202A-\u202E\u2030-\u205E\u2060-\u2FFF\u3001-\uD7FF\uE000-\uFEFE\uFF00-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])*)?@)?(?:(?!10(?:\.[0-9]{1,3}){3})(?!127(?:\.[0-9]{1,3}){3})(?!169\.254(?:\.[0-9]{1,3}){2})(?!192\.168(?:\.[0-9]{1,3}){2})(?!172\.(?:1[6-9]|2[0-9]|3[01])(?:\.[0-9]{1,3}){2})(?:[1-9][0-9]?|1[0-9][0-9]|2[01][0-9]|22[0-3])(?:\.(?:1?[0-9]{1,2}|2[0-4][0-9]|25[0-5])){2}(?:\.(?:[1-9][0-9]?|1[0-9][0-9]|2[0-4][0-9]|25[0-4]))|(?:(?:(?:[0-9a-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+-)*(?:[0-9a-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+)(?:\.(?:(?:[0-9a-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+-)*(?:[0-9a-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+)*(?:\.(?:(?:[a-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]){2,})))(?::[0-9]{2,5})?(?:\/(?:[\0-\x08\x0E-\x1F!-\x9F\xA1-\u167F\u1681-\u1FFF\u200B-\u2027\u202A-\u202E\u2030-\u205E\u2060-\u2FFF\u3001-\uD7FF\uE000-\uFEFE\uFF00-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])*)?$/i;
+  var URL$1 = /^(?:(?:http[s\u017F]?|ftp):\/\/)(?:(?:[\0-\x08\x0E-\x1F!-\x9F\xA1-\u167F\u1681-\u1FFF\u200B-\u2027\u202A-\u202E\u2030-\u205E\u2060-\u2FFF\u3001-\uD7FF\uE000-\uFEFE\uFF00-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+(?::(?:[\0-\x08\x0E-\x1F!-\x9F\xA1-\u167F\u1681-\u1FFF\u200B-\u2027\u202A-\u202E\u2030-\u205E\u2060-\u2FFF\u3001-\uD7FF\uE000-\uFEFE\uFF00-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])*)?@)?(?:(?!10(?:\.[0-9]{1,3}){3})(?!127(?:\.[0-9]{1,3}){3})(?!169\.254(?:\.[0-9]{1,3}){2})(?!192\.168(?:\.[0-9]{1,3}){2})(?!172\.(?:1[6-9]|2[0-9]|3[01])(?:\.[0-9]{1,3}){2})(?:[1-9][0-9]?|1[0-9][0-9]|2[01][0-9]|22[0-3])(?:\.(?:1?[0-9]{1,2}|2[0-4][0-9]|25[0-5])){2}(?:\.(?:[1-9][0-9]?|1[0-9][0-9]|2[0-4][0-9]|25[0-4]))|(?:(?:(?:[0-9a-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+-)*(?:[0-9a-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+)(?:\.(?:(?:[0-9a-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+-)*(?:[0-9a-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])+)*(?:\.(?:(?:[a-z\xA1-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]){2,})))(?::[0-9]{2,5})?(?:\/(?:[\0-\x08\x0E-\x1F!-\x9F\xA1-\u167F\u1681-\u1FFF\u200B-\u2027\u202A-\u202E\u2030-\u205E\u2060-\u2FFF\u3001-\uD7FF\uE000-\uFEFE\uFF00-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])*)?$/i;
   var UUID = /^(?:urn:uuid:)?[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i;
   var JSON_POINTER$1 = /^(?:\/(?:[^~/]|~0|~1)*)*$/;
   var JSON_POINTER_URI_FRAGMENT = /^#(?:\/(?:[a-z0-9_\-.!$&'()*+,;:=@]|%[0-9a-f]{2}|~0|~1)*)*$/i;
@@ -3612,7 +3648,7 @@
     uri: /^(?:[a-z][a-z0-9+\-.]*:)(?:\/?\/)?[^\s]*$/i,
     'uri-reference': /^(?:(?:[a-z][a-z0-9+\-.]*:)?\/?\/)?(?:[^\\\s#][^\s#]*)?(?:#[^\\\s]*)?$/i,
     'uri-template': URITEMPLATE,
-    url: URL,
+    url: URL$1,
     // email (sources from jsen validator):
     // http://stackoverflow.com/questions/201323/using-a-regular-expression-to-validate-an-email-address#answer-8829363
     // http://www.w3.org/TR/html5/forms.html#valid-e-mail-address (search for 'willful violation')
@@ -3641,7 +3677,7 @@
     uri: uri,
     'uri-reference': URIREF,
     'uri-template': URITEMPLATE,
-    url: URL,
+    url: URL$1,
     email: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i,
     hostname: HOSTNAME,
     ipv4: /^(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)$/,
@@ -12386,6 +12422,300 @@
   };
 
   /**
+   * TTS 试听 Widget：输入试听文本，调用后端合成并播放。
+   *
+   * 需通过 schema / uiSchema 配置：
+   * - ui:action 试听接口地址（必填，否则按钮禁用）
+   * - ui:ttsParams 当前 TTS 配置对象（可用 {{ parentFormData }}）
+   * - ui:btnText 试听按钮文案
+   * - ui:downloadBtnText 下载按钮文案
+   * - ui:rows 大于 1 时使用多行输入
+   */
+  function guessExt(contentType) {
+    if (contentType.includes('wav')) return 'wav';
+    if (contentType.includes('mpeg') || contentType.includes('mp3')) return 'mp3';
+    if (contentType.includes('ogg')) return 'ogg';
+    if (contentType.includes('webm')) return 'webm';
+    return 'wav';
+  }
+
+  function sanitizeFilePart(value) {
+    var fallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
+    var text = String(value == null ? '' : value).trim().replace(/[\\/:*?"<>|]+/g, '_').replace(/\s+/g, '_');
+    return text || fallback;
+  }
+
+  function buildTtsDownloadName(ttsParams, ext) {
+    var provider = ttsParams && _typeof(ttsParams) === 'object' ? ttsParams.provider : undefined;
+    var name = sanitizeFilePart(provider && provider.name, 'provider');
+    var voiceRaw = provider ? provider.voice && provider.voice.value != null ? provider.voice.value : provider.voice : undefined;
+    var voice = sanitizeFilePart(voiceRaw, 'voice');
+    var rateRaw = provider ? provider.speech_rate : undefined;
+    var rate = rateRaw === undefined || rateRaw === null || rateRaw === '' ? 'default' : sanitizeFilePart(rateRaw, 'default');
+    return "".concat(name, "+").concat(voice, "+").concat(rate, ".").concat(ext);
+  }
+
+  var TtsPreviewWidget = {
+    name: 'TtsPreviewWidget',
+    props: {
+      value: {
+        type: String,
+        default: ''
+      },
+      action: {
+        type: String,
+        default: ''
+      },
+      btnText: {
+        type: String,
+        default: '试听'
+      },
+      downloadBtnText: {
+        type: String,
+        default: '下载'
+      },
+      ttsParams: {
+        type: Object,
+        default: null
+      },
+      rows: {
+        type: [Number, String],
+        default: 1
+      },
+      placeholder: {
+        type: String,
+        default: '请输入试听文本'
+      }
+    },
+    data: function data() {
+      return {
+        loading: false,
+        audioUrl: null,
+        audio: null,
+        downloadName: 'provider+voice+default.wav'
+      };
+    },
+    computed: {
+      inputRows: function inputRows() {
+        var n = Number(this.rows);
+        return Number.isFinite(n) && n > 1 ? n : 1;
+      },
+      canPreview: function canPreview() {
+        return Boolean(this.action && !this.loading && this.value && String(this.value).trim());
+      },
+      canDownload: function canDownload() {
+        return Boolean(this.audioUrl) && !this.loading;
+      }
+    },
+    beforeDestroy: function beforeDestroy() {
+      this.revokeAudio();
+    },
+    methods: {
+      revokeAudio: function revokeAudio() {
+        if (this.audio) {
+          this.audio.pause();
+          this.audio = null;
+        }
+
+        if (this.audioUrl) {
+          URL.revokeObjectURL(this.audioUrl);
+          this.audioUrl = null;
+        }
+      },
+      showError: function showError(message) {
+        if (this.$message) {
+          this.$message.error(message);
+        } else {
+          // eslint-disable-next-line no-console
+          console.error(message);
+        }
+      },
+      handleDownload: function handleDownload() {
+        if (!this.audioUrl) return;
+        var a = document.createElement('a');
+        a.href = this.audioUrl;
+        a.download = this.downloadName || buildTtsDownloadName(this.ttsParams, 'wav');
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      },
+      handlePreview: function handlePreview() {
+        var _this = this;
+
+        return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+          var response, contentType, detail, data, text, blob;
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  if (_this.canPreview) {
+                    _context.next = 2;
+                    break;
+                  }
+
+                  return _context.abrupt("return");
+
+                case 2:
+                  if (!(!_this.ttsParams || _typeof(_this.ttsParams) !== 'object')) {
+                    _context.next = 5;
+                    break;
+                  }
+
+                  _this.showError('缺少 TTS 配置，无法试听');
+
+                  return _context.abrupt("return");
+
+                case 5:
+                  _this.loading = true;
+
+                  _this.revokeAudio();
+
+                  _context.prev = 7;
+                  _context.next = 10;
+                  return fetch(_this.action, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      text: String(_this.value).trim(),
+                      tts: _this.ttsParams
+                    })
+                  });
+
+                case 10:
+                  response = _context.sent;
+                  contentType = (response.headers.get('content-type') || '').toLowerCase();
+
+                  if (response.ok) {
+                    _context.next = 26;
+                    break;
+                  }
+
+                  detail = "\u8BD5\u542C\u5931\u8D25 (".concat(response.status, ")");
+
+                  if (!contentType.includes('application/json')) {
+                    _context.next = 21;
+                    break;
+                  }
+
+                  _context.next = 17;
+                  return response.json();
+
+                case 17:
+                  data = _context.sent;
+
+                  if (data && data.detail) {
+                    detail = typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail);
+                  }
+
+                  _context.next = 25;
+                  break;
+
+                case 21:
+                  _context.next = 23;
+                  return response.text();
+
+                case 23:
+                  text = _context.sent;
+                  if (text) detail = text.slice(0, 200);
+
+                case 25:
+                  throw new Error(detail);
+
+                case 26:
+                  if (contentType.startsWith('audio/')) {
+                    _context.next = 28;
+                    break;
+                  }
+
+                  throw new Error('试听接口未返回音频');
+
+                case 28:
+                  _context.next = 30;
+                  return response.blob();
+
+                case 30:
+                  blob = _context.sent;
+                  _this.downloadName = buildTtsDownloadName(_this.ttsParams, guessExt(contentType));
+                  _this.audioUrl = URL.createObjectURL(blob);
+                  _this.audio = new Audio(_this.audioUrl);
+                  _context.next = 36;
+                  return _this.audio.play();
+
+                case 36:
+                  _context.next = 41;
+                  break;
+
+                case 38:
+                  _context.prev = 38;
+                  _context.t0 = _context["catch"](7);
+
+                  _this.showError(_context.t0 && _context.t0.message || '试听失败');
+
+                case 41:
+                  _context.prev = 41;
+                  _this.loading = false;
+                  return _context.finish(41);
+
+                case 44:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, null, [[7, 38, 41, 44]]);
+        }))();
+      }
+    },
+    render: function render() {
+      var _this2 = this;
+
+      var h = this.$createElement;
+      var isTextarea = this.inputRows > 1;
+      return h('div', {
+        style: {
+          display: 'flex',
+          gap: '8px',
+          alignItems: isTextarea ? 'flex-start' : 'center',
+          width: '100%'
+        }
+      }, [h('el-input', {
+        style: {
+          flex: '1 1 auto'
+        },
+        props: {
+          value: this.value,
+          type: isTextarea ? 'textarea' : 'text',
+          rows: this.inputRows,
+          placeholder: this.placeholder,
+          disabled: this.loading
+        },
+        on: {
+          input: function input(val) {
+            _this2.$emit('input', val);
+          }
+        }
+      }), h('el-button', {
+        props: {
+          type: 'primary',
+          loading: this.loading,
+          disabled: !this.canPreview
+        },
+        on: {
+          click: this.handlePreview
+        }
+      }, [this.btnText]), h('el-button', {
+        props: {
+          disabled: !this.canDownload
+        },
+        on: {
+          click: this.handleDownload
+        }
+      }, [this.downloadBtnText])]);
+    }
+  };
+
+  /**
    * Created by Liu.Jun on 2020/5/17 10:41 下午.
    */
   // const files = require.context('.', true, /\.js|vue$/);
@@ -12403,7 +12733,8 @@
     TimePickerWidget: TimePickerWidget,
     DatePickerWidget: DatePickerWidget,
     DateTimePickerWidget: DateTimePickerWidget,
-    UploadWidget: UploadWidget
+    UploadWidget: UploadWidget,
+    TtsPreviewWidget: TtsPreviewWidget
   };
 
   /**
