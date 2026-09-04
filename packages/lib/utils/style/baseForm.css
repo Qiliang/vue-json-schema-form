@@ -73,16 +73,27 @@
         margin-bottom: 10px;
         color: rgb(153, 153, 153);
     }
+    .genFormWidgetRow {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+    }
+    .genFormWidgetRow > *:first-child {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
     .genFromWidget_des {
         padding: 0;
-        margin-top: 0;
-        margin-bottom: 2px;
+        margin: 0 0 0 8px;
         font-size: 12px;
         line-height: 20px;
         color: #999;
         text-align: left;
-        width: 100%;
-        flex-shrink: 0;
+        flex: 0 1 auto;
+        width: auto;
+        max-width: 50%;
+        word-break: break-word;
     }
     .formItemErrorBox {
         margin: 0 auto;
@@ -265,12 +276,6 @@
             padding-top: 0;
         }
     }
-}
-
-/*popover 弹出可能appendtobody*/
-.genFromWidget_des_mini {
-    font-size: 14px;
-    line-height: 1.5715;
 }
 
 /* 适配多列布局 */

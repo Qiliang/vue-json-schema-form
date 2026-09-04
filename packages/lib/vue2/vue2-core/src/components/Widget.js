@@ -7,7 +7,6 @@ import {
 } from '@lljj/vjsf-utils/vueUtils';
 
 import { validateFormDataAndTransformMsg } from '@lljj/vjsf-utils/schema/validate';
-import { IconQuestion } from '@lljj/vjsf-utils/icons';
 import { fallbackLabel } from '@lljj/vjsf-utils/formUtils';
 
 export default {
@@ -186,8 +185,6 @@ export default {
         // 判断是否为根节点
         const isRootNode = isRootNodePath(curNodePath);
 
-        const isMiniDes = self.formProps && self.formProps.isMiniDes;
-        const miniDesModel = isMiniDes ?? self.globalOptions.HELPERS.isMiniDes(self.formProps);
         const descriptionVNode = (self.description) ? h(
             'div',
             {
@@ -195,32 +192,12 @@ export default {
                     innerHTML: self.description
                 },
                 class: {
-                    genFromWidget_des: true,
-                    genFromWidget_des_mini: miniDesModel
+                    genFromWidget_des: true
                 }
             },
         ) : null;
 
         const { COMPONENT_MAP } = self.globalOptions;
-
-        const miniDescriptionVNode = (miniDesModel && descriptionVNode) ? h(COMPONENT_MAP.popover, {
-            style: {
-                margin: '0 2px',
-                fontSize: '16px',
-                cursor: 'pointer'
-            },
-            props: {
-                placement: 'top',
-                trigger: 'hover',
-                ...self.formProps?.popover
-            }
-        }, [
-            descriptionVNode,
-            h(IconQuestion, {
-                slot: 'reference'
-            })
-        ]) : null;
-
 
         // form-item style
         const formItemStyle = {
@@ -234,6 +211,62 @@ export default {
 
         // 运行配置回退到 属性名
         const label = fallbackLabel(self.label, (self.widget && this.genFormProvide.fallbackLabel), curNodePath);
+
+        const widgetVNode = h( // 关键输入组件
+            self.widget,
+            {
+                style: self.widgetStyle,
+                class: self.widgetClass,
+                attrs: {
+                    ...self.widgetAttrs,
+                    ...self.uiProps,
+                    value: this.value, // v-model
+                },
+                ref: 'widgetRef',
+                ...(self.renderScopedSlots ? {
+                    scopedSlots: self.renderScopedSlots(h) || {}
+                } : {}),
+                on: {
+                    ...self.widgetListeners ? self.widgetListeners : {},
+                    'hook:mounted': function widgetMounted() {
+                        if (self.widgetListeners && self.widgetListeners['hook:mounted']) {
+                            // eslint-disable-next-line prefer-rest-params
+                            self.widgetListeners['hook:mounted'].apply(this, [...arguments]);
+                        }
+
+                        // 提供一种特殊的配置 允许直接访问到 widget vm
+                        if (self.getWidget && typeof self.getWidget === 'function') {
+                            self.getWidget.call(null, self.$refs.widgetRef);
+                        }
+                    },
+                    input(event) {
+                        const formatValue = self.formatValue(event);
+                        // 默认用户输入变了都是需要更新form数据保持同步，唯一特例 input number
+                        // 为了兼容 number 小数点后0结尾的数据场景
+                        // 比如 1. 1.010 这类特殊数据输入是不需要触发 新值的设置，否则会导致schema校验为非数字
+                        // 但由于element为了解另外的问题，会在nextTick时强制同步dom的值等于vm的值所以无法通过这种方式来hack，这里旧的这份逻辑依旧保留 不过update一直为true
+                        const preVal = self.value;
+                        if (formatValue.update && preVal !== formatValue.value) {
+                            self.value = formatValue.value;
+                            if (self.onChange) {
+                                self.onChange({
+                                    curVal: formatValue.value,
+                                    preVal,
+                                    parentFormData: getPathVal(self.rootFormData, self.curNodePath, 1),
+                                    rootFormData: self.rootFormData
+                                });
+                            }
+                        }
+
+                        if (self.widgetListeners && self.widgetListeners.input) {
+                            // eslint-disable-next-line prefer-rest-params
+                            self.widgetListeners.input.apply(this, [...arguments]);
+                        }
+                    }
+                }
+            },
+            self.renderChildren ? self.renderChildren(h) : null
+        );
 
         return h(
             COMPONENT_MAP.formItem,
@@ -310,68 +343,17 @@ export default {
                     },
                 }, [
                     `${label}`,
-                    miniDescriptionVNode,
                     `${(self.formProps && self.formProps.labelSuffix) || ''}`
                 ]) : null,
 
-                // description
-                // 非mini模式显示 description
-                !miniDesModel ? descriptionVNode : null,
-                h( // 关键输入组件
-                    self.widget,
-                    {
-                        style: self.widgetStyle,
-                        class: self.widgetClass,
-                        attrs: {
-                            ...self.widgetAttrs,
-                            ...self.uiProps,
-                            value: this.value, // v-model
-                        },
-                        ref: 'widgetRef',
-                        ...(self.renderScopedSlots ? {
-                            scopedSlots: self.renderScopedSlots(h) || {}
-                        } : {}),
-                        on: {
-                            ...self.widgetListeners ? self.widgetListeners : {},
-                            'hook:mounted': function widgetMounted() {
-                                if (self.widgetListeners && self.widgetListeners['hook:mounted']) {
-                                    // eslint-disable-next-line prefer-rest-params
-                                    self.widgetListeners['hook:mounted'].apply(this, [...arguments]);
-                                }
-
-                                // 提供一种特殊的配置 允许直接访问到 widget vm
-                                if (self.getWidget && typeof self.getWidget === 'function') {
-                                    self.getWidget.call(null, self.$refs.widgetRef);
-                                }
-                            },
-                            input(event) {
-                                const formatValue = self.formatValue(event);
-                                // 默认用户输入变了都是需要更新form数据保持同步，唯一特例 input number
-                                // 为了兼容 number 小数点后0结尾的数据场景
-                                // 比如 1. 1.010 这类特殊数据输入是不需要触发 新值的设置，否则会导致schema校验为非数字
-                                // 但由于element为了解另外的问题，会在nextTick时强制同步dom的值等于vm的值所以无法通过这种方式来hack，这里旧的这份逻辑依旧保留 不过update一直为true
-                                const preVal = self.value;
-                                if (formatValue.update && preVal !== formatValue.value) {
-                                    self.value = formatValue.value;
-                                    if (self.onChange) {
-                                        self.onChange({
-                                            curVal: formatValue.value,
-                                            preVal,
-                                            parentFormData: getPathVal(self.rootFormData, self.curNodePath, 1),
-                                            rootFormData: self.rootFormData
-                                        });
-                                    }
-                                }
-
-                                if (self.widgetListeners && self.widgetListeners.input) {
-                                    // eslint-disable-next-line prefer-rest-params
-                                    self.widgetListeners.input.apply(this, [...arguments]);
-                                }
-                            }
-                        }
-                    },
-                    self.renderChildren ? self.renderChildren(h) : null
-                )
+                descriptionVNode ? h('div', {
+                    class: {
+                        genFormWidgetRow: true
+                    }
+                }, [
+                    widgetVNode,
+                    descriptionVNode
+                ]) : widgetVNode
             ]
         );
     }

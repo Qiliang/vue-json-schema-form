@@ -10,4 +10,18 @@
     .el-checkbox, .el-color-picker{
         vertical-align: top;
     }
+    .genFormWidgetRow {
+        .el-input,
+        .el-select,
+        .el-date-editor,
+        .el-textarea,
+        .el-cascader,
+        .el-slider {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+        .el-input-number {
+            flex: 0 0 auto;
+        }
+    }
 }

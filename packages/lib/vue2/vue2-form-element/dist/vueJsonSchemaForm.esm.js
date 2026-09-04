@@ -228,6 +228,63 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
+function _createForOfIteratorHelper(o, allowArrayLike) {
+  var it;
+
+  if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+      if (it) o = it;
+      var i = 0;
+
+      var F = function () {};
+
+      return {
+        s: F,
+        n: function () {
+          if (i >= o.length) return {
+            done: true
+          };
+          return {
+            done: false,
+            value: o[i++]
+          };
+        },
+        e: function (e) {
+          throw e;
+        },
+        f: F
+      };
+    }
+
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  var normalCompletion = true,
+      didErr = false,
+      err;
+  return {
+    s: function () {
+      it = o[Symbol.iterator]();
+    },
+    n: function () {
+      var step = it.next();
+      normalCompletion = step.done;
+      return step;
+    },
+    e: function (e) {
+      didErr = true;
+      err = e;
+    },
+    f: function () {
+      try {
+        if (!normalCompletion && it.return != null) it.return();
+      } finally {
+        if (didErr) throw err;
+      }
+    }
+  };
+}
+
 function _toPrimitive(input, hint) {
   if (typeof input !== "object" || input === null) return input;
   var prim = input[Symbol.toPrimitive];
@@ -9412,7 +9469,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = ".genFromComponent{font-size:14px;line-height:1;word-wrap:break-word;word-break:break-word;padding:0;margin:0}.genFromComponent a,.genFromComponent h1,.genFromComponent h2,.genFromComponent h3,.genFromComponent li,.genFromComponent p,.genFromComponent ul{font-size:14px}.genFromComponent .genFormIcon{width:12px;height:12px;vertical-align:top}.genFromComponent .genFormBtn{display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;background:#fff;border:1px solid #dcdfe6;color:#606266;-webkit-appearance:none;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;outline:none;margin:0;-webkit-transition:.1s;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:12px 20px;font-size:14px;border-radius:4px}.genFromComponent .genFormBtn.is-plain:focus,.genFromComponent .genFormBtn.is-plain:hover{background:#fff;border-color:#409eff;color:#409eff}.genFromComponent .hiddenWidget{display:none}.genFromComponent .fieldGroupWrap+.fieldGroupWrap .fieldGroupWrap_title{margin-top:20px}.genFromComponent .fieldGroupWrap_title{position:relative;display:block;width:100%;line-height:26px;margin-bottom:8px;font-size:15px;font-weight:700;border:0}.genFromComponent .fieldGroupWrap_des{font-size:12px;line-height:20px;margin-bottom:10px;color:#999}.genFromComponent .genFromWidget_des{padding:0;margin-top:0;margin-bottom:2px;font-size:12px;line-height:20px;color:#999;text-align:left;width:100%;-ms-flex-negative:0;flex-shrink:0}.genFromComponent .formItemErrorBox{margin:0 auto;color:#ff5757;padding-top:2px;position:absolute;top:100%;left:0;display:-webkit-box!important;line-height:16px;text-overflow:ellipsis;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:1;white-space:normal;font-size:12px;text-align:left}.genFromComponent .genFormIcon-qs{fill:#606266;vertical-align:middle;display:inline-block;width:16px;height:16px;margin-left:2px;margin-top:-2px;cursor:pointer}.genFromComponent .genFormItemRequired:before{content:\"*\";color:#f56c6c;margin-right:4px}.genFromComponent .appendCombining_box{margin-bottom:22px}.genFromComponent .appendCombining_box .appendCombining_box{margin-bottom:10px}.genFromComponent .appendCombining_box{padding:10px;background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .validateWidget{margin-bottom:0!important;width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important;padding:0!important}.genFromComponent .validateWidget .formItemErrorBox{padding:5px 0;position:relative}.genFromComponent .arrayField:not(.genFormItem){margin-bottom:22px}.genFromComponent .arrayField:not(.genFormItem) .arrayField{margin-bottom:10px}.genFromComponent .arrayOrderList{background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .arrayOrderList_item{position:relative;padding:25px 10px 12px;border-radius:2px;margin-bottom:6px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.genFromComponent .arrayOrderList_bottomAddBtn{text-align:right;padding:15px 10px;margin-bottom:10px}.genFromComponent .bottomAddBtn{width:40%;min-width:10px;max-width:180px}.genFromComponent .arrayListItem_content{padding-top:15px;-webkit-box-flex:1;-ms-flex:1;flex:1;margin:0 auto;-webkit-box-shadow:0 -1px 0 0 rgba(0,0,0,.05);box-shadow:0 -1px 0 0 rgba(0,0,0,.05)}.genFromComponent .arrayListItem_index,.genFromComponent .arrayListItem_operateTool{position:absolute;height:25px}.genFromComponent .arrayListItem_index{top:6px;line-height:18px;height:18px;padding:0 6px;background-color:rgba(0,0,0,.28);color:#fff;font-size:12px;border-radius:2px}.genFromComponent .arrayListItem_operateTool{width:75px;right:9px;top:-1px;text-align:right;font-size:0}.genFromComponent .arrayListItem_btn{vertical-align:top;display:inline-block;padding:6px;margin:0;font-size:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none;border:none;cursor:pointer;text-align:center;background:transparent;color:#666}.genFromComponent .arrayListItem_btn:hover{opacity:.6}.genFromComponent .arrayListItem_btn[disabled]{color:#999;opacity:.3!important;cursor:not-allowed}.genFromComponent .arrayListItem_orderBtn-bottom,.genFromComponent .arrayListItem_orderBtn-top{background-color:#f0f9eb}.genFromComponent .arrayListItem_btn-delete{background-color:#fef0f0}.genFromComponent .formFooter_item{text-align:right;border-top:1px solid rgba(0,0,0,.08);padding-top:10px}.genFromComponent.formInlineFooter>.fieldGroupWrap{display:inline-block;margin-right:10px}.genFromComponent.formInline .validateWidget{margin-right:0}.genFromComponent.formInline .formFooter_item{border-top:none;padding-top:0}.genFromWidget_des_mini{font-size:14px;line-height:1.5715}.layoutColumn .layoutColumn_w100{width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important}.layoutColumn .fieldGroupWrap_box{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-ms-flex-line-pack:start;align-content:flex-start}.layoutColumn .fieldGroupWrap_box>div{width:100%;-ms-flex-preferred-size:100%;flex-basis:100%}.layoutColumn .fieldGroupWrap_box>.genFormItem{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-webkit-box-sizing:border-box;box-sizing:border-box;padding-right:10px}.layoutColumn.layoutColumn-1 .fieldGroupWrap_box>.genFormItem{padding-right:0}.layoutColumn.layoutColumn-2 .fieldGroupWrap_box>.genFormItem{width:50%;-ms-flex-preferred-size:50%;flex-basis:50%}.layoutColumn.layoutColumn-3 .fieldGroupWrap_box>.genFormItem{width:33.333%;-ms-flex-preferred-size:33.333%;flex-basis:33.333%}";
+var css_248z = ".genFromComponent{font-size:14px;line-height:1;word-wrap:break-word;word-break:break-word;padding:0;margin:0}.genFromComponent a,.genFromComponent h1,.genFromComponent h2,.genFromComponent h3,.genFromComponent li,.genFromComponent p,.genFromComponent ul{font-size:14px}.genFromComponent .genFormIcon{width:12px;height:12px;vertical-align:top}.genFromComponent .genFormBtn{display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;background:#fff;border:1px solid #dcdfe6;color:#606266;-webkit-appearance:none;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;outline:none;margin:0;-webkit-transition:.1s;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:12px 20px;font-size:14px;border-radius:4px}.genFromComponent .genFormBtn.is-plain:focus,.genFromComponent .genFormBtn.is-plain:hover{background:#fff;border-color:#409eff;color:#409eff}.genFromComponent .hiddenWidget{display:none}.genFromComponent .fieldGroupWrap+.fieldGroupWrap .fieldGroupWrap_title{margin-top:20px}.genFromComponent .fieldGroupWrap_title{position:relative;display:block;width:100%;line-height:26px;margin-bottom:8px;font-size:15px;font-weight:700;border:0}.genFromComponent .fieldGroupWrap_des{font-size:12px;line-height:20px;margin-bottom:10px;color:#999}.genFromComponent .genFormWidgetRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0}.genFromComponent .genFormWidgetRow>:first-child{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFromWidget_des{padding:0;margin:0 0 0 8px;font-size:12px;line-height:20px;color:#999;text-align:left;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:0 1 auto;width:auto;max-width:50%;word-break:break-word}.genFromComponent .formItemErrorBox{margin:0 auto;color:#ff5757;padding-top:2px;position:absolute;top:100%;left:0;display:-webkit-box!important;line-height:16px;text-overflow:ellipsis;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:1;white-space:normal;font-size:12px;text-align:left}.genFromComponent .genFormIcon-qs{fill:#606266;vertical-align:middle;display:inline-block;width:16px;height:16px;margin-left:2px;margin-top:-2px;cursor:pointer}.genFromComponent .genFormItemRequired:before{content:\"*\";color:#f56c6c;margin-right:4px}.genFromComponent .appendCombining_box{margin-bottom:22px}.genFromComponent .appendCombining_box .appendCombining_box{margin-bottom:10px}.genFromComponent .appendCombining_box{padding:10px;background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .validateWidget{margin-bottom:0!important;width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important;padding:0!important}.genFromComponent .validateWidget .formItemErrorBox{padding:5px 0;position:relative}.genFromComponent .arrayField:not(.genFormItem){margin-bottom:22px}.genFromComponent .arrayField:not(.genFormItem) .arrayField{margin-bottom:10px}.genFromComponent .arrayOrderList{background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .arrayOrderList_item{position:relative;padding:25px 10px 12px;border-radius:2px;margin-bottom:6px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.genFromComponent .arrayOrderList_bottomAddBtn{text-align:right;padding:15px 10px;margin-bottom:10px}.genFromComponent .bottomAddBtn{width:40%;min-width:10px;max-width:180px}.genFromComponent .arrayListItem_content{padding-top:15px;-webkit-box-flex:1;-ms-flex:1;flex:1;margin:0 auto;-webkit-box-shadow:0 -1px 0 0 rgba(0,0,0,.05);box-shadow:0 -1px 0 0 rgba(0,0,0,.05)}.genFromComponent .arrayListItem_index,.genFromComponent .arrayListItem_operateTool{position:absolute;height:25px}.genFromComponent .arrayListItem_index{top:6px;line-height:18px;height:18px;padding:0 6px;background-color:rgba(0,0,0,.28);color:#fff;font-size:12px;border-radius:2px}.genFromComponent .arrayListItem_operateTool{width:75px;right:9px;top:-1px;text-align:right;font-size:0}.genFromComponent .arrayListItem_btn{vertical-align:top;display:inline-block;padding:6px;margin:0;font-size:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none;border:none;cursor:pointer;text-align:center;background:transparent;color:#666}.genFromComponent .arrayListItem_btn:hover{opacity:.6}.genFromComponent .arrayListItem_btn[disabled]{color:#999;opacity:.3!important;cursor:not-allowed}.genFromComponent .arrayListItem_orderBtn-bottom,.genFromComponent .arrayListItem_orderBtn-top{background-color:#f0f9eb}.genFromComponent .arrayListItem_btn-delete{background-color:#fef0f0}.genFromComponent .formFooter_item{text-align:right;border-top:1px solid rgba(0,0,0,.08);padding-top:10px}.genFromComponent.formInlineFooter>.fieldGroupWrap{display:inline-block;margin-right:10px}.genFromComponent.formInline .validateWidget{margin-right:0}.genFromComponent.formInline .formFooter_item{border-top:none;padding-top:0}.layoutColumn .layoutColumn_w100{width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important}.layoutColumn .fieldGroupWrap_box{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-ms-flex-line-pack:start;align-content:flex-start}.layoutColumn .fieldGroupWrap_box>div{width:100%;-ms-flex-preferred-size:100%;flex-basis:100%}.layoutColumn .fieldGroupWrap_box>.genFormItem{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-webkit-box-sizing:border-box;box-sizing:border-box;padding-right:10px}.layoutColumn.layoutColumn-1 .fieldGroupWrap_box>.genFormItem{padding-right:0}.layoutColumn.layoutColumn-2 .fieldGroupWrap_box>.genFormItem{width:50%;-ms-flex-preferred-size:50%;flex-basis:50%}.layoutColumn.layoutColumn-3 .fieldGroupWrap_box>.genFormItem{width:33.333%;-ms-flex-preferred-size:33.333%;flex-basis:33.333%}";
 styleInject(css_248z);
 
 /**
@@ -9867,258 +9924,6 @@ var vueProps$1 = {
   }
 };
 
-/* script */
-
-/* template */
-var __vue_render__$1 = function __vue_render__() {
-  var _vm = this;
-
-  var _h = _vm.$createElement;
-
-  var _c = _vm._self._c || _h;
-
-  return _c("svg", {
-    staticClass: "genFormIcon genFormIcon-down",
-    attrs: {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 1024 1024"
-    }
-  }, [_c("path", {
-    attrs: {
-      d: "M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z"
-    }
-  })]);
-};
-
-var __vue_staticRenderFns__$1 = [];
-__vue_render__$1._withStripped = true;
-/* style */
-
-var __vue_inject_styles__$1 = undefined;
-/* scoped */
-
-var __vue_scope_id__$1 = undefined;
-/* module identifier */
-
-var __vue_module_identifier__$1 = undefined;
-/* functional template */
-
-var __vue_is_functional_template__$1 = false;
-/* style inject */
-
-/* style inject SSR */
-
-/* style inject shadow dom */
-
-var __vue_component__$1 = /*#__PURE__*/normalizeComponent_1({
-  render: __vue_render__$1,
-  staticRenderFns: __vue_staticRenderFns__$1
-}, __vue_inject_styles__$1, {}, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, undefined, undefined);
-
-/* script */
-
-/* template */
-var __vue_render__$2 = function __vue_render__() {
-  var _vm = this;
-
-  var _h = _vm.$createElement;
-
-  var _c = _vm._self._c || _h;
-
-  return _c("svg", {
-    staticClass: "genFormIcon genFormIcon-up",
-    attrs: {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 1024 1024"
-    }
-  }, [_c("path", {
-    attrs: {
-      d: "M858.9 689L530.5 308.2c-9.4-10.9-27.5-10.9-37 0L165.1 689c-12.2 14.2-1.2 35 18.5 35h656.8c19.7 0 30.7-20.8 18.5-35z"
-    }
-  })]);
-};
-
-var __vue_staticRenderFns__$2 = [];
-__vue_render__$2._withStripped = true;
-/* style */
-
-var __vue_inject_styles__$2 = undefined;
-/* scoped */
-
-var __vue_scope_id__$2 = undefined;
-/* module identifier */
-
-var __vue_module_identifier__$2 = undefined;
-/* functional template */
-
-var __vue_is_functional_template__$2 = false;
-/* style inject */
-
-/* style inject SSR */
-
-/* style inject shadow dom */
-
-var __vue_component__$2 = /*#__PURE__*/normalizeComponent_1({
-  render: __vue_render__$2,
-  staticRenderFns: __vue_staticRenderFns__$2
-}, __vue_inject_styles__$2, {}, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, undefined, undefined);
-
-/* script */
-
-/* template */
-var __vue_render__$3 = function __vue_render__() {
-  var _vm = this;
-
-  var _h = _vm.$createElement;
-
-  var _c = _vm._self._c || _h;
-
-  return _c("svg", {
-    staticClass: "genFormIcon genFormIcon-close",
-    attrs: {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 1024 1024"
-    }
-  }, [_c("path", {
-    attrs: {
-      d: "M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1\n        191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0\n        0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"
-    }
-  })]);
-};
-
-var __vue_staticRenderFns__$3 = [];
-__vue_render__$3._withStripped = true;
-/* style */
-
-var __vue_inject_styles__$3 = undefined;
-/* scoped */
-
-var __vue_scope_id__$3 = undefined;
-/* module identifier */
-
-var __vue_module_identifier__$3 = undefined;
-/* functional template */
-
-var __vue_is_functional_template__$3 = false;
-/* style inject */
-
-/* style inject SSR */
-
-/* style inject shadow dom */
-
-var __vue_component__$3 = /*#__PURE__*/normalizeComponent_1({
-  render: __vue_render__$3,
-  staticRenderFns: __vue_staticRenderFns__$3
-}, __vue_inject_styles__$3, {}, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, undefined, undefined);
-
-/* script */
-
-/* template */
-var __vue_render__$4 = function __vue_render__() {
-  var _vm = this;
-
-  var _h = _vm.$createElement;
-
-  var _c = _vm._self._c || _h;
-
-  return _c("svg", {
-    staticClass: "genFormIcon genFormIcon-plus",
-    attrs: {
-      t: "1551322312294",
-      viewBox: "0 0 1024 1024",
-      version: "1.1",
-      xmlns: "http://www.w3.org/2000/svg",
-      "p-id": "10297",
-      "xmlns:xlink": "http://www.w3.org/1999/xlink",
-      width: "200",
-      height: "200"
-    }
-  }, [_c("path", {
-    attrs: {
-      d: "M474 152m8 0l60 0q8 0 8 8l0 704q0 8-8 8l-60 0q-8 0-8-8l0-704q0-8 8-8Z",
-      "p-id": "10298"
-    }
-  }), _vm._v(" "), _c("path", {
-    attrs: {
-      d: "M168 474m8 0l672 0q8 0 8 8l0 60q0 8-8 8l-672 0q-8 0-8-8l0-60q0-8 8-8Z",
-      "p-id": "10299"
-    }
-  })]);
-};
-
-var __vue_staticRenderFns__$4 = [];
-__vue_render__$4._withStripped = true;
-/* style */
-
-var __vue_inject_styles__$4 = undefined;
-/* scoped */
-
-var __vue_scope_id__$4 = undefined;
-/* module identifier */
-
-var __vue_module_identifier__$4 = undefined;
-/* functional template */
-
-var __vue_is_functional_template__$4 = false;
-/* style inject */
-
-/* style inject SSR */
-
-/* style inject shadow dom */
-
-var __vue_component__$4 = /*#__PURE__*/normalizeComponent_1({
-  render: __vue_render__$4,
-  staticRenderFns: __vue_staticRenderFns__$4
-}, __vue_inject_styles__$4, {}, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, undefined, undefined, undefined);
-
-/* script */
-
-/* template */
-var __vue_render__$5 = function __vue_render__() {
-  var _vm = this;
-
-  var _h = _vm.$createElement;
-
-  var _c = _vm._self._c || _h;
-
-  return _c("svg", {
-    staticClass: "genFormIcon genFormIcon-qs",
-    attrs: {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 1024 1024"
-    }
-  }, [_c("path", {
-    attrs: {
-      d: "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1\n        0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0\n        0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8\n        52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6\n        8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6\n        40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
-    }
-  })]);
-};
-
-var __vue_staticRenderFns__$5 = [];
-__vue_render__$5._withStripped = true;
-/* style */
-
-var __vue_inject_styles__$5 = undefined;
-/* scoped */
-
-var __vue_scope_id__$5 = undefined;
-/* module identifier */
-
-var __vue_module_identifier__$5 = undefined;
-/* functional template */
-
-var __vue_is_functional_template__$5 = false;
-/* style inject */
-
-/* style inject SSR */
-
-/* style inject shadow dom */
-
-var __vue_component__$5 = /*#__PURE__*/normalizeComponent_1({
-  render: __vue_render__$5,
-  staticRenderFns: __vue_staticRenderFns__$5
-}, __vue_inject_styles__$5, {}, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, undefined, undefined, undefined);
-
 var Widget = {
   name: 'Widget',
   inject: ['genFormProvide'],
@@ -10315,37 +10120,19 @@ var Widget = {
     }
   },
   render: function render(h) {
-    var _self$formProps;
-
     var self = this;
     var curNodePath = this.$props.curNodePath; // 判断是否为根节点
 
     var isRootNode = isRootNodePath(curNodePath);
-    var isMiniDes = self.formProps && self.formProps.isMiniDes;
-    var miniDesModel = isMiniDes !== null && isMiniDes !== void 0 ? isMiniDes : self.globalOptions.HELPERS.isMiniDes(self.formProps);
     var descriptionVNode = self.description ? h('div', {
       domProps: {
         innerHTML: self.description
       },
       class: {
-        genFromWidget_des: true,
-        genFromWidget_des_mini: miniDesModel
+        genFromWidget_des: true
       }
     }) : null;
-    var COMPONENT_MAP = self.globalOptions.COMPONENT_MAP;
-    var miniDescriptionVNode = miniDesModel && descriptionVNode ? h(COMPONENT_MAP.popover, {
-      style: {
-        margin: '0 2px',
-        fontSize: '16px',
-        cursor: 'pointer'
-      },
-      props: _objectSpread2({
-        placement: 'top',
-        trigger: 'hover'
-      }, (_self$formProps = self.formProps) === null || _self$formProps === void 0 ? void 0 : _self$formProps.popover)
-    }, [descriptionVNode, h(__vue_component__$5, {
-      slot: 'reference'
-    })]) : null; // form-item style
+    var COMPONENT_MAP = self.globalOptions.COMPONENT_MAP; // form-item style
 
     var formItemStyle = _objectSpread2(_objectSpread2({}, self.fieldStyle), self.width ? {
       width: self.width,
@@ -10355,6 +10142,58 @@ var Widget = {
 
 
     var label = fallbackLabel(self.label, self.widget && this.genFormProvide.fallbackLabel, curNodePath);
+    var widgetVNode = h( // 关键输入组件
+    self.widget, _objectSpread2(_objectSpread2({
+      style: self.widgetStyle,
+      class: self.widgetClass,
+      attrs: _objectSpread2(_objectSpread2(_objectSpread2({}, self.widgetAttrs), self.uiProps), {}, {
+        value: this.value // v-model
+
+      }),
+      ref: 'widgetRef'
+    }, self.renderScopedSlots ? {
+      scopedSlots: self.renderScopedSlots(h) || {}
+    } : {}), {}, {
+      on: _objectSpread2(_objectSpread2({}, self.widgetListeners ? self.widgetListeners : {}), {}, {
+        'hook:mounted': function widgetMounted() {
+          if (self.widgetListeners && self.widgetListeners['hook:mounted']) {
+            // eslint-disable-next-line prefer-rest-params
+            self.widgetListeners['hook:mounted'].apply(this, Array.prototype.slice.call(arguments));
+          } // 提供一种特殊的配置 允许直接访问到 widget vm
+
+
+          if (self.getWidget && typeof self.getWidget === 'function') {
+            self.getWidget.call(null, self.$refs.widgetRef);
+          }
+        },
+        input: function input(event) {
+          var formatValue = self.formatValue(event); // 默认用户输入变了都是需要更新form数据保持同步，唯一特例 input number
+          // 为了兼容 number 小数点后0结尾的数据场景
+          // 比如 1. 1.010 这类特殊数据输入是不需要触发 新值的设置，否则会导致schema校验为非数字
+          // 但由于element为了解另外的问题，会在nextTick时强制同步dom的值等于vm的值所以无法通过这种方式来hack，这里旧的这份逻辑依旧保留 不过update一直为true
+
+          var preVal = self.value;
+
+          if (formatValue.update && preVal !== formatValue.value) {
+            self.value = formatValue.value;
+
+            if (self.onChange) {
+              self.onChange({
+                curVal: formatValue.value,
+                preVal: preVal,
+                parentFormData: getPathVal$1(self.rootFormData, self.curNodePath, 1),
+                rootFormData: self.rootFormData
+              });
+            }
+          }
+
+          if (self.widgetListeners && self.widgetListeners.input) {
+            // eslint-disable-next-line prefer-rest-params
+            self.widgetListeners.input.apply(this, Array.prototype.slice.call(arguments));
+          }
+        }
+      })
+    }), self.renderChildren ? self.renderChildren(h) : null);
     return h(COMPONENT_MAP.formItem, {
       class: _objectSpread2(_objectSpread2({}, self.fieldClass), {}, {
         genFormItem: true
@@ -10423,60 +10262,11 @@ var Widget = {
         genFormLabel: true,
         genFormItemRequired: self.realRequired
       }
-    }, ["".concat(label), miniDescriptionVNode, "".concat(self.formProps && self.formProps.labelSuffix || '')]) : null, // description
-    // 非mini模式显示 description
-    !miniDesModel ? descriptionVNode : null, h( // 关键输入组件
-    self.widget, _objectSpread2(_objectSpread2({
-      style: self.widgetStyle,
-      class: self.widgetClass,
-      attrs: _objectSpread2(_objectSpread2(_objectSpread2({}, self.widgetAttrs), self.uiProps), {}, {
-        value: this.value // v-model
-
-      }),
-      ref: 'widgetRef'
-    }, self.renderScopedSlots ? {
-      scopedSlots: self.renderScopedSlots(h) || {}
-    } : {}), {}, {
-      on: _objectSpread2(_objectSpread2({}, self.widgetListeners ? self.widgetListeners : {}), {}, {
-        'hook:mounted': function widgetMounted() {
-          if (self.widgetListeners && self.widgetListeners['hook:mounted']) {
-            // eslint-disable-next-line prefer-rest-params
-            self.widgetListeners['hook:mounted'].apply(this, Array.prototype.slice.call(arguments));
-          } // 提供一种特殊的配置 允许直接访问到 widget vm
-
-
-          if (self.getWidget && typeof self.getWidget === 'function') {
-            self.getWidget.call(null, self.$refs.widgetRef);
-          }
-        },
-        input: function input(event) {
-          var formatValue = self.formatValue(event); // 默认用户输入变了都是需要更新form数据保持同步，唯一特例 input number
-          // 为了兼容 number 小数点后0结尾的数据场景
-          // 比如 1. 1.010 这类特殊数据输入是不需要触发 新值的设置，否则会导致schema校验为非数字
-          // 但由于element为了解另外的问题，会在nextTick时强制同步dom的值等于vm的值所以无法通过这种方式来hack，这里旧的这份逻辑依旧保留 不过update一直为true
-
-          var preVal = self.value;
-
-          if (formatValue.update && preVal !== formatValue.value) {
-            self.value = formatValue.value;
-
-            if (self.onChange) {
-              self.onChange({
-                curVal: formatValue.value,
-                preVal: preVal,
-                parentFormData: getPathVal$1(self.rootFormData, self.curNodePath, 1),
-                rootFormData: self.rootFormData
-              });
-            }
-          }
-
-          if (self.widgetListeners && self.widgetListeners.input) {
-            // eslint-disable-next-line prefer-rest-params
-            self.widgetListeners.input.apply(this, Array.prototype.slice.call(arguments));
-          }
-        }
-      })
-    }), self.renderChildren ? self.renderChildren(h) : null)]);
+    }, ["".concat(label), "".concat(self.formProps && self.formProps.labelSuffix || '')]) : null, descriptionVNode ? h('div', {
+      class: {
+        genFormWidgetRow: true
+      }
+    }, [widgetVNode, descriptionVNode]) : widgetVNode]);
   }
 };
 
@@ -10697,6 +10487,210 @@ var BooleanField = {
     }));
   }
 };
+
+/* script */
+
+/* template */
+var __vue_render__$1 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c("svg", {
+    staticClass: "genFormIcon genFormIcon-down",
+    attrs: {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 1024 1024"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z"
+    }
+  })]);
+};
+
+var __vue_staticRenderFns__$1 = [];
+__vue_render__$1._withStripped = true;
+/* style */
+
+var __vue_inject_styles__$1 = undefined;
+/* scoped */
+
+var __vue_scope_id__$1 = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$1 = undefined;
+/* functional template */
+
+var __vue_is_functional_template__$1 = false;
+/* style inject */
+
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$1 = /*#__PURE__*/normalizeComponent_1({
+  render: __vue_render__$1,
+  staticRenderFns: __vue_staticRenderFns__$1
+}, __vue_inject_styles__$1, {}, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, undefined, undefined);
+
+/* script */
+
+/* template */
+var __vue_render__$2 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c("svg", {
+    staticClass: "genFormIcon genFormIcon-up",
+    attrs: {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 1024 1024"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M858.9 689L530.5 308.2c-9.4-10.9-27.5-10.9-37 0L165.1 689c-12.2 14.2-1.2 35 18.5 35h656.8c19.7 0 30.7-20.8 18.5-35z"
+    }
+  })]);
+};
+
+var __vue_staticRenderFns__$2 = [];
+__vue_render__$2._withStripped = true;
+/* style */
+
+var __vue_inject_styles__$2 = undefined;
+/* scoped */
+
+var __vue_scope_id__$2 = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$2 = undefined;
+/* functional template */
+
+var __vue_is_functional_template__$2 = false;
+/* style inject */
+
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$2 = /*#__PURE__*/normalizeComponent_1({
+  render: __vue_render__$2,
+  staticRenderFns: __vue_staticRenderFns__$2
+}, __vue_inject_styles__$2, {}, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, undefined, undefined);
+
+/* script */
+
+/* template */
+var __vue_render__$3 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c("svg", {
+    staticClass: "genFormIcon genFormIcon-close",
+    attrs: {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 1024 1024"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1\n        191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0\n        0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"
+    }
+  })]);
+};
+
+var __vue_staticRenderFns__$3 = [];
+__vue_render__$3._withStripped = true;
+/* style */
+
+var __vue_inject_styles__$3 = undefined;
+/* scoped */
+
+var __vue_scope_id__$3 = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$3 = undefined;
+/* functional template */
+
+var __vue_is_functional_template__$3 = false;
+/* style inject */
+
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$3 = /*#__PURE__*/normalizeComponent_1({
+  render: __vue_render__$3,
+  staticRenderFns: __vue_staticRenderFns__$3
+}, __vue_inject_styles__$3, {}, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, undefined, undefined);
+
+/* script */
+
+/* template */
+var __vue_render__$4 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c("svg", {
+    staticClass: "genFormIcon genFormIcon-plus",
+    attrs: {
+      t: "1551322312294",
+      viewBox: "0 0 1024 1024",
+      version: "1.1",
+      xmlns: "http://www.w3.org/2000/svg",
+      "p-id": "10297",
+      "xmlns:xlink": "http://www.w3.org/1999/xlink",
+      width: "200",
+      height: "200"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M474 152m8 0l60 0q8 0 8 8l0 704q0 8-8 8l-60 0q-8 0-8-8l0-704q0-8 8-8Z",
+      "p-id": "10298"
+    }
+  }), _vm._v(" "), _c("path", {
+    attrs: {
+      d: "M168 474m8 0l672 0q8 0 8 8l0 60q0 8-8 8l-672 0q-8 0-8-8l0-60q0-8 8-8Z",
+      "p-id": "10299"
+    }
+  })]);
+};
+
+var __vue_staticRenderFns__$4 = [];
+__vue_render__$4._withStripped = true;
+/* style */
+
+var __vue_inject_styles__$4 = undefined;
+/* scoped */
+
+var __vue_scope_id__$4 = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$4 = undefined;
+/* functional template */
+
+var __vue_is_functional_template__$4 = false;
+/* style inject */
+
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$4 = /*#__PURE__*/normalizeComponent_1({
+  render: __vue_render__$4,
+  staticRenderFns: __vue_staticRenderFns__$4
+}, __vue_inject_styles__$4, {}, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, undefined, undefined, undefined);
 
 var ArrayOrderList = {
   name: 'ArrayOrderList',
@@ -11997,7 +11991,7 @@ var script$1 = {
 var __vue_script__$1 = script$1;
 /* template */
 
-var __vue_render__$6 = function __vue_render__() {
+var __vue_render__$5 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -12014,30 +12008,30 @@ var __vue_render__$6 = function __vue_render__() {
   }), 1);
 };
 
-var __vue_staticRenderFns__$6 = [];
-__vue_render__$6._withStripped = true;
+var __vue_staticRenderFns__$5 = [];
+__vue_render__$5._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$6 = undefined;
+var __vue_inject_styles__$5 = undefined;
 /* scoped */
 
-var __vue_scope_id__$6 = undefined;
+var __vue_scope_id__$5 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$6 = undefined;
+var __vue_module_identifier__$5 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$6 = false;
+var __vue_is_functional_template__$5 = false;
 /* style inject */
 
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$6 = /*#__PURE__*/normalizeComponent_1({
-  render: __vue_render__$6,
-  staticRenderFns: __vue_staticRenderFns__$6
-}, __vue_inject_styles__$6, __vue_script__$1, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, undefined, undefined, undefined);
+var __vue_component__$5 = /*#__PURE__*/normalizeComponent_1({
+  render: __vue_render__$5,
+  staticRenderFns: __vue_staticRenderFns__$5
+}, __vue_inject_styles__$5, __vue_script__$1, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, undefined, undefined, undefined);
 
 //
 //
@@ -12070,7 +12064,7 @@ var script$2 = {
 var __vue_script__$2 = script$2;
 /* template */
 
-var __vue_render__$7 = function __vue_render__() {
+var __vue_render__$6 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -12087,30 +12081,30 @@ var __vue_render__$7 = function __vue_render__() {
   }), 1);
 };
 
-var __vue_staticRenderFns__$7 = [];
-__vue_render__$7._withStripped = true;
+var __vue_staticRenderFns__$6 = [];
+__vue_render__$6._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$7 = undefined;
+var __vue_inject_styles__$6 = undefined;
 /* scoped */
 
-var __vue_scope_id__$7 = undefined;
+var __vue_scope_id__$6 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$7 = undefined;
+var __vue_module_identifier__$6 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$7 = false;
+var __vue_is_functional_template__$6 = false;
 /* style inject */
 
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$7 = /*#__PURE__*/normalizeComponent_1({
-  render: __vue_render__$7,
-  staticRenderFns: __vue_staticRenderFns__$7
-}, __vue_inject_styles__$7, __vue_script__$2, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, undefined, undefined, undefined);
+var __vue_component__$6 = /*#__PURE__*/normalizeComponent_1({
+  render: __vue_render__$6,
+  staticRenderFns: __vue_staticRenderFns__$6
+}, __vue_inject_styles__$6, __vue_script__$2, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, undefined, undefined, undefined);
 
 //
 //
@@ -12142,7 +12136,7 @@ var script$3 = {
 var __vue_script__$3 = script$3;
 /* template */
 
-var __vue_render__$8 = function __vue_render__() {
+var __vue_render__$7 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -12160,30 +12154,30 @@ var __vue_render__$8 = function __vue_render__() {
   }), 1);
 };
 
-var __vue_staticRenderFns__$8 = [];
-__vue_render__$8._withStripped = true;
+var __vue_staticRenderFns__$7 = [];
+__vue_render__$7._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$8 = undefined;
+var __vue_inject_styles__$7 = undefined;
 /* scoped */
 
-var __vue_scope_id__$8 = undefined;
+var __vue_scope_id__$7 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$8 = undefined;
+var __vue_module_identifier__$7 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$8 = false;
+var __vue_is_functional_template__$7 = false;
 /* style inject */
 
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$8 = /*#__PURE__*/normalizeComponent_1({
-  render: __vue_render__$8,
-  staticRenderFns: __vue_staticRenderFns__$8
-}, __vue_inject_styles__$8, __vue_script__$3, __vue_scope_id__$8, __vue_is_functional_template__$8, __vue_module_identifier__$8, false, undefined, undefined, undefined);
+var __vue_component__$7 = /*#__PURE__*/normalizeComponent_1({
+  render: __vue_render__$7,
+  staticRenderFns: __vue_staticRenderFns__$7
+}, __vue_inject_styles__$7, __vue_script__$3, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, undefined, undefined, undefined);
 
 /**
  * Created by Liu.Jun on 2020/7/22 13:21.
@@ -12419,10 +12413,13 @@ var UploadWidget = {
  * 需通过 schema / uiSchema 配置：
  * - ui:action 试听接口地址（必填，否则按钮禁用）
  * - ui:ttsParams 当前 TTS 配置对象（可用 {{ parentFormData }}）
+ * - ui:providerSchema TTS provider 的 JSON Schema（用于解析显示名；也可由宿主注入）
  * - ui:btnText 试听按钮文案
  * - ui:downloadBtnText 下载按钮文案
  * - ui:rows 大于 1 时使用多行输入
  */
+var providerSchemaRef = null;
+
 function guessExt(contentType) {
   if (contentType.includes('wav')) return 'wav';
   if (contentType.includes('mpeg') || contentType.includes('mp3')) return 'mp3';
@@ -12437,14 +12434,77 @@ function sanitizeFilePart(value) {
   return text || fallback;
 }
 
-function buildTtsDownloadName(ttsParams, ext) {
+function providerOptions(schema) {
+  if (!schema) return [];
+  var opts = schema.oneOf || schema.anyOf;
+  return Array.isArray(opts) ? opts : [];
+}
+
+function matchProviderOption(schema, name) {
+  var _iterator = _createForOfIteratorHelper(providerOptions(schema)),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var opt = _step.value;
+      var nameProp = opt && opt.properties && opt.properties.name;
+      var constName = nameProp ? nameProp.const != null ? nameProp.const : nameProp.default != null ? nameProp.default : nameProp.enum && nameProp.enum[0] : undefined;
+      if (constName === name) return opt;
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  return null;
+}
+
+function resolveVoiceLabel(voiceSchema, voiceValue) {
+  if (voiceValue == null || voiceValue === '') return 'voice';
+  var oneOf = voiceSchema && voiceSchema.oneOf;
+
+  if (Array.isArray(oneOf)) {
+    var _iterator2 = _createForOfIteratorHelper(oneOf),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var opt = _step2.value;
+
+        if (opt && opt.const === voiceValue && opt.title) {
+          return String(opt.title);
+        }
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+  }
+
+  var enums = voiceSchema && voiceSchema.enum;
+  var names = voiceSchema && voiceSchema.enumNames;
+
+  if (Array.isArray(enums) && Array.isArray(names)) {
+    var idx = enums.indexOf(voiceValue);
+    if (idx >= 0 && names[idx]) return String(names[idx]);
+  }
+
+  return String(voiceValue);
+}
+
+function buildTtsDownloadName(ttsParams, ext, providerSchema) {
+  var schema = providerSchema || providerSchemaRef;
   var provider = ttsParams && _typeof(ttsParams) === 'object' ? ttsParams.provider : undefined;
-  var name = sanitizeFilePart(provider && provider.name, 'provider');
+  var nameVal = provider && provider.name;
+  var option = matchProviderOption(schema, nameVal);
+  var nameLabel = option && option.title || nameVal || 'provider';
   var voiceRaw = provider ? provider.voice && provider.voice.value != null ? provider.voice.value : provider.voice : undefined;
-  var voice = sanitizeFilePart(voiceRaw, 'voice');
+  var voiceLabel = resolveVoiceLabel(option && option.properties && option.properties.voice, voiceRaw);
   var rateRaw = provider ? provider.speech_rate : undefined;
-  var rate = rateRaw === undefined || rateRaw === null || rateRaw === '' ? 'default' : sanitizeFilePart(rateRaw, 'default');
-  return "".concat(name, "+").concat(voice, "+").concat(rate, ".").concat(ext);
+  var rateLabel = rateRaw === undefined || rateRaw === null || rateRaw === '' ? 'default' : String(rateRaw);
+  return "".concat(sanitizeFilePart(nameLabel, 'provider'), "+").concat(sanitizeFilePart(voiceLabel, 'voice'), "+").concat(sanitizeFilePart(rateLabel, 'default'), ".").concat(ext);
 }
 
 var TtsPreviewWidget = {
@@ -12467,6 +12527,10 @@ var TtsPreviewWidget = {
       default: '下载'
     },
     ttsParams: {
+      type: Object,
+      default: null
+    },
+    providerSchema: {
       type: Object,
       default: null
     },
@@ -12526,7 +12590,7 @@ var TtsPreviewWidget = {
       if (!this.audioUrl) return;
       var a = document.createElement('a');
       a.href = this.audioUrl;
-      a.download = this.downloadName || buildTtsDownloadName(this.ttsParams, 'wav');
+      a.download = this.downloadName || buildTtsDownloadName(this.ttsParams, 'wav', this.providerSchema);
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -12629,7 +12693,7 @@ var TtsPreviewWidget = {
 
               case 30:
                 blob = _context.sent;
-                _this.downloadName = buildTtsDownloadName(_this.ttsParams, guessExt(contentType));
+                _this.downloadName = buildTtsDownloadName(_this.ttsParams, guessExt(contentType), _this.providerSchema);
                 _this.audioUrl = URL.createObjectURL(blob);
                 _this.audio = new Audio(_this.audioUrl);
                 _context.next = 36;
@@ -12719,9 +12783,9 @@ var TtsPreviewWidget = {
 // }, {});
 
 var widgetComponents = {
-  CheckboxesWidget: __vue_component__$6,
-  RadioWidget: __vue_component__$7,
-  SelectWidget: __vue_component__$8,
+  CheckboxesWidget: __vue_component__$5,
+  RadioWidget: __vue_component__$6,
+  SelectWidget: __vue_component__$7,
   TimePickerWidget: TimePickerWidget,
   DatePickerWidget: DatePickerWidget,
   DateTimePickerWidget: DateTimePickerWidget,
@@ -12762,7 +12826,7 @@ var WIDGET_MAP = {
   widgetComponents: widgetComponents
 };
 
-var css_248z$1 = ".genFromComponent.el-form--label-top .el-form-item__label{line-height:26px;padding-bottom:6px;font-size:14px}.genFromComponent .el-checkbox,.genFromComponent .el-color-picker{vertical-align:top}";
+var css_248z$1 = ".genFromComponent.el-form--label-top .el-form-item__label{line-height:26px;padding-bottom:6px;font-size:14px}.genFromComponent .el-checkbox,.genFromComponent .el-color-picker{vertical-align:top}.genFromComponent .genFormWidgetRow .el-cascader,.genFromComponent .genFormWidgetRow .el-date-editor,.genFromComponent .genFormWidgetRow .el-input,.genFromComponent .genFormWidgetRow .el-select,.genFromComponent .genFormWidgetRow .el-slider,.genFromComponent .genFormWidgetRow .el-textarea{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow .el-input-number{-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto}";
 styleInject(css_248z$1);
 
 /**
