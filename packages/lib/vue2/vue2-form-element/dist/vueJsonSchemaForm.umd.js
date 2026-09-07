@@ -1,4 +1,4 @@
-/** @license @lljj/vue-json-schema-form (c) 2020-2026 Liu.Jun License: Apache-2.0 */
+/** @license @lljj/vue-json-schema-form v1.19.3 (c) 2020-2026 Liu.Jun License: Apache-2.0 */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue')) :
   typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory) :
