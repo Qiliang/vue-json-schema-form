@@ -24,4 +24,14 @@
             flex: 0 0 auto;
         }
     }
+    .genFormFieldRow_widget {
+        .el-input,
+        .el-select,
+        .el-date-editor,
+        .el-textarea,
+        .el-cascader,
+        .el-slider {
+            width: 100%;
+        }
+    }
 }

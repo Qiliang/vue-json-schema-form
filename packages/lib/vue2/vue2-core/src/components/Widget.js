@@ -9,6 +9,33 @@ import {
 import { validateFormDataAndTransformMsg } from '@lljj/vjsf-utils/schema/validate';
 import { fallbackLabel } from '@lljj/vjsf-utils/formUtils';
 
+function toCssSize(value) {
+    if (value === undefined || value === null || value === '') return undefined;
+    if (typeof value === 'number') return `${value}%`;
+    return String(value);
+}
+
+function resolveWidgetDesWidths(widgetWidth, descriptionWidth) {
+    const widget = toCssSize(widgetWidth);
+    const description = toCssSize(descriptionWidth);
+    if (!widget && !description) {
+        return { widgetWidth: '60%', descriptionWidth: '40%' };
+    }
+    if (widget && !description) {
+        return { widgetWidth: widget, descriptionWidth: `calc(100% - ${widget})` };
+    }
+    if (!widget && description) {
+        return { widgetWidth: `calc(100% - ${description})`, descriptionWidth: description };
+    }
+    return { widgetWidth: widget, descriptionWidth: description };
+}
+
+function isMultiLineText(uiProps = {}, widget) {
+    if (uiProps && uiProps.type === 'textarea') return true;
+    if (typeof widget === 'string' && /textarea/i.test(widget)) return true;
+    return false;
+}
+
 export default {
     name: 'Widget',
     inject: ['genFormProvide'],
@@ -88,6 +115,16 @@ export default {
         width: {
             type: String,
             default: ''
+        },
+        // label+控件 宽度，有 description 时生效，默认 60%
+        widgetWidth: {
+            type: [String, Number],
+            default: undefined
+        },
+        // description 宽度，有 description 时生效，默认 40%
+        descriptionWidth: {
+            type: [String, Number],
+            default: undefined
         },
         labelWidth: {
             type: String,
@@ -185,6 +222,13 @@ export default {
         // 判断是否为根节点
         const isRootNode = isRootNodePath(curNodePath);
 
+        const isTextarea = isMultiLineText(self.uiProps, self.widget);
+        const { widgetWidth, descriptionWidth } = resolveWidgetDesWidths(
+            self.widgetWidth != null ? self.widgetWidth : (self.formProps && self.formProps.widgetWidth),
+            self.descriptionWidth != null ? self.descriptionWidth : (self.formProps && self.formProps.descriptionWidth)
+        );
+        const hasSideDescription = !!(self.description && !isTextarea);
+
         const descriptionVNode = (self.description) ? h(
             'div',
             {
@@ -193,7 +237,11 @@ export default {
                 },
                 class: {
                     genFromWidget_des: true
-                }
+                },
+                style: hasSideDescription ? {
+                    width: descriptionWidth,
+                    flex: `0 0 ${descriptionWidth}`
+                } : undefined
             },
         ) : null;
 
@@ -268,15 +316,18 @@ export default {
             self.renderChildren ? self.renderChildren(h) : null
         );
 
-        return h(
+        const formItemVNode = h(
             COMPONENT_MAP.formItem,
             {
                 class: {
-                    ...self.fieldClass,
+                    ...hasSideDescription ? {} : self.fieldClass,
                     genFormItem: true
                 },
-                style: formItemStyle,
-                attrs: self.fieldAttrs,
+                style: hasSideDescription ? {
+                    width: '100%',
+                    marginBottom: 0
+                } : formItemStyle,
+                attrs: hasSideDescription ? undefined : self.fieldAttrs,
                 props: {
                     ...self.labelWidth ? { labelWidth: self.labelWidth } : {},
                     ...this.isFormData ? {
@@ -346,9 +397,10 @@ export default {
                     `${(self.formProps && self.formProps.labelSuffix) || ''}`
                 ]) : null,
 
-                descriptionVNode ? h('div', {
+                (descriptionVNode && isTextarea) ? h('div', {
                     class: {
-                        genFormWidgetRow: true
+                        genFormWidgetRow: true,
+                        'genFormWidgetRow--block': true
                     }
                 }, [
                     widgetVNode,
@@ -356,5 +408,30 @@ export default {
                 ]) : widgetVNode
             ]
         );
+
+        if (!hasSideDescription) {
+            return formItemVNode;
+        }
+
+        return h('div', {
+            class: {
+                ...self.fieldClass,
+                genFormItem: true,
+                genFormFieldRow: true
+            },
+            style: formItemStyle,
+            attrs: self.fieldAttrs
+        }, [
+            h('div', {
+                class: {
+                    genFormFieldRow_widget: true
+                },
+                style: {
+                    width: widgetWidth,
+                    flex: `0 0 ${widgetWidth}`
+                }
+            }, [formItemVNode]),
+            descriptionVNode
+        ]);
     }
 };

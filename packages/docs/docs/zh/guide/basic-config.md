@@ -189,6 +189,13 @@ uiSchema = {
     // 也可在 fieldAttrs 中配置 labelWidth': '50px'
     'ui:labelWidth': '50px',
 
+    // 有 description 时，label+控件 所占宽度，默认 60%。多行文本不生效
+    // 数字按百分比处理，也可写 '70%'、'320px'
+    'ui:widgetWidth': '60%',
+
+    // 有 description 时，右侧描述所占宽度，默认 40%。多行文本不生效
+    'ui:descriptionWidth': '40%',
+
     'ui:options': {
             // scoped slots 使用render函数来实现
             // 配置 renderScopedSlots 返回对象key为slotName，函数体返回vnode
@@ -829,6 +836,8 @@ formProps = {
     isMiniDes: false, // 是否优先mini形式显示描述信息（label文字和描述信息同行显示）
     defaultSelectFirstOption: true, // 单选框必填，是否默认选中第一个
     popover: {}, // 透传给ui 组件库的popver组件，比如element ui Popover，antd a-popover
+    widgetWidth: '60%', // 有 description 时，label+控件默认宽度；也可在根 schema / 字段上配置 ui:widgetWidth
+    descriptionWidth: '40%', // 有 description 时，右侧描述默认宽度；也可在根 schema / 字段上配置 ui:descriptionWidth
 }
 ```
 

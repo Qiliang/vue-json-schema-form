@@ -7,6 +7,7 @@ import Vue from 'vue';
 
 // 生成form表单默认数据
 import getDefaultFormState from '@lljj/vjsf-utils/schema/getDefaultFormState';
+import { getUserUiOptions } from '@lljj/vjsf-utils/formUtils';
 import { deepEquals } from '@lljj/vjsf-utils/utils';
 
 // 基础公共样式
@@ -142,10 +143,18 @@ export default function createForm(globalOptions = {}) {
 
             const {
                 // eslint-disable-next-line no-unused-vars
-                layoutColumn = 1, inlineFooter, labelSuffix, isMiniDes, defaultSelectFirstOption, popover, ...uiFormProps
+                layoutColumn = 1, inlineFooter, labelSuffix, isMiniDes, defaultSelectFirstOption, popover,
+                widgetWidth, descriptionWidth, ...uiFormProps
             } = self.$props.formProps;
 
             const { inline = false, labelPosition = 'top' } = uiFormProps;
+
+            const rootUiOptions = getUserUiOptions({
+                schema: this.schema,
+                uiSchema: this.uiSchema,
+                curNodePath: '',
+                rootFormData: this.formData
+            });
 
             const props = {
                 schema: this.schema,
@@ -162,7 +171,9 @@ export default function createForm(globalOptions = {}) {
                     labelSuffix: '：',
                     defaultSelectFirstOption: true,
                     inline,
-                    ...self.$props.formProps
+                    ...self.$props.formProps,
+                    widgetWidth: widgetWidth ?? rootUiOptions.widgetWidth,
+                    descriptionWidth: descriptionWidth ?? rootUiOptions.descriptionWidth
                 }
             };
 

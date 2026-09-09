@@ -73,6 +73,23 @@
         margin-bottom: 10px;
         color: rgb(153, 153, 153);
     }
+    .genFormFieldRow {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        margin-bottom: 22px;
+    }
+    .genFormFieldRow_widget {
+        min-width: 0;
+        box-sizing: border-box;
+    }
+    .genFormFieldRow_widget > .el-form-item,
+    .genFormFieldRow_widget > .genFormItem {
+        width: 100%;
+        margin-bottom: 0;
+    }
     .genFormWidgetRow {
         display: flex;
         align-items: center;
@@ -83,17 +100,32 @@
         flex: 1 1 auto;
         min-width: 0;
     }
+    .genFormWidgetRow--block {
+        flex-direction: column;
+        align-items: stretch;
+    }
     .genFromWidget_des {
-        padding: 0;
-        margin: 0 0 0 8px;
+        padding: 0 0 0 12px;
+        margin: 0;
         font-size: 12px;
         line-height: 20px;
         color: #999;
         text-align: left;
-        flex: 0 1 auto;
-        width: auto;
-        max-width: 50%;
+        min-width: 0;
+        box-sizing: border-box;
         word-break: break-word;
+    }
+    .genFormWidgetRow--block .genFromWidget_des {
+        margin: 8px 0 0;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+    &.el-form--label-top .genFormFieldRow {
+        align-items: flex-end;
+    }
+    &.el-form--label-top .genFormFieldRow .genFromWidget_des {
+        padding-bottom: 10px;
     }
     .formItemErrorBox {
         margin: 0 auto;
