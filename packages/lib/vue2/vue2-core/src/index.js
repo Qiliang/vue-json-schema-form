@@ -156,6 +156,9 @@ export default function createForm(globalOptions = {}) {
                 rootFormData: this.formData
             });
 
+            const resolvedLabelColor = labelColor ?? rootUiOptions.labelColor;
+            const resolvedDescriptionColor = descriptionColor ?? rootUiOptions.descriptionColor;
+
             const props = {
                 schema: this.schema,
                 uiSchema: this.uiSchema,
@@ -174,8 +177,8 @@ export default function createForm(globalOptions = {}) {
                     ...self.$props.formProps,
                     widgetWidth: widgetWidth ?? rootUiOptions.widgetWidth,
                     descriptionWidth: descriptionWidth ?? rootUiOptions.descriptionWidth,
-                    labelColor: labelColor ?? rootUiOptions.labelColor,
-                    descriptionColor: descriptionColor ?? rootUiOptions.descriptionColor
+                    labelColor: resolvedLabelColor,
+                    descriptionColor: resolvedDescriptionColor
                 }
             };
 
@@ -189,6 +192,10 @@ export default function createForm(globalOptions = {}) {
                         [`genFromComponent_${this.schema.id}Form`]: !!this.schema.id,
                         layoutColumn: !inline,
                         [`layoutColumn-${layoutColumn}`]: !inline
+                    },
+                    style: {
+                        ...(resolvedLabelColor ? { '--vjsf-label-color': resolvedLabelColor } : {}),
+                        ...(resolvedDescriptionColor ? { '--vjsf-description-color': resolvedDescriptionColor } : {})
                     },
                     nativeOn: {
                         submit(e) {

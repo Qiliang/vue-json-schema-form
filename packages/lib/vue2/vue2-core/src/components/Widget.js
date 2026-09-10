@@ -281,7 +281,9 @@ export default {
                 width: self.width,
                 flexBasis: self.width,
                 paddingRight: '10px'
-            } : {})
+            } : {}),
+            ...(labelColor ? { '--vjsf-label-color': labelColor } : {}),
+            ...(descriptionColor ? { '--vjsf-description-color': descriptionColor } : {})
         };
 
         // 运行配置回退到 属性名

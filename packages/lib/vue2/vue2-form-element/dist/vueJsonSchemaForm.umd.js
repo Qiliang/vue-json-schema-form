@@ -1,4 +1,4 @@
-/** @license @lljj/vue-json-schema-form v1.20.0 (c) 2020-2026 Liu.Jun License: Apache-2.0 */
+/** @license @lljj/vue-json-schema-form v1.20.3 (c) 2020-2026 Liu.Jun License: Apache-2.0 */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue')) :
   typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory) :
@@ -8697,12 +8697,14 @@
         width = uiOptions.width,
         widgetWidth = uiOptions.widgetWidth,
         descriptionWidth = uiOptions.descriptionWidth,
+        labelColor = uiOptions.labelColor,
+        descriptionColor = uiOptions.descriptionColor,
         getWidget = uiOptions.getWidget,
         renderScopedSlots = uiOptions.renderScopedSlots,
         renderChildren = uiOptions.renderChildren,
         onChange = uiOptions.onChange,
         uiRequired = uiOptions.required,
-        uiProps = _objectWithoutProperties(uiOptions, ["widget", "title", "labelWidth", "description", "attrs", "class", "style", "widgetListeners", "fieldAttrs", "fieldStyle", "fieldClass", "emptyValue", "width", "widgetWidth", "descriptionWidth", "getWidget", "renderScopedSlots", "renderChildren", "onChange", "required"]);
+        uiProps = _objectWithoutProperties(uiOptions, ["widget", "title", "labelWidth", "description", "attrs", "class", "style", "widgetListeners", "fieldAttrs", "fieldStyle", "fieldClass", "emptyValue", "width", "widgetWidth", "descriptionWidth", "labelColor", "descriptionColor", "getWidget", "renderScopedSlots", "renderChildren", "onChange", "required"]);
 
     return {
       widget: widget,
@@ -8716,6 +8718,8 @@
       width: width,
       widgetWidth: widgetWidth,
       descriptionWidth: descriptionWidth,
+      labelColor: labelColor,
+      descriptionColor: descriptionColor,
       fieldStyle: fieldStyle,
       fieldClass: fieldClass,
       emptyValue: emptyValue,
@@ -9481,7 +9485,7 @@
     }
   }
 
-  var css_248z = ".genFromComponent{font-size:14px;line-height:1;word-wrap:break-word;word-break:break-word;padding:0;margin:0}.genFromComponent a,.genFromComponent h1,.genFromComponent h2,.genFromComponent h3,.genFromComponent li,.genFromComponent p,.genFromComponent ul{font-size:14px}.genFromComponent .genFormIcon{width:12px;height:12px;vertical-align:top}.genFromComponent .genFormBtn{display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;background:#fff;border:1px solid #dcdfe6;color:#606266;-webkit-appearance:none;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;outline:none;margin:0;-webkit-transition:.1s;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:12px 20px;font-size:14px;border-radius:4px}.genFromComponent .genFormBtn.is-plain:focus,.genFromComponent .genFormBtn.is-plain:hover{background:#fff;border-color:#409eff;color:#409eff}.genFromComponent .hiddenWidget{display:none}.genFromComponent .fieldGroupWrap+.fieldGroupWrap .fieldGroupWrap_title{margin-top:20px}.genFromComponent .fieldGroupWrap_title{position:relative;display:block;width:100%;line-height:26px;margin-bottom:8px;font-size:15px;font-weight:700;border:0}.genFromComponent .fieldGroupWrap_des{font-size:12px;line-height:20px;margin-bottom:10px;color:#999}.genFromComponent .genFormFieldRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;margin-bottom:22px}.genFromComponent .genFormFieldRow,.genFromComponent .genFormFieldRow_widget{min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box}.genFromComponent .genFormFieldRow_widget>.el-form-item,.genFromComponent .genFormFieldRow_widget>.genFormItem{width:100%;margin-bottom:0}.genFromComponent .genFormWidgetRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0}.genFromComponent .genFormWidgetRow>:first-child{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow--block{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.genFromComponent .genFromWidget_des{padding:0 0 0 12px;margin:0;font-size:12px;line-height:20px;color:#999;text-align:left;min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box;word-break:break-word}.genFromComponent .genFormWidgetRow--block .genFromWidget_des{margin:8px 0 0;padding:0;width:100%;max-width:100%}.genFromComponent.el-form--label-top .genFormFieldRow{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.genFromComponent.el-form--label-top .genFormFieldRow .genFromWidget_des{padding-bottom:10px}.genFromComponent .formItemErrorBox{margin:0 auto;color:#ff5757;padding-top:2px;position:absolute;top:100%;left:0;display:-webkit-box!important;line-height:16px;text-overflow:ellipsis;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:1;white-space:normal;font-size:12px;text-align:left}.genFromComponent .genFormIcon-qs{fill:#606266;vertical-align:middle;display:inline-block;width:16px;height:16px;margin-left:2px;margin-top:-2px;cursor:pointer}.genFromComponent .genFormItemRequired:before{content:\"*\";color:#f56c6c;margin-right:4px}.genFromComponent .appendCombining_box{margin-bottom:22px}.genFromComponent .appendCombining_box .appendCombining_box{margin-bottom:10px}.genFromComponent .appendCombining_box{padding:10px;background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .validateWidget{margin-bottom:0!important;width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important;padding:0!important}.genFromComponent .validateWidget .formItemErrorBox{padding:5px 0;position:relative}.genFromComponent .arrayField:not(.genFormItem){margin-bottom:22px}.genFromComponent .arrayField:not(.genFormItem) .arrayField{margin-bottom:10px}.genFromComponent .arrayOrderList{background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .arrayOrderList_item{position:relative;padding:25px 10px 12px;border-radius:2px;margin-bottom:6px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.genFromComponent .arrayOrderList_bottomAddBtn{text-align:right;padding:15px 10px;margin-bottom:10px}.genFromComponent .bottomAddBtn{width:40%;min-width:10px;max-width:180px}.genFromComponent .arrayListItem_content{padding-top:15px;-webkit-box-flex:1;-ms-flex:1;flex:1;margin:0 auto;-webkit-box-shadow:0 -1px 0 0 rgba(0,0,0,.05);box-shadow:0 -1px 0 0 rgba(0,0,0,.05)}.genFromComponent .arrayListItem_index,.genFromComponent .arrayListItem_operateTool{position:absolute;height:25px}.genFromComponent .arrayListItem_index{top:6px;line-height:18px;height:18px;padding:0 6px;background-color:rgba(0,0,0,.28);color:#fff;font-size:12px;border-radius:2px}.genFromComponent .arrayListItem_operateTool{width:75px;right:9px;top:-1px;text-align:right;font-size:0}.genFromComponent .arrayListItem_btn{vertical-align:top;display:inline-block;padding:6px;margin:0;font-size:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none;border:none;cursor:pointer;text-align:center;background:transparent;color:#666}.genFromComponent .arrayListItem_btn:hover{opacity:.6}.genFromComponent .arrayListItem_btn[disabled]{color:#999;opacity:.3!important;cursor:not-allowed}.genFromComponent .arrayListItem_orderBtn-bottom,.genFromComponent .arrayListItem_orderBtn-top{background-color:#f0f9eb}.genFromComponent .arrayListItem_btn-delete{background-color:#fef0f0}.genFromComponent .formFooter_item{text-align:right;border-top:1px solid rgba(0,0,0,.08);padding-top:10px}.genFromComponent.formInlineFooter>.fieldGroupWrap{display:inline-block;margin-right:10px}.genFromComponent.formInline .validateWidget{margin-right:0}.genFromComponent.formInline .formFooter_item{border-top:none;padding-top:0}.layoutColumn .layoutColumn_w100{width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important}.layoutColumn .fieldGroupWrap_box{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-ms-flex-line-pack:start;align-content:flex-start}.layoutColumn .fieldGroupWrap_box>div{width:100%;-ms-flex-preferred-size:100%;flex-basis:100%}.layoutColumn .fieldGroupWrap_box>.genFormItem{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-webkit-box-sizing:border-box;box-sizing:border-box;padding-right:10px}.layoutColumn.layoutColumn-1 .fieldGroupWrap_box>.genFormItem{padding-right:0}.layoutColumn.layoutColumn-2 .fieldGroupWrap_box>.genFormItem{width:50%;-ms-flex-preferred-size:50%;flex-basis:50%}.layoutColumn.layoutColumn-3 .fieldGroupWrap_box>.genFormItem{width:33.333%;-ms-flex-preferred-size:33.333%;flex-basis:33.333%}";
+  var css_248z = ".genFromComponent{font-size:14px;line-height:1;word-wrap:break-word;word-break:break-word;padding:0;margin:0}.genFromComponent a,.genFromComponent h1,.genFromComponent h2,.genFromComponent h3,.genFromComponent li,.genFromComponent p,.genFromComponent ul{font-size:14px}.genFromComponent .genFormIcon{width:12px;height:12px;vertical-align:top}.genFromComponent .genFormBtn{display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;background:#fff;border:1px solid #dcdfe6;color:#606266;-webkit-appearance:none;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;outline:none;margin:0;-webkit-transition:.1s;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:12px 20px;font-size:14px;border-radius:4px}.genFromComponent .genFormBtn.is-plain:focus,.genFromComponent .genFormBtn.is-plain:hover{background:#fff;border-color:#409eff;color:#409eff}.genFromComponent .hiddenWidget{display:none}.genFromComponent .fieldGroupWrap+.fieldGroupWrap .fieldGroupWrap_title{margin-top:20px}.genFromComponent .fieldGroupWrap_title{position:relative;display:block;width:100%;line-height:26px;margin-bottom:8px;font-size:15px;font-weight:700;border:0;color:inherit}.genFromComponent .fieldGroupWrap_des{font-size:12px;line-height:20px;margin-bottom:10px;color:#000}.genFromComponent .genFormFieldRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;margin-bottom:22px}.genFromComponent .genFormFieldRow,.genFromComponent .genFormFieldRow_widget{min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box}.genFromComponent .genFormFieldRow_widget>.el-form-item,.genFromComponent .genFormFieldRow_widget>.genFormItem{width:100%;margin-bottom:0}.genFromComponent .genFormWidgetRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0}.genFromComponent .genFormWidgetRow>:first-child{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow--block{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.genFromComponent .genFromWidget_des{padding:0 0 0 12px;margin:0;font-size:12px;line-height:20px;color:#000;text-align:left;min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box;word-break:break-word}.genFromComponent .genFormWidgetRow--block .genFromWidget_des{margin:8px 0 0;padding:0;width:100%;max-width:100%}.genFromComponent.el-form--label-top .genFormFieldRow{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.genFromComponent.el-form--label-top .genFormFieldRow .genFromWidget_des{padding-bottom:10px}.genFromComponent .formItemErrorBox{margin:0 auto;color:#ff5757;padding-top:2px;position:absolute;top:100%;left:0;display:-webkit-box!important;line-height:16px;text-overflow:ellipsis;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:1;white-space:normal;font-size:12px;text-align:left}.genFromComponent .genFormIcon-qs{fill:#606266;vertical-align:middle;display:inline-block;width:16px;height:16px;margin-left:2px;margin-top:-2px;cursor:pointer}.genFromComponent .genFormItemRequired:before{content:\"*\";color:#f56c6c;margin-right:4px}.genFromComponent .appendCombining_box{margin-bottom:22px}.genFromComponent .appendCombining_box .appendCombining_box{margin-bottom:10px}.genFromComponent .appendCombining_box{padding:10px;background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .validateWidget{margin-bottom:0!important;width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important;padding:0!important}.genFromComponent .validateWidget .formItemErrorBox{padding:5px 0;position:relative}.genFromComponent .arrayField:not(.genFormItem){margin-bottom:22px}.genFromComponent .arrayField:not(.genFormItem) .arrayField{margin-bottom:10px}.genFromComponent .arrayOrderList{background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .arrayOrderList_item{position:relative;padding:25px 10px 12px;border-radius:2px;margin-bottom:6px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.genFromComponent .arrayOrderList_bottomAddBtn{text-align:right;padding:15px 10px;margin-bottom:10px}.genFromComponent .bottomAddBtn{width:40%;min-width:10px;max-width:180px}.genFromComponent .arrayListItem_content{padding-top:15px;-webkit-box-flex:1;-ms-flex:1;flex:1;margin:0 auto;-webkit-box-shadow:0 -1px 0 0 rgba(0,0,0,.05);box-shadow:0 -1px 0 0 rgba(0,0,0,.05)}.genFromComponent .arrayListItem_index,.genFromComponent .arrayListItem_operateTool{position:absolute;height:25px}.genFromComponent .arrayListItem_index{top:6px;line-height:18px;height:18px;padding:0 6px;background-color:rgba(0,0,0,.28);color:#fff;font-size:12px;border-radius:2px}.genFromComponent .arrayListItem_operateTool{width:75px;right:9px;top:-1px;text-align:right;font-size:0}.genFromComponent .arrayListItem_btn{vertical-align:top;display:inline-block;padding:6px;margin:0;font-size:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none;border:none;cursor:pointer;text-align:center;background:transparent;color:#666}.genFromComponent .arrayListItem_btn:hover{opacity:.6}.genFromComponent .arrayListItem_btn[disabled]{color:#999;opacity:.3!important;cursor:not-allowed}.genFromComponent .arrayListItem_orderBtn-bottom,.genFromComponent .arrayListItem_orderBtn-top{background-color:#f0f9eb}.genFromComponent .arrayListItem_btn-delete{background-color:#fef0f0}.genFromComponent .formFooter_item{text-align:right;border-top:1px solid rgba(0,0,0,.08);padding-top:10px}.genFromComponent.formInlineFooter>.fieldGroupWrap{display:inline-block;margin-right:10px}.genFromComponent.formInline .validateWidget{margin-right:0}.genFromComponent.formInline .formFooter_item{border-top:none;padding-top:0}.layoutColumn .layoutColumn_w100{width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important}.layoutColumn .fieldGroupWrap_box{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-ms-flex-line-pack:start;align-content:flex-start}.layoutColumn .fieldGroupWrap_box>div{width:100%;-ms-flex-preferred-size:100%;flex-basis:100%}.layoutColumn .fieldGroupWrap_box>.genFormItem{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-webkit-box-sizing:border-box;box-sizing:border-box;padding-right:10px}.layoutColumn.layoutColumn-1 .fieldGroupWrap_box>.genFormItem{padding-right:0}.layoutColumn.layoutColumn-2 .fieldGroupWrap_box>.genFormItem{width:50%;-ms-flex-preferred-size:50%;flex-basis:50%}.layoutColumn.layoutColumn-3 .fieldGroupWrap_box>.genFormItem{width:33.333%;-ms-flex-preferred-size:33.333%;flex-basis:33.333%}";
   styleInject(css_248z);
 
   /**
@@ -9671,6 +9675,17 @@
   //
   //
   //
+  //
+  //
+  //
+  //
+  //
+  function resolveUiColor(fieldColor, formColor) {
+    if (fieldColor != null && fieldColor !== '') return fieldColor;
+    if (formColor != null && formColor !== '') return formColor;
+    return undefined;
+  }
+
   var script = {
     name: 'FieldGroupWrap',
     inject: ['genFormProvide'],
@@ -9695,6 +9710,20 @@
       description: {
         type: String,
         default: ''
+      },
+      labelColor: {
+        type: String,
+        default: undefined
+      },
+      descriptionColor: {
+        type: String,
+        default: undefined
+      },
+      formProps: {
+        type: Object,
+        default: function _default() {
+          return {};
+        }
       }
     },
     computed: {
@@ -9720,6 +9749,26 @@
         var backTitle = fallbackLabel && this.curNodePath.split('.').pop();
         if (backTitle !== "".concat(Number(backTitle))) return backTitle;
         return '';
+      },
+      titleStyle: function titleStyle() {
+        var color = resolveUiColor(this.labelColor, this.formProps && this.formProps.labelColor);
+        return color ? {
+          color: color
+        } : undefined;
+      },
+      desStyle: function desStyle() {
+        var color = resolveUiColor(this.descriptionColor, this.formProps && this.formProps.descriptionColor);
+        return color ? {
+          color: color
+        } : undefined;
+      },
+      wrapStyle: function wrapStyle() {
+        var labelColor = resolveUiColor(this.labelColor, this.formProps && this.formProps.labelColor);
+        var descriptionColor = resolveUiColor(this.descriptionColor, this.formProps && this.formProps.descriptionColor);
+        var style = {};
+        if (labelColor) style['--vjsf-label-color'] = labelColor;
+        if (descriptionColor) style['--vjsf-description-color'] = descriptionColor;
+        return Object.keys(style).length ? style : undefined;
       }
     }
   };
@@ -9821,11 +9870,14 @@
     var _c = _vm._self._c || _h;
 
     return _c("div", {
-      staticClass: "fieldGroupWrap"
+      staticClass: "fieldGroupWrap",
+      style: _vm.wrapStyle
     }, [_vm.showTitle && _vm.trueTitle ? _c("h3", {
-      staticClass: "fieldGroupWrap_title"
+      staticClass: "fieldGroupWrap_title",
+      style: _vm.titleStyle
     }, [_vm._v("\n        " + _vm._s(_vm.trueTitle) + "\n    ")]) : _vm._e(), _vm._v(" "), _vm.showDescription && _vm.description ? _c("p", {
       staticClass: "fieldGroupWrap_des",
+      style: _vm.desStyle,
       domProps: {
         innerHTML: _vm._s(_vm.description)
       }
@@ -9981,6 +10033,12 @@
     return false;
   }
 
+  function resolveUiColor$1(fieldColor, formColor) {
+    if (fieldColor != null && fieldColor !== '') return fieldColor;
+    if (formColor != null && formColor !== '') return formColor;
+    return undefined;
+  }
+
   var Widget = {
     name: 'Widget',
     inject: ['genFormProvide'],
@@ -10078,6 +10136,16 @@
       // description 宽度，有 description 时生效，默认 40%
       descriptionWidth: {
         type: [String, Number],
+        default: undefined
+      },
+      // label 文字颜色，可在字段 schema / 根 schema / formProps 配置
+      labelColor: {
+        type: String,
+        default: undefined
+      },
+      // description 文字颜色，可在字段 schema / 根 schema / formProps 配置
+      descriptionColor: {
+        type: String,
         default: undefined
       },
       labelWidth: {
@@ -10198,6 +10266,8 @@
           descriptionWidth = _resolveWidgetDesWidt.descriptionWidth;
 
       var hasSideDescription = !!(self.description && !isTextarea);
+      var labelColor = resolveUiColor$1(self.labelColor, self.formProps && self.formProps.labelColor);
+      var descriptionColor = resolveUiColor$1(self.descriptionColor, self.formProps && self.formProps.descriptionColor);
       var descriptionVNode = self.description ? h('div', {
         domProps: {
           innerHTML: self.description
@@ -10205,17 +10275,23 @@
         class: {
           genFromWidget_des: true
         },
-        style: hasSideDescription ? {
+        style: _objectSpread2(_objectSpread2({}, hasSideDescription ? {
           width: descriptionWidth,
           flex: "0 0 ".concat(descriptionWidth)
-        } : undefined
+        } : {}), descriptionColor ? {
+          color: descriptionColor
+        } : {})
       }) : null;
       var COMPONENT_MAP = self.globalOptions.COMPONENT_MAP; // form-item style
 
-      var formItemStyle = _objectSpread2(_objectSpread2({}, self.fieldStyle), self.width ? {
+      var formItemStyle = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, self.fieldStyle), self.width ? {
         width: self.width,
         flexBasis: self.width,
         paddingRight: '10px'
+      } : {}), labelColor ? {
+        '--vjsf-label-color': labelColor
+      } : {}), descriptionColor ? {
+        '--vjsf-description-color': descriptionColor
       } : {}); // 运行配置回退到 属性名
 
 
@@ -10342,7 +10418,10 @@
         class: {
           genFormLabel: true,
           genFormItemRequired: self.realRequired
-        }
+        },
+        style: labelColor ? {
+          color: labelColor
+        } : undefined
       }, ["".concat(label), "".concat(self.formProps && self.formProps.labelSuffix || '')]) : null, descriptionVNode && isTextarea ? h('div', {
         class: {
           genFormWidgetRow: true,
@@ -10434,7 +10513,9 @@
           fieldClass = _getUiOptions.fieldClass,
           fieldAttrs = _getUiOptions.fieldAttrs,
           fieldStyle = _getUiOptions.fieldStyle,
-          onlyShowIfDependent = _getUiOptions.onlyShowIfDependent;
+          onlyShowIfDependent = _getUiOptions.onlyShowIfDependent,
+          labelColor = _getUiOptions.labelColor,
+          descriptionColor = _getUiOptions.descriptionColor;
 
       var properties = Object.keys(schema.properties || {});
       var orderedProperties = orderProperties(properties, order); // 递归参数
@@ -10464,7 +10545,10 @@
           description: description,
           showTitle: showTitle,
           showDescription: showDescription,
-          curNodePath: curNodePath
+          curNodePath: curNodePath,
+          labelColor: labelColor,
+          descriptionColor: descriptionColor,
+          formProps: context.props.formProps
         },
         class: _objectSpread2(_objectSpread2({}, context.data.class), fieldClass),
         attrs: fieldAttrs,
@@ -11032,7 +11116,9 @@
           showDescription = _getUiOptions.showDescription,
           fieldClass = _getUiOptions.fieldClass,
           fieldAttrs = _getUiOptions.fieldAttrs,
-          fieldStyle = _getUiOptions.fieldStyle;
+          fieldStyle = _getUiOptions.fieldStyle,
+          labelColor = _getUiOptions.labelColor,
+          descriptionColor = _getUiOptions.descriptionColor;
 
       var arrayItemsVNodeList = itemsFormData.map(function (item, index) {
         var tempUiSchema = replaceArrayIndex({
@@ -11059,7 +11145,10 @@
           description: description,
           showTitle: showTitle,
           showDescription: showDescription,
-          curNodePath: curNodePath
+          curNodePath: curNodePath,
+          labelColor: labelColor,
+          descriptionColor: descriptionColor,
+          formProps: context.props.formProps
         },
         class: _objectSpread2(_objectSpread2({}, context.data.class), fieldClass),
         attrs: fieldAttrs,
@@ -11187,7 +11276,9 @@
           showDescription = _getUiOptions.showDescription,
           fieldClass = _getUiOptions.fieldClass,
           fieldAttrs = _getUiOptions.fieldAttrs,
-          fieldStyle = _getUiOptions.fieldStyle; // 拆分为 tuple 和 additional
+          fieldStyle = _getUiOptions.fieldStyle,
+          labelColor = _getUiOptions.labelColor,
+          descriptionColor = _getUiOptions.descriptionColor; // 拆分为 tuple 和 additional
 
 
       var cutOfArr = cutOff(this.itemsFormData, this.schema.items.length - 1);
@@ -11232,7 +11323,10 @@
           description: description,
           showTitle: showTitle,
           showDescription: showDescription,
-          curNodePath: curNodePath
+          curNodePath: curNodePath,
+          labelColor: labelColor,
+          descriptionColor: descriptionColor,
+          formProps: this.formProps
         },
         class: fieldClass,
         attrs: fieldAttrs,
@@ -12015,7 +12109,9 @@
             _self$$props$formProp.popover;
             var widgetWidth = _self$$props$formProp.widgetWidth,
             descriptionWidth = _self$$props$formProp.descriptionWidth,
-            uiFormProps = _objectWithoutProperties(_self$$props$formProp, ["layoutColumn", "inlineFooter", "labelSuffix", "isMiniDes", "defaultSelectFirstOption", "popover", "widgetWidth", "descriptionWidth"]);
+            labelColor = _self$$props$formProp.labelColor,
+            descriptionColor = _self$$props$formProp.descriptionColor,
+            uiFormProps = _objectWithoutProperties(_self$$props$formProp, ["layoutColumn", "inlineFooter", "labelSuffix", "isMiniDes", "defaultSelectFirstOption", "popover", "widgetWidth", "descriptionWidth", "labelColor", "descriptionColor"]);
 
         var _uiFormProps$inline = uiFormProps.inline,
             inline = _uiFormProps$inline === void 0 ? false : _uiFormProps$inline,
@@ -12027,6 +12123,8 @@
           curNodePath: '',
           rootFormData: this.formData
         });
+        var resolvedLabelColor = labelColor !== null && labelColor !== void 0 ? labelColor : rootUiOptions.labelColor;
+        var resolvedDescriptionColor = descriptionColor !== null && descriptionColor !== void 0 ? descriptionColor : rootUiOptions.descriptionColor;
         var props = {
           schema: this.schema,
           uiSchema: this.uiSchema,
@@ -12047,7 +12145,9 @@
             inline: inline
           }, self.$props.formProps), {}, {
             widgetWidth: widgetWidth !== null && widgetWidth !== void 0 ? widgetWidth : rootUiOptions.widgetWidth,
-            descriptionWidth: descriptionWidth !== null && descriptionWidth !== void 0 ? descriptionWidth : rootUiOptions.descriptionWidth
+            descriptionWidth: descriptionWidth !== null && descriptionWidth !== void 0 ? descriptionWidth : rootUiOptions.descriptionWidth,
+            labelColor: resolvedLabelColor,
+            descriptionColor: resolvedDescriptionColor
           })
         };
         return h(globalOptions.COMPONENT_MAP.form, {
@@ -12056,6 +12156,11 @@
             formInlineFooter: inlineFooter,
             formInline: inline
           }, _defineProperty(_class, "genFromComponent_".concat(this.schema.id, "Form"), !!this.schema.id), _defineProperty(_class, "layoutColumn", !inline), _defineProperty(_class, "layoutColumn-".concat(layoutColumn), !inline), _class),
+          style: _objectSpread2(_objectSpread2({}, resolvedLabelColor ? {
+            '--vjsf-label-color': resolvedLabelColor
+          } : {}), resolvedDescriptionColor ? {
+            '--vjsf-description-color': resolvedDescriptionColor
+          } : {}),
           nativeOn: {
             submit: function submit(e) {
               e.preventDefault();
@@ -12940,7 +13045,7 @@
     widgetComponents: widgetComponents
   };
 
-  var css_248z$1 = ".genFromComponent.el-form--label-top .el-form-item__label{line-height:26px;padding-bottom:6px;font-size:14px}.genFromComponent .el-checkbox,.genFromComponent .el-color-picker{vertical-align:top}.genFromComponent .genFormWidgetRow .el-cascader,.genFromComponent .genFormWidgetRow .el-date-editor,.genFromComponent .genFormWidgetRow .el-input,.genFromComponent .genFormWidgetRow .el-select,.genFromComponent .genFormWidgetRow .el-slider,.genFromComponent .genFormWidgetRow .el-textarea{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow .el-input-number{-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto}.genFromComponent .genFormFieldRow_widget .el-cascader,.genFromComponent .genFormFieldRow_widget .el-date-editor,.genFromComponent .genFormFieldRow_widget .el-input,.genFromComponent .genFormFieldRow_widget .el-select,.genFromComponent .genFormFieldRow_widget .el-slider,.genFromComponent .genFormFieldRow_widget .el-textarea{width:100%}";
+  var css_248z$1 = ".genFromComponent.el-form--label-top .el-form-item__label{line-height:26px;padding-bottom:6px;font-size:14px}.genFromComponent .el-form-item__label{color:#606266}.genFromComponent .el-form-item__label .genFormLabel{color:inherit}.genFromComponent .el-checkbox,.genFromComponent .el-color-picker{vertical-align:top}.genFromComponent .genFormWidgetRow .el-cascader,.genFromComponent .genFormWidgetRow .el-date-editor,.genFromComponent .genFormWidgetRow .el-input,.genFromComponent .genFormWidgetRow .el-select,.genFromComponent .genFormWidgetRow .el-slider,.genFromComponent .genFormWidgetRow .el-textarea{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow .el-input-number{-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto}.genFromComponent .genFormFieldRow_widget .el-cascader,.genFromComponent .genFormFieldRow_widget .el-date-editor,.genFromComponent .genFormFieldRow_widget .el-input,.genFromComponent .genFormFieldRow_widget .el-select,.genFromComponent .genFormFieldRow_widget .el-slider,.genFromComponent .genFormFieldRow_widget .el-textarea{width:100%}";
   styleInject(css_248z$1);
 
   /**

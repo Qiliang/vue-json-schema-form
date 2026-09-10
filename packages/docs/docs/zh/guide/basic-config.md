@@ -196,11 +196,11 @@ uiSchema = {
     // 有 description 时，右侧描述所占宽度，默认 40%。多行文本不生效
     'ui:descriptionWidth': '40%',
 
-    // label 文字颜色。字段级优先，也可写在根 schema 或 formProps.labelColor
-    'ui:labelColor': '#000',
+    // label 文字颜色。写在根 schema 上全局生效，字段上配置则覆盖
+    'ui:labelColor': '#666',
 
-    // description 文字颜色。字段级优先，也可写在根 schema 或 formProps.descriptionColor
-    'ui:descriptionColor': '#666',
+    // description 文字颜色。写在根 schema 上全局生效，字段上配置则覆盖
+    'ui:descriptionColor': '#409EFF',
 
     'ui:options': {
             // scoped slots 使用render函数来实现
@@ -844,8 +844,8 @@ formProps = {
     popover: {}, // 透传给ui 组件库的popver组件，比如element ui Popover，antd a-popover
     widgetWidth: '60%', // 有 description 时，label+控件默认宽度；也可在根 schema / 字段上配置 ui:widgetWidth
     descriptionWidth: '40%', // 有 description 时，右侧描述默认宽度；也可在根 schema / 字段上配置 ui:descriptionWidth
-    labelColor: '#000', // label 默认颜色；也可在根 schema / 字段上配置 ui:labelColor
-    descriptionColor: '#000', // description 默认颜色；也可在根 schema / 字段上配置 ui:descriptionColor
+    labelColor: '#666', // 全局 label 颜色；优先用根 schema 的 ui:labelColor，字段上可覆盖
+    descriptionColor: '#409EFF', // 全局 description 颜色；优先用根 schema 的 ui:descriptionColor，字段上可覆盖
 }
 ```
 

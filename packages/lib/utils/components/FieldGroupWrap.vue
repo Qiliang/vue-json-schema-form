@@ -1,5 +1,8 @@
 <template>
-    <div class="fieldGroupWrap">
+    <div
+        class="fieldGroupWrap"
+        :style="wrapStyle"
+    >
         <h3
             v-if="showTitle && trueTitle"
             class="fieldGroupWrap_title"
@@ -90,6 +93,14 @@ export default {
         desStyle() {
             const color = resolveUiColor(this.descriptionColor, this.formProps && this.formProps.descriptionColor);
             return color ? { color } : undefined;
+        },
+        wrapStyle() {
+            const labelColor = resolveUiColor(this.labelColor, this.formProps && this.formProps.labelColor);
+            const descriptionColor = resolveUiColor(this.descriptionColor, this.formProps && this.formProps.descriptionColor);
+            const style = {};
+            if (labelColor) style['--vjsf-label-color'] = labelColor;
+            if (descriptionColor) style['--vjsf-description-color'] = descriptionColor;
+            return Object.keys(style).length ? style : undefined;
         }
     }
 };

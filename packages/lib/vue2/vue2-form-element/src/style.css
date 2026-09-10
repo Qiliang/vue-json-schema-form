@@ -7,6 +7,12 @@
             font-size: 14px;
         }
     }
+    .el-form-item__label {
+        color: var(--vjsf-label-color, #606266);
+    }
+    .el-form-item__label .genFormLabel {
+        color: var(--vjsf-label-color, inherit);
+    }
     .el-checkbox, .el-color-picker{
         vertical-align: top;
     }

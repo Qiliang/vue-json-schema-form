@@ -66,12 +66,13 @@
         font-size: 15px;
         font-weight: bold;
         border: 0;
+        color: var(--vjsf-label-color, inherit);
     }
     .fieldGroupWrap_des {
         font-size: 12px;
         line-height: 20px;
         margin-bottom: 10px;
-        color: #000;
+        color: var(--vjsf-description-color, #000);
     }
     .genFormFieldRow {
         display: flex;
@@ -109,7 +110,7 @@
         margin: 0;
         font-size: 12px;
         line-height: 20px;
-        color: #000;
+        color: var(--vjsf-description-color, #000);
         text-align: left;
         min-width: 0;
         box-sizing: border-box;

@@ -3,6 +3,8 @@ export default {
         title: '测试注册表单',
         description: 'A simple form example.',
         type: 'object',
+        'ui:labelColor': '#666',
+        'ui:descriptionColor': '#409EFF',
         required: ['firstName', 'lastName'],
         'ui:order': [
             'lastName',
@@ -65,8 +67,6 @@ export default {
         firstName: {
             'ui:title': '名字',
             'ui:description': '比如：李白姓李、孙尚香姓孙、马可波罗姓马可波',
-            'ui:labelColor': '#000',
-            'ui:descriptionColor': '#000',
             'ui:emptyValue': '',
             'ui:options': {
                 placeholder: '请输入你的姓',

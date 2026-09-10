@@ -50,7 +50,11 @@ module.exports = {
 
     runtimeCompiler: true,
 
-    transpileDependencies: [],
+    transpileDependencies: [
+        '@lljj/vue-json-schema-form',
+        '@lljj/vue2-form-core',
+        '@lljj/vjsf-utils',
+    ],
 
     productionSourceMap: false,
 
@@ -62,7 +66,7 @@ module.exports = {
         };
         config.resolve.alias = {
             ...config.resolve.alias,
-            // '@lljj/vue-json-schema-form': '@lljj/vue-json-schema-form/src/index',
+            '@lljj/vue-json-schema-form': path.resolve(__dirname, '../../lib/vue2/vue2-form-element/src/index.js'),
         };
     },
 
