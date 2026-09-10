@@ -36,6 +36,12 @@ function isMultiLineText(uiProps = {}, widget) {
     return false;
 }
 
+function resolveUiColor(fieldColor, formColor) {
+    if (fieldColor != null && fieldColor !== '') return fieldColor;
+    if (formColor != null && formColor !== '') return formColor;
+    return undefined;
+}
+
 export default {
     name: 'Widget',
     inject: ['genFormProvide'],
@@ -124,6 +130,16 @@ export default {
         // description 宽度，有 description 时生效，默认 40%
         descriptionWidth: {
             type: [String, Number],
+            default: undefined
+        },
+        // label 文字颜色，可在字段 schema / 根 schema / formProps 配置
+        labelColor: {
+            type: String,
+            default: undefined
+        },
+        // description 文字颜色，可在字段 schema / 根 schema / formProps 配置
+        descriptionColor: {
+            type: String,
             default: undefined
         },
         labelWidth: {
@@ -228,6 +244,14 @@ export default {
             self.descriptionWidth != null ? self.descriptionWidth : (self.formProps && self.formProps.descriptionWidth)
         );
         const hasSideDescription = !!(self.description && !isTextarea);
+        const labelColor = resolveUiColor(
+            self.labelColor,
+            self.formProps && self.formProps.labelColor
+        );
+        const descriptionColor = resolveUiColor(
+            self.descriptionColor,
+            self.formProps && self.formProps.descriptionColor
+        );
 
         const descriptionVNode = (self.description) ? h(
             'div',
@@ -238,10 +262,13 @@ export default {
                 class: {
                     genFromWidget_des: true
                 },
-                style: hasSideDescription ? {
-                    width: descriptionWidth,
-                    flex: `0 0 ${descriptionWidth}`
-                } : undefined
+                style: {
+                    ...(hasSideDescription ? {
+                        width: descriptionWidth,
+                        flex: `0 0 ${descriptionWidth}`
+                    } : {}),
+                    ...(descriptionColor ? { color: descriptionColor } : {})
+                }
             },
         ) : null;
 
@@ -392,6 +419,7 @@ export default {
                         genFormLabel: true,
                         genFormItemRequired: self.realRequired,
                     },
+                    style: labelColor ? { color: labelColor } : undefined
                 }, [
                     `${label}`,
                     `${(self.formProps && self.formProps.labelSuffix) || ''}`

@@ -3,12 +3,14 @@
         <h3
             v-if="showTitle && trueTitle"
             class="fieldGroupWrap_title"
+            :style="titleStyle"
         >
             {{ trueTitle }}
         </h3>
         <p
             v-if="showDescription && description"
             class="fieldGroupWrap_des"
+            :style="desStyle"
             v-html="description"
         >
         </p>
@@ -19,6 +21,12 @@
 </template>
 
 <script>
+function resolveUiColor(fieldColor, formColor) {
+    if (fieldColor != null && fieldColor !== '') return fieldColor;
+    if (formColor != null && formColor !== '') return formColor;
+    return undefined;
+}
+
 export default {
     name: 'FieldGroupWrap',
     inject: ['genFormProvide'],
@@ -43,6 +51,18 @@ export default {
         description: {
             type: String,
             default: ''
+        },
+        labelColor: {
+            type: String,
+            default: undefined
+        },
+        descriptionColor: {
+            type: String,
+            default: undefined
+        },
+        formProps: {
+            type: Object,
+            default: () => ({})
         }
     },
     computed: {
@@ -62,6 +82,14 @@ export default {
             if (backTitle !== `${Number(backTitle)}`) return backTitle;
 
             return '';
+        },
+        titleStyle() {
+            const color = resolveUiColor(this.labelColor, this.formProps && this.formProps.labelColor);
+            return color ? { color } : undefined;
+        },
+        desStyle() {
+            const color = resolveUiColor(this.descriptionColor, this.formProps && this.formProps.descriptionColor);
+            return color ? { color } : undefined;
         }
     }
 };

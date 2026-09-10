@@ -58,7 +58,8 @@ export default {
         };
 
         const {
-            title, description, showTitle, showDescription, order, fieldClass, fieldAttrs, fieldStyle, onlyShowIfDependent
+            title, description, showTitle, showDescription, order, fieldClass, fieldAttrs, fieldStyle, onlyShowIfDependent,
+            labelColor, descriptionColor
         } = getUiOptions({
             schema,
             uiSchema,
@@ -99,7 +100,10 @@ export default {
                     description,
                     showTitle,
                     showDescription,
-                    curNodePath
+                    curNodePath,
+                    labelColor,
+                    descriptionColor,
+                    formProps: context.props.formProps
                 },
                 class: { ...context.data.class, ...fieldClass },
                 attrs: fieldAttrs,

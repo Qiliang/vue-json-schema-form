@@ -196,6 +196,12 @@ uiSchema = {
     // 有 description 时，右侧描述所占宽度，默认 40%。多行文本不生效
     'ui:descriptionWidth': '40%',
 
+    // label 文字颜色。字段级优先，也可写在根 schema 或 formProps.labelColor
+    'ui:labelColor': '#000',
+
+    // description 文字颜色。字段级优先，也可写在根 schema 或 formProps.descriptionColor
+    'ui:descriptionColor': '#666',
+
     'ui:options': {
             // scoped slots 使用render函数来实现
             // 配置 renderScopedSlots 返回对象key为slotName，函数体返回vnode
@@ -838,6 +844,8 @@ formProps = {
     popover: {}, // 透传给ui 组件库的popver组件，比如element ui Popover，antd a-popover
     widgetWidth: '60%', // 有 description 时，label+控件默认宽度；也可在根 schema / 字段上配置 ui:widgetWidth
     descriptionWidth: '40%', // 有 description 时，右侧描述默认宽度；也可在根 schema / 字段上配置 ui:descriptionWidth
+    labelColor: '#000', // label 默认颜色；也可在根 schema / 字段上配置 ui:labelColor
+    descriptionColor: '#000', // description 默认颜色；也可在根 schema / 字段上配置 ui:descriptionColor
 }
 ```
 

@@ -144,7 +144,7 @@ export default function createForm(globalOptions = {}) {
             const {
                 // eslint-disable-next-line no-unused-vars
                 layoutColumn = 1, inlineFooter, labelSuffix, isMiniDes, defaultSelectFirstOption, popover,
-                widgetWidth, descriptionWidth, ...uiFormProps
+                widgetWidth, descriptionWidth, labelColor, descriptionColor, ...uiFormProps
             } = self.$props.formProps;
 
             const { inline = false, labelPosition = 'top' } = uiFormProps;
@@ -173,7 +173,9 @@ export default function createForm(globalOptions = {}) {
                     inline,
                     ...self.$props.formProps,
                     widgetWidth: widgetWidth ?? rootUiOptions.widgetWidth,
-                    descriptionWidth: descriptionWidth ?? rootUiOptions.descriptionWidth
+                    descriptionWidth: descriptionWidth ?? rootUiOptions.descriptionWidth,
+                    labelColor: labelColor ?? rootUiOptions.labelColor,
+                    descriptionColor: descriptionColor ?? rootUiOptions.descriptionColor
                 }
             };
 

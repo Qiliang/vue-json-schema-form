@@ -70,6 +70,8 @@ export default {
             fieldClass,
             fieldAttrs,
             fieldStyle,
+            labelColor,
+            descriptionColor,
         } = getUiOptions({
             schema,
             uiSchema,
@@ -136,7 +138,10 @@ export default {
                     description,
                     showTitle,
                     showDescription,
-                    curNodePath
+                    curNodePath,
+                    labelColor,
+                    descriptionColor,
+                    formProps: this.formProps
                 },
                 class: fieldClass,
                 attrs: fieldAttrs,
