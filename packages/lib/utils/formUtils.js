@@ -35,7 +35,7 @@ export function replaceArrayIndex({ schema, uiSchema } = {}, index) {
         containsSpec: false
     });
 
-    return ['title', 'description'].reduce((preVal, curItem) => {
+    return ['title', 'description', 'description2'].reduce((preVal, curItem) => {
         if (itemUiOptions[curItem]) {
             preVal[`ui:${curItem}`] = String(itemUiOptions[curItem]).replace(/\$index/g, index + 1);
         }
@@ -193,6 +193,7 @@ export function getUiOptions({
 
     if (schema.title) spec.title = schema.title;
     if (schema.description) spec.description = schema.description;
+    if (schema.description2) spec.description2 = schema.description2;
 
     // 计算ui配置
     return {
@@ -236,6 +237,7 @@ export function getWidgetConfig({
         title: label,
         labelWidth,
         description,
+        description2,
         attrs: widgetAttrs,
         class: widgetClass,
         style: widgetStyle,
@@ -262,6 +264,7 @@ export function getWidgetConfig({
         label,
         labelWidth,
         description,
+        description2,
         widgetAttrs,
         widgetClass,
         widgetStyle,

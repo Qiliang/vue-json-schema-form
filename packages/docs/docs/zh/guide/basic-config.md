@@ -146,8 +146,11 @@ uiSchema = {
      // 覆盖schema title
     'ui:title': '覆盖schema title',
 
-    // 覆盖schema description
+    // 覆盖schema description（新版：显示在控件右侧，textarea 显示在控件下方）
     'ui:description': '覆盖schema description描述信息',
+
+    // 旧版 description：label 旁圆形问号，鼠标悬停后弹出
+    'ui:description2': '旧版问号提示的描述信息',
 
     // 通过 fui:xxx  配置function 来计算当前的ui options
     'fui:placeholder': (parent, root, prop) => {

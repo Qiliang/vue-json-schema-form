@@ -1,4 +1,4 @@
-/** @license @lljj/vue-json-schema-form v1.20.3 (c) 2020-2026 Liu.Jun License: Apache-2.0 */
+/** @license @lljj/vue-json-schema-form v1.20.5 (c) 2020-2026 Liu.Jun License: Apache-2.0 */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue')) :
   typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory) :
@@ -8492,7 +8492,7 @@
       uiSchema: uiSchema,
       containsSpec: false
     });
-    return ['title', 'description'].reduce(function (preVal, curItem) {
+    return ['title', 'description', 'description2'].reduce(function (preVal, curItem) {
       if (itemUiOptions[curItem]) {
         preVal["ui:".concat(curItem)] = String(itemUiOptions[curItem]).replace(/\$index/g, index + 1);
       }
@@ -8649,7 +8649,8 @@
     }
 
     if (schema.title) spec.title = schema.title;
-    if (schema.description) spec.description = schema.description; // 计算ui配置
+    if (schema.description) spec.description = schema.description;
+    if (schema.description2) spec.description2 = schema.description2; // 计算ui配置
 
     return _objectSpread2(_objectSpread2({}, spec), getUserUiOptions({
       schema: schema,
@@ -8686,6 +8687,7 @@
         label = uiOptions.title,
         labelWidth = uiOptions.labelWidth,
         description = uiOptions.description,
+        description2 = uiOptions.description2,
         widgetAttrs = uiOptions.attrs,
         widgetClass = uiOptions.class,
         widgetStyle = uiOptions.style,
@@ -8704,13 +8706,14 @@
         renderChildren = uiOptions.renderChildren,
         onChange = uiOptions.onChange,
         uiRequired = uiOptions.required,
-        uiProps = _objectWithoutProperties(uiOptions, ["widget", "title", "labelWidth", "description", "attrs", "class", "style", "widgetListeners", "fieldAttrs", "fieldStyle", "fieldClass", "emptyValue", "width", "widgetWidth", "descriptionWidth", "labelColor", "descriptionColor", "getWidget", "renderScopedSlots", "renderChildren", "onChange", "required"]);
+        uiProps = _objectWithoutProperties(uiOptions, ["widget", "title", "labelWidth", "description", "description2", "attrs", "class", "style", "widgetListeners", "fieldAttrs", "fieldStyle", "fieldClass", "emptyValue", "width", "widgetWidth", "descriptionWidth", "labelColor", "descriptionColor", "getWidget", "renderScopedSlots", "renderChildren", "onChange", "required"]);
 
     return {
       widget: widget,
       label: label,
       labelWidth: labelWidth,
       description: description,
+      description2: description2,
       widgetAttrs: widgetAttrs,
       widgetClass: widgetClass,
       widgetStyle: widgetStyle,
@@ -9485,7 +9488,7 @@
     }
   }
 
-  var css_248z = ".genFromComponent{font-size:14px;line-height:1;word-wrap:break-word;word-break:break-word;padding:0;margin:0}.genFromComponent a,.genFromComponent h1,.genFromComponent h2,.genFromComponent h3,.genFromComponent li,.genFromComponent p,.genFromComponent ul{font-size:14px}.genFromComponent .genFormIcon{width:12px;height:12px;vertical-align:top}.genFromComponent .genFormBtn{display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;background:#fff;border:1px solid #dcdfe6;color:#606266;-webkit-appearance:none;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;outline:none;margin:0;-webkit-transition:.1s;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:12px 20px;font-size:14px;border-radius:4px}.genFromComponent .genFormBtn.is-plain:focus,.genFromComponent .genFormBtn.is-plain:hover{background:#fff;border-color:#409eff;color:#409eff}.genFromComponent .hiddenWidget{display:none}.genFromComponent .fieldGroupWrap+.fieldGroupWrap .fieldGroupWrap_title{margin-top:20px}.genFromComponent .fieldGroupWrap_title{position:relative;display:block;width:100%;line-height:26px;margin-bottom:8px;font-size:15px;font-weight:700;border:0;color:inherit}.genFromComponent .fieldGroupWrap_des{font-size:12px;line-height:20px;margin-bottom:10px;color:#000}.genFromComponent .genFormFieldRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;margin-bottom:22px}.genFromComponent .genFormFieldRow,.genFromComponent .genFormFieldRow_widget{min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box}.genFromComponent .genFormFieldRow_widget>.el-form-item,.genFromComponent .genFormFieldRow_widget>.genFormItem{width:100%;margin-bottom:0}.genFromComponent .genFormWidgetRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0}.genFromComponent .genFormWidgetRow>:first-child{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow--block{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.genFromComponent .genFromWidget_des{padding:0 0 0 12px;margin:0;font-size:12px;line-height:20px;color:#000;text-align:left;min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box;word-break:break-word}.genFromComponent .genFormWidgetRow--block .genFromWidget_des{margin:8px 0 0;padding:0;width:100%;max-width:100%}.genFromComponent.el-form--label-top .genFormFieldRow{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.genFromComponent.el-form--label-top .genFormFieldRow .genFromWidget_des{padding-bottom:10px}.genFromComponent .formItemErrorBox{margin:0 auto;color:#ff5757;padding-top:2px;position:absolute;top:100%;left:0;display:-webkit-box!important;line-height:16px;text-overflow:ellipsis;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:1;white-space:normal;font-size:12px;text-align:left}.genFromComponent .genFormIcon-qs{fill:#606266;vertical-align:middle;display:inline-block;width:16px;height:16px;margin-left:2px;margin-top:-2px;cursor:pointer}.genFromComponent .genFormItemRequired:before{content:\"*\";color:#f56c6c;margin-right:4px}.genFromComponent .appendCombining_box{margin-bottom:22px}.genFromComponent .appendCombining_box .appendCombining_box{margin-bottom:10px}.genFromComponent .appendCombining_box{padding:10px;background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .validateWidget{margin-bottom:0!important;width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important;padding:0!important}.genFromComponent .validateWidget .formItemErrorBox{padding:5px 0;position:relative}.genFromComponent .arrayField:not(.genFormItem){margin-bottom:22px}.genFromComponent .arrayField:not(.genFormItem) .arrayField{margin-bottom:10px}.genFromComponent .arrayOrderList{background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .arrayOrderList_item{position:relative;padding:25px 10px 12px;border-radius:2px;margin-bottom:6px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.genFromComponent .arrayOrderList_bottomAddBtn{text-align:right;padding:15px 10px;margin-bottom:10px}.genFromComponent .bottomAddBtn{width:40%;min-width:10px;max-width:180px}.genFromComponent .arrayListItem_content{padding-top:15px;-webkit-box-flex:1;-ms-flex:1;flex:1;margin:0 auto;-webkit-box-shadow:0 -1px 0 0 rgba(0,0,0,.05);box-shadow:0 -1px 0 0 rgba(0,0,0,.05)}.genFromComponent .arrayListItem_index,.genFromComponent .arrayListItem_operateTool{position:absolute;height:25px}.genFromComponent .arrayListItem_index{top:6px;line-height:18px;height:18px;padding:0 6px;background-color:rgba(0,0,0,.28);color:#fff;font-size:12px;border-radius:2px}.genFromComponent .arrayListItem_operateTool{width:75px;right:9px;top:-1px;text-align:right;font-size:0}.genFromComponent .arrayListItem_btn{vertical-align:top;display:inline-block;padding:6px;margin:0;font-size:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none;border:none;cursor:pointer;text-align:center;background:transparent;color:#666}.genFromComponent .arrayListItem_btn:hover{opacity:.6}.genFromComponent .arrayListItem_btn[disabled]{color:#999;opacity:.3!important;cursor:not-allowed}.genFromComponent .arrayListItem_orderBtn-bottom,.genFromComponent .arrayListItem_orderBtn-top{background-color:#f0f9eb}.genFromComponent .arrayListItem_btn-delete{background-color:#fef0f0}.genFromComponent .formFooter_item{text-align:right;border-top:1px solid rgba(0,0,0,.08);padding-top:10px}.genFromComponent.formInlineFooter>.fieldGroupWrap{display:inline-block;margin-right:10px}.genFromComponent.formInline .validateWidget{margin-right:0}.genFromComponent.formInline .formFooter_item{border-top:none;padding-top:0}.layoutColumn .layoutColumn_w100{width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important}.layoutColumn .fieldGroupWrap_box{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-ms-flex-line-pack:start;align-content:flex-start}.layoutColumn .fieldGroupWrap_box>div{width:100%;-ms-flex-preferred-size:100%;flex-basis:100%}.layoutColumn .fieldGroupWrap_box>.genFormItem{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-webkit-box-sizing:border-box;box-sizing:border-box;padding-right:10px}.layoutColumn.layoutColumn-1 .fieldGroupWrap_box>.genFormItem{padding-right:0}.layoutColumn.layoutColumn-2 .fieldGroupWrap_box>.genFormItem{width:50%;-ms-flex-preferred-size:50%;flex-basis:50%}.layoutColumn.layoutColumn-3 .fieldGroupWrap_box>.genFormItem{width:33.333%;-ms-flex-preferred-size:33.333%;flex-basis:33.333%}";
+  var css_248z = ".genFromComponent{font-size:14px;line-height:1;word-wrap:break-word;word-break:break-word;padding:0;margin:0}.genFromComponent a,.genFromComponent h1,.genFromComponent h2,.genFromComponent h3,.genFromComponent li,.genFromComponent p,.genFromComponent ul{font-size:14px}.genFromComponent .genFormIcon{width:12px;height:12px;vertical-align:top}.genFromComponent .genFormBtn{display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;background:#fff;border:1px solid #dcdfe6;color:#606266;-webkit-appearance:none;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;outline:none;margin:0;-webkit-transition:.1s;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:12px 20px;font-size:14px;border-radius:4px}.genFromComponent .genFormBtn.is-plain:focus,.genFromComponent .genFormBtn.is-plain:hover{background:#fff;border-color:#409eff;color:#409eff}.genFromComponent .hiddenWidget{display:none}.genFromComponent .fieldGroupWrap+.fieldGroupWrap .fieldGroupWrap_title{margin-top:20px}.genFromComponent .fieldGroupWrap_title{position:relative;display:block;width:100%;line-height:26px;margin-bottom:8px;font-size:15px;font-weight:700;border:0;color:inherit}.genFromComponent .fieldGroupWrap_des{font-size:12px;line-height:20px;margin-bottom:10px;color:#000}.genFromComponent .genFormFieldRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;margin-bottom:22px}.genFromComponent .genFormFieldRow,.genFromComponent .genFormFieldRow_widget{min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box}.genFromComponent .genFormFieldRow_widget>.el-form-item,.genFromComponent .genFormFieldRow_widget>.genFormItem{width:100%;margin-bottom:0}.genFromComponent .genFormWidgetRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0}.genFromComponent .genFormWidgetRow>:first-child{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow--block{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.genFromComponent .genFromWidget_des{padding:0 0 0 12px;margin:0;color:#000;min-width:0}.genFromComponent .genFromWidget_des,.genFromComponent .genFromWidget_des2{font-size:12px;line-height:20px;text-align:left;-webkit-box-sizing:border-box;box-sizing:border-box;word-break:break-word}.genFromComponent .genFromWidget_des2{padding:0;margin-top:0;margin-bottom:2px;color:#999;width:100%;-ms-flex-negative:0;flex-shrink:0}.genFromComponent .genFormWidgetRow--block .genFromWidget_des{margin:8px 0 0;padding:0;width:100%;max-width:100%}.genFromComponent.el-form--label-top .genFormFieldRow{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.genFromComponent.el-form--label-top .genFormFieldRow .genFromWidget_des{padding-bottom:10px}.genFromComponent .formItemErrorBox{margin:0 auto;color:#ff5757;padding-top:2px;position:absolute;top:100%;left:0;display:-webkit-box!important;line-height:16px;text-overflow:ellipsis;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:1;white-space:normal;font-size:12px;text-align:left}.genFromComponent .genFormIcon-qs{fill:#606266;vertical-align:middle;display:inline-block;width:16px;height:16px;margin-left:2px;margin-top:-2px;cursor:pointer}.genFromComponent .genFormItemRequired:before{content:\"*\";color:#f56c6c;margin-right:4px}.genFromComponent .appendCombining_box{margin-bottom:22px}.genFromComponent .appendCombining_box .appendCombining_box{margin-bottom:10px}.genFromComponent .appendCombining_box{padding:10px;background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .validateWidget{margin-bottom:0!important;width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important;padding:0!important}.genFromComponent .validateWidget .formItemErrorBox{padding:5px 0;position:relative}.genFromComponent .arrayField:not(.genFormItem){margin-bottom:22px}.genFromComponent .arrayField:not(.genFormItem) .arrayField{margin-bottom:10px}.genFromComponent .arrayOrderList{background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .arrayOrderList_item{position:relative;padding:25px 10px 12px;border-radius:2px;margin-bottom:6px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.genFromComponent .arrayOrderList_bottomAddBtn{text-align:right;padding:15px 10px;margin-bottom:10px}.genFromComponent .bottomAddBtn{width:40%;min-width:10px;max-width:180px}.genFromComponent .arrayListItem_content{padding-top:15px;-webkit-box-flex:1;-ms-flex:1;flex:1;margin:0 auto;-webkit-box-shadow:0 -1px 0 0 rgba(0,0,0,.05);box-shadow:0 -1px 0 0 rgba(0,0,0,.05)}.genFromComponent .arrayListItem_index,.genFromComponent .arrayListItem_operateTool{position:absolute;height:25px}.genFromComponent .arrayListItem_index{top:6px;line-height:18px;height:18px;padding:0 6px;background-color:rgba(0,0,0,.28);color:#fff;font-size:12px;border-radius:2px}.genFromComponent .arrayListItem_operateTool{width:75px;right:9px;top:-1px;text-align:right;font-size:0}.genFromComponent .arrayListItem_btn{vertical-align:top;display:inline-block;padding:6px;margin:0;font-size:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none;border:none;cursor:pointer;text-align:center;background:transparent;color:#666}.genFromComponent .arrayListItem_btn:hover{opacity:.6}.genFromComponent .arrayListItem_btn[disabled]{color:#999;opacity:.3!important;cursor:not-allowed}.genFromComponent .arrayListItem_orderBtn-bottom,.genFromComponent .arrayListItem_orderBtn-top{background-color:#f0f9eb}.genFromComponent .arrayListItem_btn-delete{background-color:#fef0f0}.genFromComponent .formFooter_item{text-align:right;border-top:1px solid rgba(0,0,0,.08);padding-top:10px}.genFromComponent.formInlineFooter>.fieldGroupWrap{display:inline-block;margin-right:10px}.genFromComponent.formInline .validateWidget{margin-right:0}.genFromComponent.formInline .formFooter_item{border-top:none;padding-top:0}.genFromWidget_des_mini{font-size:14px;line-height:1.5715}.layoutColumn .layoutColumn_w100{width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important}.layoutColumn .fieldGroupWrap_box{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-ms-flex-line-pack:start;align-content:flex-start}.layoutColumn .fieldGroupWrap_box>div{width:100%;-ms-flex-preferred-size:100%;flex-basis:100%}.layoutColumn .fieldGroupWrap_box>.genFormItem{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-webkit-box-sizing:border-box;box-sizing:border-box;padding-right:10px}.layoutColumn.layoutColumn-1 .fieldGroupWrap_box>.genFormItem{padding-right:0}.layoutColumn.layoutColumn-2 .fieldGroupWrap_box>.genFormItem{width:50%;-ms-flex-preferred-size:50%;flex-basis:50%}.layoutColumn.layoutColumn-3 .fieldGroupWrap_box>.genFormItem{width:33.333%;-ms-flex-preferred-size:33.333%;flex-basis:33.333%}";
   styleInject(css_248z);
 
   /**
@@ -9988,6 +9991,258 @@
     }
   };
 
+  /* script */
+
+  /* template */
+  var __vue_render__$1 = function __vue_render__() {
+    var _vm = this;
+
+    var _h = _vm.$createElement;
+
+    var _c = _vm._self._c || _h;
+
+    return _c("svg", {
+      staticClass: "genFormIcon genFormIcon-down",
+      attrs: {
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 1024 1024"
+      }
+    }, [_c("path", {
+      attrs: {
+        d: "M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z"
+      }
+    })]);
+  };
+
+  var __vue_staticRenderFns__$1 = [];
+  __vue_render__$1._withStripped = true;
+  /* style */
+
+  var __vue_inject_styles__$1 = undefined;
+  /* scoped */
+
+  var __vue_scope_id__$1 = undefined;
+  /* module identifier */
+
+  var __vue_module_identifier__$1 = undefined;
+  /* functional template */
+
+  var __vue_is_functional_template__$1 = false;
+  /* style inject */
+
+  /* style inject SSR */
+
+  /* style inject shadow dom */
+
+  var __vue_component__$1 = /*#__PURE__*/normalizeComponent_1({
+    render: __vue_render__$1,
+    staticRenderFns: __vue_staticRenderFns__$1
+  }, __vue_inject_styles__$1, {}, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, undefined, undefined);
+
+  /* script */
+
+  /* template */
+  var __vue_render__$2 = function __vue_render__() {
+    var _vm = this;
+
+    var _h = _vm.$createElement;
+
+    var _c = _vm._self._c || _h;
+
+    return _c("svg", {
+      staticClass: "genFormIcon genFormIcon-up",
+      attrs: {
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 1024 1024"
+      }
+    }, [_c("path", {
+      attrs: {
+        d: "M858.9 689L530.5 308.2c-9.4-10.9-27.5-10.9-37 0L165.1 689c-12.2 14.2-1.2 35 18.5 35h656.8c19.7 0 30.7-20.8 18.5-35z"
+      }
+    })]);
+  };
+
+  var __vue_staticRenderFns__$2 = [];
+  __vue_render__$2._withStripped = true;
+  /* style */
+
+  var __vue_inject_styles__$2 = undefined;
+  /* scoped */
+
+  var __vue_scope_id__$2 = undefined;
+  /* module identifier */
+
+  var __vue_module_identifier__$2 = undefined;
+  /* functional template */
+
+  var __vue_is_functional_template__$2 = false;
+  /* style inject */
+
+  /* style inject SSR */
+
+  /* style inject shadow dom */
+
+  var __vue_component__$2 = /*#__PURE__*/normalizeComponent_1({
+    render: __vue_render__$2,
+    staticRenderFns: __vue_staticRenderFns__$2
+  }, __vue_inject_styles__$2, {}, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, undefined, undefined);
+
+  /* script */
+
+  /* template */
+  var __vue_render__$3 = function __vue_render__() {
+    var _vm = this;
+
+    var _h = _vm.$createElement;
+
+    var _c = _vm._self._c || _h;
+
+    return _c("svg", {
+      staticClass: "genFormIcon genFormIcon-close",
+      attrs: {
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 1024 1024"
+      }
+    }, [_c("path", {
+      attrs: {
+        d: "M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1\n        191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0\n        0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"
+      }
+    })]);
+  };
+
+  var __vue_staticRenderFns__$3 = [];
+  __vue_render__$3._withStripped = true;
+  /* style */
+
+  var __vue_inject_styles__$3 = undefined;
+  /* scoped */
+
+  var __vue_scope_id__$3 = undefined;
+  /* module identifier */
+
+  var __vue_module_identifier__$3 = undefined;
+  /* functional template */
+
+  var __vue_is_functional_template__$3 = false;
+  /* style inject */
+
+  /* style inject SSR */
+
+  /* style inject shadow dom */
+
+  var __vue_component__$3 = /*#__PURE__*/normalizeComponent_1({
+    render: __vue_render__$3,
+    staticRenderFns: __vue_staticRenderFns__$3
+  }, __vue_inject_styles__$3, {}, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, undefined, undefined);
+
+  /* script */
+
+  /* template */
+  var __vue_render__$4 = function __vue_render__() {
+    var _vm = this;
+
+    var _h = _vm.$createElement;
+
+    var _c = _vm._self._c || _h;
+
+    return _c("svg", {
+      staticClass: "genFormIcon genFormIcon-plus",
+      attrs: {
+        t: "1551322312294",
+        viewBox: "0 0 1024 1024",
+        version: "1.1",
+        xmlns: "http://www.w3.org/2000/svg",
+        "p-id": "10297",
+        "xmlns:xlink": "http://www.w3.org/1999/xlink",
+        width: "200",
+        height: "200"
+      }
+    }, [_c("path", {
+      attrs: {
+        d: "M474 152m8 0l60 0q8 0 8 8l0 704q0 8-8 8l-60 0q-8 0-8-8l0-704q0-8 8-8Z",
+        "p-id": "10298"
+      }
+    }), _vm._v(" "), _c("path", {
+      attrs: {
+        d: "M168 474m8 0l672 0q8 0 8 8l0 60q0 8-8 8l-672 0q-8 0-8-8l0-60q0-8 8-8Z",
+        "p-id": "10299"
+      }
+    })]);
+  };
+
+  var __vue_staticRenderFns__$4 = [];
+  __vue_render__$4._withStripped = true;
+  /* style */
+
+  var __vue_inject_styles__$4 = undefined;
+  /* scoped */
+
+  var __vue_scope_id__$4 = undefined;
+  /* module identifier */
+
+  var __vue_module_identifier__$4 = undefined;
+  /* functional template */
+
+  var __vue_is_functional_template__$4 = false;
+  /* style inject */
+
+  /* style inject SSR */
+
+  /* style inject shadow dom */
+
+  var __vue_component__$4 = /*#__PURE__*/normalizeComponent_1({
+    render: __vue_render__$4,
+    staticRenderFns: __vue_staticRenderFns__$4
+  }, __vue_inject_styles__$4, {}, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, undefined, undefined, undefined);
+
+  /* script */
+
+  /* template */
+  var __vue_render__$5 = function __vue_render__() {
+    var _vm = this;
+
+    var _h = _vm.$createElement;
+
+    var _c = _vm._self._c || _h;
+
+    return _c("svg", {
+      staticClass: "genFormIcon genFormIcon-qs",
+      attrs: {
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 1024 1024"
+      }
+    }, [_c("path", {
+      attrs: {
+        d: "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 708c-22.1\n        0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm62.9-219.5a48.3 48.3 0 0\n        0-30.9 44.8V620c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-21.5c0-23.1 6.7-45.9 19.9-64.9 12.9-18.6 30.9-32.8\n        52.1-40.9 34-13.1 56-41.6 56-72.7 0-44.1-43.1-80-96-80s-96 35.9-96 80v7.6c0 4.4-3.6\n        8-8 8h-48c-4.4 0-8-3.6-8-8V420c0-39.3 17.2-76 48.4-103.3C430.4 290.4 470 276 512 276s81.6 14.5 111.6\n        40.7C654.8 344 672 380.7 672 420c0 57.8-38.1 109.8-97.1 132.5z"
+      }
+    })]);
+  };
+
+  var __vue_staticRenderFns__$5 = [];
+  __vue_render__$5._withStripped = true;
+  /* style */
+
+  var __vue_inject_styles__$5 = undefined;
+  /* scoped */
+
+  var __vue_scope_id__$5 = undefined;
+  /* module identifier */
+
+  var __vue_module_identifier__$5 = undefined;
+  /* functional template */
+
+  var __vue_is_functional_template__$5 = false;
+  /* style inject */
+
+  /* style inject SSR */
+
+  /* style inject shadow dom */
+
+  var __vue_component__$5 = /*#__PURE__*/normalizeComponent_1({
+    render: __vue_render__$5,
+    staticRenderFns: __vue_staticRenderFns__$5
+  }, __vue_inject_styles__$5, {}, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, undefined, undefined, undefined);
+
   function toCssSize(value) {
     if (value === undefined || value === null || value === '') return undefined;
     if (typeof value === 'number') return "".concat(value, "%");
@@ -10156,6 +10411,11 @@
         type: String,
         default: ''
       },
+      // 旧版 description：label 旁圆形问号，鼠标悬停后弹出
+      description2: {
+        type: String,
+        default: ''
+      },
       // Widget attrs
       widgetAttrs: {
         type: Object,
@@ -10255,6 +10515,8 @@
       }
     },
     render: function render(h) {
+      var _self$formProps;
+
       var self = this;
       var curNodePath = this.$props.curNodePath; // 判断是否为根节点
 
@@ -10282,7 +10544,33 @@
           color: descriptionColor
         } : {})
       }) : null;
-      var COMPONENT_MAP = self.globalOptions.COMPONENT_MAP; // form-item style
+      var COMPONENT_MAP = self.globalOptions.COMPONENT_MAP; // description2 固定为旧版 mini 展示：label 旁问号，悬停弹出
+
+      var description2VNode = self.description2 ? h('div', {
+        domProps: {
+          innerHTML: self.description2
+        },
+        class: {
+          genFromWidget_des2: true,
+          genFromWidget_des_mini: true
+        },
+        style: descriptionColor ? {
+          color: descriptionColor
+        } : undefined
+      }) : null;
+      var description2TipVNode = description2VNode ? h(COMPONENT_MAP.popover, {
+        style: {
+          margin: '0 2px',
+          fontSize: '16px',
+          cursor: 'pointer'
+        },
+        props: _objectSpread2({
+          placement: 'top',
+          trigger: 'hover'
+        }, (_self$formProps = self.formProps) === null || _self$formProps === void 0 ? void 0 : _self$formProps.popover)
+      }, [description2VNode, h(__vue_component__$5, {
+        slot: 'reference'
+      })]) : null; // form-item style
 
       var formItemStyle = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, self.fieldStyle), self.width ? {
         width: self.width,
@@ -10413,7 +10701,7 @@
             }, [props.error]) : null;
           }
         }
-      }, [label ? h('span', {
+      }, [label || description2TipVNode ? h('span', {
         slot: 'label',
         class: {
           genFormLabel: true,
@@ -10422,7 +10710,7 @@
         style: labelColor ? {
           color: labelColor
         } : undefined
-      }, ["".concat(label), "".concat(self.formProps && self.formProps.labelSuffix || '')]) : null, descriptionVNode && isTextarea ? h('div', {
+      }, [label ? "".concat(label) : null, description2TipVNode, label ? "".concat(self.formProps && self.formProps.labelSuffix || '') : null]) : null, descriptionVNode && isTextarea ? h('div', {
         class: {
           genFormWidgetRow: true,
           'genFormWidgetRow--block': true
@@ -10674,210 +10962,6 @@
       }));
     }
   };
-
-  /* script */
-
-  /* template */
-  var __vue_render__$1 = function __vue_render__() {
-    var _vm = this;
-
-    var _h = _vm.$createElement;
-
-    var _c = _vm._self._c || _h;
-
-    return _c("svg", {
-      staticClass: "genFormIcon genFormIcon-down",
-      attrs: {
-        xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 1024 1024"
-      }
-    }, [_c("path", {
-      attrs: {
-        d: "M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z"
-      }
-    })]);
-  };
-
-  var __vue_staticRenderFns__$1 = [];
-  __vue_render__$1._withStripped = true;
-  /* style */
-
-  var __vue_inject_styles__$1 = undefined;
-  /* scoped */
-
-  var __vue_scope_id__$1 = undefined;
-  /* module identifier */
-
-  var __vue_module_identifier__$1 = undefined;
-  /* functional template */
-
-  var __vue_is_functional_template__$1 = false;
-  /* style inject */
-
-  /* style inject SSR */
-
-  /* style inject shadow dom */
-
-  var __vue_component__$1 = /*#__PURE__*/normalizeComponent_1({
-    render: __vue_render__$1,
-    staticRenderFns: __vue_staticRenderFns__$1
-  }, __vue_inject_styles__$1, {}, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, undefined, undefined);
-
-  /* script */
-
-  /* template */
-  var __vue_render__$2 = function __vue_render__() {
-    var _vm = this;
-
-    var _h = _vm.$createElement;
-
-    var _c = _vm._self._c || _h;
-
-    return _c("svg", {
-      staticClass: "genFormIcon genFormIcon-up",
-      attrs: {
-        xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 1024 1024"
-      }
-    }, [_c("path", {
-      attrs: {
-        d: "M858.9 689L530.5 308.2c-9.4-10.9-27.5-10.9-37 0L165.1 689c-12.2 14.2-1.2 35 18.5 35h656.8c19.7 0 30.7-20.8 18.5-35z"
-      }
-    })]);
-  };
-
-  var __vue_staticRenderFns__$2 = [];
-  __vue_render__$2._withStripped = true;
-  /* style */
-
-  var __vue_inject_styles__$2 = undefined;
-  /* scoped */
-
-  var __vue_scope_id__$2 = undefined;
-  /* module identifier */
-
-  var __vue_module_identifier__$2 = undefined;
-  /* functional template */
-
-  var __vue_is_functional_template__$2 = false;
-  /* style inject */
-
-  /* style inject SSR */
-
-  /* style inject shadow dom */
-
-  var __vue_component__$2 = /*#__PURE__*/normalizeComponent_1({
-    render: __vue_render__$2,
-    staticRenderFns: __vue_staticRenderFns__$2
-  }, __vue_inject_styles__$2, {}, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, undefined, undefined);
-
-  /* script */
-
-  /* template */
-  var __vue_render__$3 = function __vue_render__() {
-    var _vm = this;
-
-    var _h = _vm.$createElement;
-
-    var _c = _vm._self._c || _h;
-
-    return _c("svg", {
-      staticClass: "genFormIcon genFormIcon-close",
-      attrs: {
-        xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 1024 1024"
-      }
-    }, [_c("path", {
-      attrs: {
-        d: "M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1\n        191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0\n        0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"
-      }
-    })]);
-  };
-
-  var __vue_staticRenderFns__$3 = [];
-  __vue_render__$3._withStripped = true;
-  /* style */
-
-  var __vue_inject_styles__$3 = undefined;
-  /* scoped */
-
-  var __vue_scope_id__$3 = undefined;
-  /* module identifier */
-
-  var __vue_module_identifier__$3 = undefined;
-  /* functional template */
-
-  var __vue_is_functional_template__$3 = false;
-  /* style inject */
-
-  /* style inject SSR */
-
-  /* style inject shadow dom */
-
-  var __vue_component__$3 = /*#__PURE__*/normalizeComponent_1({
-    render: __vue_render__$3,
-    staticRenderFns: __vue_staticRenderFns__$3
-  }, __vue_inject_styles__$3, {}, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, undefined, undefined);
-
-  /* script */
-
-  /* template */
-  var __vue_render__$4 = function __vue_render__() {
-    var _vm = this;
-
-    var _h = _vm.$createElement;
-
-    var _c = _vm._self._c || _h;
-
-    return _c("svg", {
-      staticClass: "genFormIcon genFormIcon-plus",
-      attrs: {
-        t: "1551322312294",
-        viewBox: "0 0 1024 1024",
-        version: "1.1",
-        xmlns: "http://www.w3.org/2000/svg",
-        "p-id": "10297",
-        "xmlns:xlink": "http://www.w3.org/1999/xlink",
-        width: "200",
-        height: "200"
-      }
-    }, [_c("path", {
-      attrs: {
-        d: "M474 152m8 0l60 0q8 0 8 8l0 704q0 8-8 8l-60 0q-8 0-8-8l0-704q0-8 8-8Z",
-        "p-id": "10298"
-      }
-    }), _vm._v(" "), _c("path", {
-      attrs: {
-        d: "M168 474m8 0l672 0q8 0 8 8l0 60q0 8-8 8l-672 0q-8 0-8-8l0-60q0-8 8-8Z",
-        "p-id": "10299"
-      }
-    })]);
-  };
-
-  var __vue_staticRenderFns__$4 = [];
-  __vue_render__$4._withStripped = true;
-  /* style */
-
-  var __vue_inject_styles__$4 = undefined;
-  /* scoped */
-
-  var __vue_scope_id__$4 = undefined;
-  /* module identifier */
-
-  var __vue_module_identifier__$4 = undefined;
-  /* functional template */
-
-  var __vue_is_functional_template__$4 = false;
-  /* style inject */
-
-  /* style inject SSR */
-
-  /* style inject shadow dom */
-
-  var __vue_component__$4 = /*#__PURE__*/normalizeComponent_1({
-    render: __vue_render__$4,
-    staticRenderFns: __vue_staticRenderFns__$4
-  }, __vue_inject_styles__$4, {}, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, undefined, undefined, undefined);
 
   var ArrayOrderList = {
     name: 'ArrayOrderList',
@@ -11646,7 +11730,8 @@
         // select ui配置需要使用 (oneOf|anyOf)Select
 
         selectWidgetConfig.label = selectWidgetConfig.label || this.schema.title;
-        selectWidgetConfig.description = selectWidgetConfig.description || this.schema.description; // 下拉列表枚举值
+        selectWidgetConfig.description = selectWidgetConfig.description || this.schema.description;
+        selectWidgetConfig.description2 = selectWidgetConfig.description2 || this.schema.description2; // 下拉列表枚举值
 
         if (!selectWidgetConfig.uiProps.enumOptions) {
           var uiSchemaSelectList = this.uiSchema[this.combiningType] || [];
@@ -12210,7 +12295,7 @@
   var __vue_script__$1 = script$1;
   /* template */
 
-  var __vue_render__$5 = function __vue_render__() {
+  var __vue_render__$6 = function __vue_render__() {
     var _vm = this;
 
     var _h = _vm.$createElement;
@@ -12227,30 +12312,30 @@
     }), 1);
   };
 
-  var __vue_staticRenderFns__$5 = [];
-  __vue_render__$5._withStripped = true;
+  var __vue_staticRenderFns__$6 = [];
+  __vue_render__$6._withStripped = true;
   /* style */
 
-  var __vue_inject_styles__$5 = undefined;
+  var __vue_inject_styles__$6 = undefined;
   /* scoped */
 
-  var __vue_scope_id__$5 = undefined;
+  var __vue_scope_id__$6 = undefined;
   /* module identifier */
 
-  var __vue_module_identifier__$5 = undefined;
+  var __vue_module_identifier__$6 = undefined;
   /* functional template */
 
-  var __vue_is_functional_template__$5 = false;
+  var __vue_is_functional_template__$6 = false;
   /* style inject */
 
   /* style inject SSR */
 
   /* style inject shadow dom */
 
-  var __vue_component__$5 = /*#__PURE__*/normalizeComponent_1({
-    render: __vue_render__$5,
-    staticRenderFns: __vue_staticRenderFns__$5
-  }, __vue_inject_styles__$5, __vue_script__$1, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, undefined, undefined, undefined);
+  var __vue_component__$6 = /*#__PURE__*/normalizeComponent_1({
+    render: __vue_render__$6,
+    staticRenderFns: __vue_staticRenderFns__$6
+  }, __vue_inject_styles__$6, __vue_script__$1, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, undefined, undefined, undefined);
 
   //
   //
@@ -12283,7 +12368,7 @@
   var __vue_script__$2 = script$2;
   /* template */
 
-  var __vue_render__$6 = function __vue_render__() {
+  var __vue_render__$7 = function __vue_render__() {
     var _vm = this;
 
     var _h = _vm.$createElement;
@@ -12300,30 +12385,30 @@
     }), 1);
   };
 
-  var __vue_staticRenderFns__$6 = [];
-  __vue_render__$6._withStripped = true;
+  var __vue_staticRenderFns__$7 = [];
+  __vue_render__$7._withStripped = true;
   /* style */
 
-  var __vue_inject_styles__$6 = undefined;
+  var __vue_inject_styles__$7 = undefined;
   /* scoped */
 
-  var __vue_scope_id__$6 = undefined;
+  var __vue_scope_id__$7 = undefined;
   /* module identifier */
 
-  var __vue_module_identifier__$6 = undefined;
+  var __vue_module_identifier__$7 = undefined;
   /* functional template */
 
-  var __vue_is_functional_template__$6 = false;
+  var __vue_is_functional_template__$7 = false;
   /* style inject */
 
   /* style inject SSR */
 
   /* style inject shadow dom */
 
-  var __vue_component__$6 = /*#__PURE__*/normalizeComponent_1({
-    render: __vue_render__$6,
-    staticRenderFns: __vue_staticRenderFns__$6
-  }, __vue_inject_styles__$6, __vue_script__$2, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, undefined, undefined, undefined);
+  var __vue_component__$7 = /*#__PURE__*/normalizeComponent_1({
+    render: __vue_render__$7,
+    staticRenderFns: __vue_staticRenderFns__$7
+  }, __vue_inject_styles__$7, __vue_script__$2, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, undefined, undefined, undefined);
 
   //
   //
@@ -12355,7 +12440,7 @@
   var __vue_script__$3 = script$3;
   /* template */
 
-  var __vue_render__$7 = function __vue_render__() {
+  var __vue_render__$8 = function __vue_render__() {
     var _vm = this;
 
     var _h = _vm.$createElement;
@@ -12373,30 +12458,30 @@
     }), 1);
   };
 
-  var __vue_staticRenderFns__$7 = [];
-  __vue_render__$7._withStripped = true;
+  var __vue_staticRenderFns__$8 = [];
+  __vue_render__$8._withStripped = true;
   /* style */
 
-  var __vue_inject_styles__$7 = undefined;
+  var __vue_inject_styles__$8 = undefined;
   /* scoped */
 
-  var __vue_scope_id__$7 = undefined;
+  var __vue_scope_id__$8 = undefined;
   /* module identifier */
 
-  var __vue_module_identifier__$7 = undefined;
+  var __vue_module_identifier__$8 = undefined;
   /* functional template */
 
-  var __vue_is_functional_template__$7 = false;
+  var __vue_is_functional_template__$8 = false;
   /* style inject */
 
   /* style inject SSR */
 
   /* style inject shadow dom */
 
-  var __vue_component__$7 = /*#__PURE__*/normalizeComponent_1({
-    render: __vue_render__$7,
-    staticRenderFns: __vue_staticRenderFns__$7
-  }, __vue_inject_styles__$7, __vue_script__$3, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, undefined, undefined, undefined);
+  var __vue_component__$8 = /*#__PURE__*/normalizeComponent_1({
+    render: __vue_render__$8,
+    staticRenderFns: __vue_staticRenderFns__$8
+  }, __vue_inject_styles__$8, __vue_script__$3, __vue_scope_id__$8, __vue_is_functional_template__$8, __vue_module_identifier__$8, false, undefined, undefined, undefined);
 
   /**
    * Created by Liu.Jun on 2020/7/22 13:21.
@@ -13002,9 +13087,9 @@
   // }, {});
 
   var widgetComponents = {
-    CheckboxesWidget: __vue_component__$5,
-    RadioWidget: __vue_component__$6,
-    SelectWidget: __vue_component__$7,
+    CheckboxesWidget: __vue_component__$6,
+    RadioWidget: __vue_component__$7,
+    SelectWidget: __vue_component__$8,
     TimePickerWidget: TimePickerWidget,
     DatePickerWidget: DatePickerWidget,
     DateTimePickerWidget: DateTimePickerWidget,

@@ -7,6 +7,7 @@ import {
 } from '@lljj/vjsf-utils/vueUtils';
 
 import { validateFormDataAndTransformMsg } from '@lljj/vjsf-utils/schema/validate';
+import { IconQuestion } from '@lljj/vjsf-utils/icons';
 import { fallbackLabel } from '@lljj/vjsf-utils/formUtils';
 
 function toCssSize(value) {
@@ -150,6 +151,11 @@ export default {
             type: String,
             default: ''
         },
+        // 旧版 description：label 旁圆形问号，鼠标悬停后弹出
+        description2: {
+            type: String,
+            default: ''
+        },
         // Widget attrs
         widgetAttrs: {
             type: Object,
@@ -273,6 +279,38 @@ export default {
         ) : null;
 
         const { COMPONENT_MAP } = self.globalOptions;
+
+        // description2 固定为旧版 mini 展示：label 旁问号，悬停弹出
+        const description2VNode = (self.description2) ? h(
+            'div',
+            {
+                domProps: {
+                    innerHTML: self.description2
+                },
+                class: {
+                    genFromWidget_des2: true,
+                    genFromWidget_des_mini: true
+                },
+                style: descriptionColor ? { color: descriptionColor } : undefined
+            },
+        ) : null;
+        const description2TipVNode = description2VNode ? h(COMPONENT_MAP.popover, {
+            style: {
+                margin: '0 2px',
+                fontSize: '16px',
+                cursor: 'pointer'
+            },
+            props: {
+                placement: 'top',
+                trigger: 'hover',
+                ...self.formProps?.popover
+            }
+        }, [
+            description2VNode,
+            h(IconQuestion, {
+                slot: 'reference'
+            })
+        ]) : null;
 
         // form-item style
         const formItemStyle = {
@@ -415,7 +453,7 @@ export default {
                 },
             },
             [
-                label ? h('span', {
+                (label || description2TipVNode) ? h('span', {
                     slot: 'label',
                     class: {
                         genFormLabel: true,
@@ -423,8 +461,9 @@ export default {
                     },
                     style: labelColor ? { color: labelColor } : undefined
                 }, [
-                    `${label}`,
-                    `${(self.formProps && self.formProps.labelSuffix) || ''}`
+                    label ? `${label}` : null,
+                    description2TipVNode,
+                    label ? `${(self.formProps && self.formProps.labelSuffix) || ''}` : null
                 ]) : null,
 
                 (descriptionVNode && isTextarea) ? h('div', {

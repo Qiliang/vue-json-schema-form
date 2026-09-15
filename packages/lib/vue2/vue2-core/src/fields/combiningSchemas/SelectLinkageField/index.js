@@ -62,6 +62,7 @@ export default {
             // select ui配置需要使用 (oneOf|anyOf)Select
             selectWidgetConfig.label = selectWidgetConfig.label || this.schema.title;
             selectWidgetConfig.description = selectWidgetConfig.description || this.schema.description;
+            selectWidgetConfig.description2 = selectWidgetConfig.description2 || this.schema.description2;
 
             // 下拉列表枚举值
             if (!selectWidgetConfig.uiProps.enumOptions) {

@@ -16,7 +16,8 @@ export default {
             firstName: {
                 type: 'string',
                 title: 'First name',
-                default: 'Jun'
+                default: 'Jun',
+                description2: '旧版描述：鼠标悬停问号查看'
             },
             lastName: {
                 type: 'string',

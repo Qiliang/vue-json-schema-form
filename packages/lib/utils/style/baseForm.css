@@ -116,6 +116,19 @@
         box-sizing: border-box;
         word-break: break-word;
     }
+    .genFromWidget_des2 {
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 2px;
+        font-size: 12px;
+        line-height: 20px;
+        color: var(--vjsf-description-color, #999);
+        text-align: left;
+        width: 100%;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        word-break: break-word;
+    }
     .genFormWidgetRow--block .genFromWidget_des {
         margin: 8px 0 0;
         padding: 0;
@@ -309,6 +322,11 @@
             padding-top: 0;
         }
     }
+}
+
+.genFromWidget_des_mini {
+    font-size: 14px;
+    line-height: 1.5715;
 }
 
 /* 适配多列布局 */
