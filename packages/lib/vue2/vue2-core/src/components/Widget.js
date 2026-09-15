@@ -143,6 +143,16 @@ export default {
             type: String,
             default: undefined
         },
+        // 字段背景色，配合 ui:boxed 可做成 oneOf 附加区域那样的面板
+        backgroundColor: {
+            type: String,
+            default: undefined
+        },
+        // 与 oneOf appendCombining_box 相同的灰底+阴影面板
+        boxed: {
+            type: Boolean,
+            default: false
+        },
         labelWidth: {
             type: [String, Number],
             default: ''
@@ -258,6 +268,10 @@ export default {
             self.descriptionColor,
             self.formProps && self.formProps.descriptionColor
         );
+        const backgroundColor = (self.backgroundColor != null && self.backgroundColor !== '')
+            ? self.backgroundColor
+            : (self.fieldStyle && (self.fieldStyle.backgroundColor || self.fieldStyle.background));
+        const boxed = !!self.boxed;
         const itemLabelWidth = (self.labelWidth != null && self.labelWidth !== '')
             ? self.labelWidth
             : (self.formProps && self.formProps.labelWidth);
@@ -324,7 +338,11 @@ export default {
                 paddingRight: '10px'
             } : {}),
             ...(labelColor ? { '--vjsf-label-color': labelColor } : {}),
-            ...(descriptionColor ? { '--vjsf-description-color': descriptionColor } : {})
+            ...(descriptionColor ? { '--vjsf-description-color': descriptionColor } : {}),
+            ...(backgroundColor ? {
+                backgroundColor,
+                '--vjsf-background-color': backgroundColor
+            } : {})
         };
 
         // 运行配置回退到 属性名
@@ -391,7 +409,8 @@ export default {
             {
                 class: {
                     ...hasSideDescription ? {} : self.fieldClass,
-                    genFormItem: true
+                    genFormItem: true,
+                    'vjsf-boxed': boxed && !hasSideDescription
                 },
                 style: hasSideDescription ? {
                     width: '100%',
@@ -489,7 +508,8 @@ export default {
             class: {
                 ...self.fieldClass,
                 genFormItem: true,
-                genFormFieldRow: true
+                genFormFieldRow: true,
+                'vjsf-boxed': boxed
             },
             style: formItemStyle,
             attrs: self.fieldAttrs

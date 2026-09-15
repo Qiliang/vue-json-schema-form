@@ -13,6 +13,10 @@
     .el-form-item__label .genFormLabel {
         color: var(--vjsf-label-color, inherit);
     }
+    .genFormItem .el-input__inner,
+    .genFormItem .el-textarea__inner {
+        background-color: var(--vjsf-background-color, #FFF);
+    }
     .el-checkbox, .el-color-picker{
         vertical-align: top;
     }

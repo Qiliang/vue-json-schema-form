@@ -82,6 +82,10 @@
         box-sizing: border-box;
         margin-bottom: 22px;
     }
+    .genFormItem input,
+    .genFormItem textarea {
+        background-color: var(--vjsf-background-color, #FFF);
+    }
     .genFormFieldRow_widget {
         min-width: 0;
         box-sizing: border-box;
@@ -176,15 +180,23 @@
         }
     }
 
-    /* oneOf anyOf -  appendCombining_box*/
-    .appendCombining_box {
+    /* oneOf anyOf 附加区域，以及 ui:boxed 指定字段共用同一套面板背景 */
+    .appendCombining_box,
+    .vjsf-boxed {
         margin-bottom: 22px;
-        .appendCombining_box {
+        padding: 10px;
+        background: var(--vjsf-background-color, rgba(242,242,242,0.8));
+        box-shadow: 0 3px 1px -2px rgba(0,0,0,0.2), 0 0 3px 1px rgba(0,0,0,0.1);
+        .appendCombining_box,
+        .vjsf-boxed {
             margin-bottom: 10px;
         }
-        padding: 10px;
-        background: rgba(242,242,242,0.8);
-        box-shadow: 0 3px 1px -2px rgba(0,0,0,0.2), 0 0 3px 1px rgba(0,0,0,0.1);
+        .vjsf-boxed > .el-form-item,
+        .vjsf-boxed > .genFormFieldRow_widget > .el-form-item {
+            background: transparent;
+            box-shadow: none;
+            padding: 0;
+        }
     }
 
     /* validateWidget 单独的校验不属于输入框的*/

@@ -59,7 +59,7 @@ export default {
 
         const {
             title, description, showTitle, showDescription, order, fieldClass, fieldAttrs, fieldStyle, onlyShowIfDependent,
-            labelColor, descriptionColor
+            labelColor, descriptionColor, backgroundColor, boxed
         } = getUiOptions({
             schema,
             uiSchema,
@@ -103,9 +103,11 @@ export default {
                     curNodePath,
                     labelColor,
                     descriptionColor,
+                    backgroundColor,
+                    boxed,
                     formProps: context.props.formProps
                 },
-                class: { ...context.data.class, ...fieldClass },
+                class: { ...context.data.class, ...fieldClass, 'vjsf-boxed': boxed },
                 attrs: fieldAttrs,
                 style: fieldStyle
             },

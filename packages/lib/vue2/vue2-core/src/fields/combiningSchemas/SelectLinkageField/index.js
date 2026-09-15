@@ -184,6 +184,19 @@ export default {
         const { curNodePath } = this.$props;
         const pathClassName = nodePath2ClassName(curNodePath);
 
+        const {
+            backgroundColor,
+            fieldStyle,
+            fieldClass,
+            boxed,
+        } = getUiOptions({
+            schema: this.schema,
+            uiSchema: this.uiSchema,
+            curNodePath,
+            rootFormData: this.rootFormData,
+            containsSpec: false,
+        });
+
         // is object
         const isTypeObject = (this.schema.type === 'object' || this.schema.properties);
 
@@ -322,8 +335,17 @@ export default {
                 key: `appendBox_${this.combiningType}`,
                 class: {
                     appendCombining_box: true,
+                    'vjsf-boxed': boxed,
                     [`${this.combiningType}_appendBox`]: true,
-                    [`${pathClassName}-appendBox`]: true
+                    [`${pathClassName}-appendBox`]: true,
+                    ...fieldClass
+                },
+                style: {
+                    ...fieldStyle,
+                    ...(backgroundColor ? {
+                        backgroundColor,
+                        '--vjsf-background-color': backgroundColor
+                    } : {})
                 }
             }, childrenVNodeList)
         ]);

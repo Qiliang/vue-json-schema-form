@@ -189,9 +189,13 @@ uiSchema = {
     'ui:widget': 'el-slider',
 
     // 传给formItem 组件 labelWidth，优先级更高（antdv formItem 没有该参数，可使用fieldAttrs配置labelCol控制label宽度）
-    // 写在根 schema 上全局生效，字段上配置则覆盖
+    // 写在根 schema 上全局生效（优先于 formProps.labelWidth），字段上配置则覆盖
+    // Element UI 在 labelPosition 为 left/right 时宽度才可见，可同时配置 ui:labelPosition
     // 也可在 fieldAttrs 中配置 labelWidth': '50px'
     'ui:labelWidth': '120px',
+
+    // 表单域标签位置。写在根 schema 上全局生效：top / left / right
+    'ui:labelPosition': 'left',
 
     // 有 description 时，label+控件 所占宽度，默认 60%。多行文本不生效
     // 数字按百分比处理，也可写 '70%'、'320px'
@@ -205,6 +209,12 @@ uiSchema = {
 
     // description 文字颜色。写在根 schema 上全局生效，字段上配置则覆盖
     'ui:descriptionColor': '#409EFF',
+
+    // 给当前字段加上与 oneOf 附加区域相同的灰底+阴影面板
+    'ui:boxed': true,
+
+    // 当前字段背景色。可单独使用，也可和 ui:boxed 一起改面板颜色
+    'ui:backgroundColor': 'rgba(242,242,242,0.8)',
 
     'ui:options': {
             // scoped slots 使用render函数来实现

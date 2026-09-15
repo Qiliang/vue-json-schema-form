@@ -1,6 +1,7 @@
 <template>
     <div
         class="fieldGroupWrap"
+        :class="{ 'vjsf-boxed': boxed }"
         :style="wrapStyle"
     >
         <h3
@@ -63,6 +64,14 @@ export default {
             type: String,
             default: undefined
         },
+        backgroundColor: {
+            type: String,
+            default: undefined
+        },
+        boxed: {
+            type: Boolean,
+            default: false
+        },
         formProps: {
             type: Object,
             default: () => ({})
@@ -100,6 +109,10 @@ export default {
             const style = {};
             if (labelColor) style['--vjsf-label-color'] = labelColor;
             if (descriptionColor) style['--vjsf-description-color'] = descriptionColor;
+            if (this.backgroundColor) {
+                style.backgroundColor = this.backgroundColor;
+                style['--vjsf-background-color'] = this.backgroundColor;
+            }
             return Object.keys(style).length ? style : undefined;
         }
     }

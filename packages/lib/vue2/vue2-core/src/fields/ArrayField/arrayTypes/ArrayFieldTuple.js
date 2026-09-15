@@ -72,6 +72,8 @@ export default {
             fieldStyle,
             labelColor,
             descriptionColor,
+            backgroundColor,
+            boxed,
         } = getUiOptions({
             schema,
             uiSchema,
@@ -141,9 +143,14 @@ export default {
                     curNodePath,
                     labelColor,
                     descriptionColor,
+                    backgroundColor,
+                    boxed,
                     formProps: this.formProps
                 },
-                class: fieldClass,
+                class: {
+                    ...fieldClass,
+                    'vjsf-boxed': boxed
+                },
                 attrs: fieldAttrs,
                 style: fieldStyle,
             },

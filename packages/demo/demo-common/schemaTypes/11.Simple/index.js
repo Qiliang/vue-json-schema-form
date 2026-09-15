@@ -6,6 +6,7 @@ export default {
         'ui:labelColor': '#666',
         'ui:descriptionColor': '#409EFF',
         'ui:labelWidth': '120px',
+        'ui:labelPosition': 'left',
         required: ['firstName', 'lastName'],
         'ui:order': [
             'lastName',
@@ -23,6 +24,7 @@ export default {
             lastName: {
                 type: 'string',
                 title: 'Last name',
+                'ui:boxed': true,
                 'ui:options': {
                     description: '请输入你的姓'
                 },

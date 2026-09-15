@@ -158,7 +158,9 @@ export default function createForm(globalOptions = {}) {
 
             const resolvedLabelColor = labelColor ?? rootUiOptions.labelColor;
             const resolvedDescriptionColor = descriptionColor ?? rootUiOptions.descriptionColor;
-            const resolvedLabelWidth = uiFormProps.labelWidth ?? rootUiOptions.labelWidth;
+            // 根 schema 的 ui:labelWidth / ui:labelPosition 优先于 formProps，避免 demo 滑块等默认值盖掉 schema
+            const resolvedLabelWidth = rootUiOptions.labelWidth ?? uiFormProps.labelWidth;
+            const resolvedLabelPosition = rootUiOptions.labelPosition ?? labelPosition;
 
             const props = {
                 schema: this.schema,
@@ -171,7 +173,6 @@ export default function createForm(globalOptions = {}) {
                 curNodePath: '', // 当前节点路径
                 globalOptions, // 全局配置，差异化ui框架
                 formProps: {
-                    labelPosition,
                     labelSuffix: '：',
                     defaultSelectFirstOption: true,
                     inline,
@@ -180,6 +181,7 @@ export default function createForm(globalOptions = {}) {
                     descriptionWidth: descriptionWidth ?? rootUiOptions.descriptionWidth,
                     labelColor: resolvedLabelColor,
                     descriptionColor: resolvedDescriptionColor,
+                    labelPosition: resolvedLabelPosition,
                     ...(resolvedLabelWidth != null && resolvedLabelWidth !== '' ? { labelWidth: resolvedLabelWidth } : {})
                 }
             };
@@ -207,9 +209,9 @@ export default function createForm(globalOptions = {}) {
                     ref: 'genEditForm',
                     props: {
                         model: self.formData,
-                        labelPosition,
                         inline,
                         ...uiFormProps,
+                        labelPosition: resolvedLabelPosition,
                         ...(resolvedLabelWidth != null && resolvedLabelWidth !== '' ? { labelWidth: resolvedLabelWidth } : {})
                     }
                 },
