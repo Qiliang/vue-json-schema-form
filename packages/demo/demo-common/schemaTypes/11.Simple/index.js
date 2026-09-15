@@ -5,6 +5,7 @@ export default {
         type: 'object',
         'ui:labelColor': '#666',
         'ui:descriptionColor': '#409EFF',
+        'ui:labelWidth': '120px',
         required: ['firstName', 'lastName'],
         'ui:order': [
             'lastName',

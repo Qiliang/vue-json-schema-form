@@ -158,6 +158,7 @@ export default function createForm(globalOptions = {}) {
 
             const resolvedLabelColor = labelColor ?? rootUiOptions.labelColor;
             const resolvedDescriptionColor = descriptionColor ?? rootUiOptions.descriptionColor;
+            const resolvedLabelWidth = uiFormProps.labelWidth ?? rootUiOptions.labelWidth;
 
             const props = {
                 schema: this.schema,
@@ -178,7 +179,8 @@ export default function createForm(globalOptions = {}) {
                     widgetWidth: widgetWidth ?? rootUiOptions.widgetWidth,
                     descriptionWidth: descriptionWidth ?? rootUiOptions.descriptionWidth,
                     labelColor: resolvedLabelColor,
-                    descriptionColor: resolvedDescriptionColor
+                    descriptionColor: resolvedDescriptionColor,
+                    ...(resolvedLabelWidth != null && resolvedLabelWidth !== '' ? { labelWidth: resolvedLabelWidth } : {})
                 }
             };
 
@@ -207,7 +209,8 @@ export default function createForm(globalOptions = {}) {
                         model: self.formData,
                         labelPosition,
                         inline,
-                        ...uiFormProps
+                        ...uiFormProps,
+                        ...(resolvedLabelWidth != null && resolvedLabelWidth !== '' ? { labelWidth: resolvedLabelWidth } : {})
                     }
                 },
                 [

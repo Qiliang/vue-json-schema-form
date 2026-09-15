@@ -189,8 +189,9 @@ uiSchema = {
     'ui:widget': 'el-slider',
 
     // 传给formItem 组件 labelWidth，优先级更高（antdv formItem 没有该参数，可使用fieldAttrs配置labelCol控制label宽度）
+    // 写在根 schema 上全局生效，字段上配置则覆盖
     // 也可在 fieldAttrs 中配置 labelWidth': '50px'
-    'ui:labelWidth': '50px',
+    'ui:labelWidth': '120px',
 
     // 有 description 时，label+控件 所占宽度，默认 60%。多行文本不生效
     // 数字按百分比处理，也可写 '70%'、'320px'
@@ -860,7 +861,7 @@ formProps = {
 
     // 如下为form组件参数
     // 如elementUi el-form labelWidth
-    labelWidth: 'auto', // 表单域标签的宽度，例如 '50px'
+    labelWidth: 'auto', // 表单域标签的宽度，例如 '50px'；也可在根 schema 配置 ui:labelWidth
 }
 ```
 

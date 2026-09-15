@@ -144,7 +144,7 @@ export default {
             default: undefined
         },
         labelWidth: {
-            type: String,
+            type: [String, Number],
             default: ''
         },
         description: {
@@ -258,6 +258,9 @@ export default {
             self.descriptionColor,
             self.formProps && self.formProps.descriptionColor
         );
+        const itemLabelWidth = (self.labelWidth != null && self.labelWidth !== '')
+            ? self.labelWidth
+            : (self.formProps && self.formProps.labelWidth);
 
         const descriptionVNode = (self.description) ? h(
             'div',
@@ -396,7 +399,7 @@ export default {
                 } : formItemStyle,
                 attrs: hasSideDescription ? undefined : self.fieldAttrs,
                 props: {
-                    ...self.labelWidth ? { labelWidth: self.labelWidth } : {},
+                    ...(itemLabelWidth != null && itemLabelWidth !== '' ? { labelWidth: itemLabelWidth } : {}),
                     ...this.isFormData ? {
                         // 这里对根节点打特殊标志，绕过elementUi无prop属性不校验
                         prop: isRootNode ? '__$$root' : path2prop(curNodePath),
