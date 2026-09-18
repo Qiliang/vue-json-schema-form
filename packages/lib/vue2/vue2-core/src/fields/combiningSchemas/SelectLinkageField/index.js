@@ -58,11 +58,21 @@ export default {
                 widget: 'SelectWidget'
             }));
 
-            // title description 回退到 schema 配置，但这里不使用 uiSchema配置
-            // select ui配置需要使用 (oneOf|anyOf)Select
+            // title / description / 颜色回退到当前 oneOf|anyOf 字段配置
+            // select 自身的 ui 仍走 (oneOf|anyOf)Select，但 labelColor 等需继承父级，否则全局 ui:labelColor 无法作用到下拉标题
+            const parentUiOptions = getUiOptions({
+                schema: this.schema,
+                uiSchema: this.uiSchema,
+                curNodePath: this.curNodePath,
+                rootFormData: this.rootFormData,
+                containsSpec: false,
+            });
             selectWidgetConfig.label = selectWidgetConfig.label || this.schema.title;
             selectWidgetConfig.description = selectWidgetConfig.description || this.schema.description;
             selectWidgetConfig.description2 = selectWidgetConfig.description2 || this.schema.description2;
+            selectWidgetConfig.labelColor = selectWidgetConfig.labelColor || parentUiOptions.labelColor;
+            selectWidgetConfig.descriptionColor = selectWidgetConfig.descriptionColor
+                || parentUiOptions.descriptionColor;
 
             // 下拉列表枚举值
             if (!selectWidgetConfig.uiProps.enumOptions) {
@@ -97,6 +107,7 @@ export default {
                         globalOptions: this.globalOptions,
                         rootFormData: this.rootFormData,
                         curNodePath: this.curNodePath,
+                        formProps: this.formProps,
                         ...selectWidgetConfig
                     },
                     on: {
@@ -189,6 +200,8 @@ export default {
             fieldStyle,
             fieldClass,
             boxed,
+            labelColor,
+            descriptionColor,
         } = getUiOptions({
             schema: this.schema,
             uiSchema: this.uiSchema,
@@ -345,7 +358,9 @@ export default {
                     ...(backgroundColor ? {
                         backgroundColor,
                         '--vjsf-background-color': backgroundColor
-                    } : {})
+                    } : {}),
+                    ...(labelColor ? { '--vjsf-label-color': labelColor } : {}),
+                    ...(descriptionColor ? { '--vjsf-description-color': descriptionColor } : {})
                 }
             }, childrenVNodeList)
         ]);

@@ -13,6 +13,12 @@ module.exports = {
         require('postcss-color-mod-function'),
         require('postcss-cssnext')({
             warnForDuplicates: false,
+            features: {
+                customProperties: {
+                    preserve: true,
+                    warnings: false
+                }
+            }
         }),
         require('cssnano')({
             sourcemap: false,
