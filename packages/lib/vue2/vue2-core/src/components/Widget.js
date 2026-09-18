@@ -143,12 +143,12 @@ export default {
             type: String,
             default: undefined
         },
-        // 字段背景色，配合 ui:boxed 可做成 oneOf 附加区域那样的面板
+        // 字段背景色，配合 ui:boxed 可做成灰底面板
         backgroundColor: {
             type: String,
             default: undefined
         },
-        // 与 oneOf appendCombining_box 相同的灰底+阴影面板
+        // 灰底+阴影面板，需通过 ui:boxed 手动开启
         boxed: {
             type: Boolean,
             default: false

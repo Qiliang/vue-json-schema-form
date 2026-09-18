@@ -210,7 +210,7 @@ uiSchema = {
     // description 文字颜色。写在根 schema 上全局生效，字段上配置则覆盖
     'ui:descriptionColor': '#409EFF',
 
-    // 给当前字段加上与 oneOf 附加区域相同的灰底+阴影面板
+    // 给当前字段加上灰底+阴影面板。默认不显示，oneOf/anyOf 等也需手动指定
     'ui:boxed': true,
 
     // 当前字段背景色。可单独使用，也可和 ui:boxed 一起改面板颜色
