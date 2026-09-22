@@ -2,7 +2,7 @@
  * 模版下拉 + 「应用模版」按钮：按 schema 中的 fillByKey 回填兄弟字段。
  *
  * 需通过 schema / uiSchema 配置：
- * - ui:fillByKey 各选项对应的回填对象，如 { qingyun_cs: { system_prompt, probability } }
+ * - ui:fillByKey 各选项对应的回填对象，如 { qingyun_cs: { system_prompt, probability, temperature } }
  * - ui:fillFields 要点击后写入的字段名列表
  * - ui:parentFormData 当前父级表单对象（可用 {{ parentFormData }}）
  * - ui:btnText 按钮文案

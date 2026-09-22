@@ -10,6 +10,7 @@
 * [UploadWidget](#uploadwidget)
 * [TtsPreviewWidget](#ttspreviewwidget)
 * [TemplateApplySelectWidget](#templateapplyselectwidget)
+* [BackgroundAudioPreviewWidget](#backgroundaudiopreviewwidget)
 * [TimePickerWidget](#timepickerwidget)
 * [DatePickerWidget](#datepickerwidget)
 * [DateTimePickerWidget](#datetimepickerwidget)
@@ -197,16 +198,48 @@ schema 中可直接配置（也可用 uiSchema）：
   template: {
     type: 'string',
     title: '模版选择',
-    enum: ['custom', 'qingyun_cs'],
-    enumNames: ['自定义', '青云客服垫词'],
+    enum: ['', 'qingyun_cs'],
+    enumNames: ['空', '青云客服垫词'],
     'ui:widget': 'TemplateApplySelectWidget',
     'ui:btnText': '应用模版',
     'ui:parentFormData': '{{ parentFormData }}',
-    'ui:fillFields': ['system_prompt', 'probability'],
+    'ui:fillFields': ['system_prompt', 'probability', 'temperature'],
     'ui:fillByKey': {
-      custom: {},
-      qingyun_cs: { system_prompt: '...', probability: 0.7 }
+      '': {},
+      qingyun_cs: { system_prompt: '...', probability: 0.7, temperature: 1.0 }
     }
+  }
+}
+```
+
+## BackgroundAudioPreviewWidget
+* 背景音下拉 + 试听：按当前选中 key 请求后端音频并播放
+* 页面体验地址：[Playground BackgroundAudio 组件](https://form.lljj.me/#/demo?type=BackgroundAudio)
+
+### props
+* `value/v-model` 当前选中的背景音 key
+* `enumOptions` 下拉选项，由 enum / enumNames 自动生成
+* `action` 试听接口地址；未配置时按钮禁用
+* `btnText` 试听按钮文案，默认 `试听`
+* `placeholder` 下拉占位文案
+
+请求约定：
+```http
+GET {action}?key={value}
+```
+成功时接口应返回 `audio/*`（推荐 `audio/mpeg`）。
+
+schema 中可直接配置（也可用 uiSchema）：
+```js
+{
+  sound_files: {
+    type: 'string',
+    title: '背景音',
+    enum: ['office-ambience-16000-mono.mp3', 'office2-ambience-16000-mono.mp3'],
+    enumNames: ['办公室背景音一', '办公室背景音二'],
+    'ui:widget': 'BackgroundAudioPreviewWidget',
+    'ui:action': '/bot/background-audio/preview',
+    'ui:btnText': '试听'
   }
 }
 ```

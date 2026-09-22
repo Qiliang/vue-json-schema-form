@@ -11,6 +11,7 @@ import TimePickerWidget from './TimePickerWidget';
 import UploadWidget from './UploadWidget';
 import TtsPreviewWidget from './TtsPreviewWidget';
 import TemplateApplySelectWidget from './TemplateApplySelectWidget';
+import BackgroundAudioPreviewWidget from './BackgroundAudioPreviewWidget';
 
 // webpack -> rollup
 // const files = require.context('.', true, /\.js|vue$/);
@@ -31,7 +32,8 @@ const widgetComponents = {
     DateTimePickerWidget,
     UploadWidget,
     TtsPreviewWidget,
-    TemplateApplySelectWidget
+    TemplateApplySelectWidget,
+    BackgroundAudioPreviewWidget
 };
 
 export default widgetComponents;
