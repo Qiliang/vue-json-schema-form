@@ -82,7 +82,21 @@ export default {
                 console.error(message);
             }
         },
-        async handlePreview() {
+        parsePreviewError(response, contentType) {
+            const fallback = `试听失败 (${response.status})`;
+            if (contentType.includes('application/json')) {
+                return response.json().then((data) => {
+                    if (data && data.detail) {
+                        return typeof data.detail === 'string'
+                            ? data.detail
+                            : JSON.stringify(data.detail);
+                    }
+                    return fallback;
+                });
+            }
+            return response.text().then(text => (text ? text.slice(0, 200) : fallback));
+        },
+        handlePreview() {
             if (!this.canPreview) {
                 return;
             }
@@ -90,42 +104,28 @@ export default {
             this.loading = true;
             this.revokeAudio();
 
-            try {
-                const response = await fetch(buildPreviewUrl(this.action, this.selectedKey), {
-                    method: 'GET'
-                });
-
+            fetch(buildPreviewUrl(this.action, this.selectedKey), {
+                method: 'GET'
+            }).then((response) => {
                 const contentType = (response.headers.get('content-type') || '').toLowerCase();
-
                 if (!response.ok) {
-                    let detail = `试听失败 (${response.status})`;
-                    if (contentType.includes('application/json')) {
-                        const data = await response.json();
-                        if (data && data.detail) {
-                            detail = typeof data.detail === 'string'
-                                ? data.detail
-                                : JSON.stringify(data.detail);
-                        }
-                    } else {
-                        const text = await response.text();
-                        if (text) detail = text.slice(0, 200);
-                    }
-                    throw new Error(detail);
+                    return this.parsePreviewError(response, contentType).then((detail) => {
+                        throw new Error(detail);
+                    });
                 }
-
                 if (!contentType.startsWith('audio/')) {
                     throw new Error('试听接口未返回音频');
                 }
-
-                const blob = await response.blob();
+                return response.blob();
+            }).then((blob) => {
                 this.audioUrl = URL.createObjectURL(blob);
                 this.audio = new Audio(this.audioUrl);
-                await this.audio.play();
-            } catch (err) {
+                return this.audio.play();
+            }).catch((err) => {
                 this.showError((err && err.message) || '试听失败');
-            } finally {
+            }).then(() => {
                 this.loading = false;
-            }
+            });
         }
     },
     render() {

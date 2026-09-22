@@ -195,7 +195,21 @@ export default {
             a.click();
             document.body.removeChild(a);
         },
-        async handlePreview() {
+        parsePreviewError(response, contentType) {
+            const fallback = `试听失败 (${response.status})`;
+            if (contentType.includes('application/json')) {
+                return response.json().then((data) => {
+                    if (data && data.detail) {
+                        return typeof data.detail === 'string'
+                            ? data.detail
+                            : JSON.stringify(data.detail);
+                    }
+                    return fallback;
+                });
+            }
+            return response.text().then(text => (text ? text.slice(0, 200) : fallback));
+        },
+        handlePreview() {
             if (!this.canPreview) {
                 return;
             }
@@ -207,54 +221,40 @@ export default {
             this.loading = true;
             this.revokeAudio();
 
-            try {
-                const response = await fetch(this.action, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        text: String(this.value).trim(),
-                        tts: this.ttsParams
-                    })
-                });
-
+            fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text: String(this.value).trim(),
+                    tts: this.ttsParams
+                })
+            }).then((response) => {
                 const contentType = (response.headers.get('content-type') || '').toLowerCase();
-
                 if (!response.ok) {
-                    let detail = `试听失败 (${response.status})`;
-                    if (contentType.includes('application/json')) {
-                        const data = await response.json();
-                        if (data && data.detail) {
-                            detail = typeof data.detail === 'string'
-                                ? data.detail
-                                : JSON.stringify(data.detail);
-                        }
-                    } else {
-                        const text = await response.text();
-                        if (text) detail = text.slice(0, 200);
-                    }
-                    throw new Error(detail);
+                    return this.parsePreviewError(response, contentType).then((detail) => {
+                        throw new Error(detail);
+                    });
                 }
-
                 if (!contentType.startsWith('audio/')) {
                     throw new Error('试听接口未返回音频');
                 }
-
-                const blob = await response.blob();
+                return response.blob().then(blob => ({ blob, contentType }));
+            }).then((result) => {
                 this.downloadName = buildTtsDownloadName(
                     this.ttsParams,
-                    guessExt(contentType),
+                    guessExt(result.contentType),
                     this.providerSchema
                 );
-                this.audioUrl = URL.createObjectURL(blob);
+                this.audioUrl = URL.createObjectURL(result.blob);
                 this.audio = new Audio(this.audioUrl);
-                await this.audio.play();
-            } catch (err) {
+                return this.audio.play();
+            }).catch((err) => {
                 this.showError((err && err.message) || '试听失败');
-            } finally {
+            }).then(() => {
                 this.loading = false;
-            }
+            });
         }
     },
     render() {
