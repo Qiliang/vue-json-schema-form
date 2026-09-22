@@ -18,7 +18,8 @@ export default {
                 enumNames: ['办公室背景音一', '办公室背景音二'],
                 'ui:widget': 'BackgroundAudioPreviewWidget',
                 'ui:action': '/bot/background-audio/preview',
-                'ui:btnText': '试听'
+                'ui:btnText': '试听',
+                'ui:stopBtnText': '停止'
             },
             volume: {
                 title: '音量',

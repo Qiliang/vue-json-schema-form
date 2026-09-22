@@ -221,6 +221,7 @@ schema 中可直接配置（也可用 uiSchema）：
 * `enumOptions` 下拉选项，由 enum / enumNames 自动生成
 * `action` 试听接口地址；未配置时按钮禁用
 * `btnText` 试听按钮文案，默认 `试听`
+* `stopBtnText` 播放中停止按钮文案，默认 `停止`
 * `placeholder` 下拉占位文案
 
 请求约定：
