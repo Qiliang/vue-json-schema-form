@@ -9,6 +9,7 @@
 * [SelectWidget](#selectwidget)
 * [UploadWidget](#uploadwidget)
 * [TtsPreviewWidget](#ttspreviewwidget)
+* [TemplateApplySelectWidget](#templateapplyselectwidget)
 * [TimePickerWidget](#timepickerwidget)
 * [DatePickerWidget](#datepickerwidget)
 * [DateTimePickerWidget](#datetimepickerwidget)
@@ -174,6 +175,38 @@ schema 中可直接配置（也可用 uiSchema）：
     // 将父对象（TTS 配置）传给 widget
     'ui:ttsParams': '{{ parentFormData }}',
     'ui:rows': 2
+  }
+}
+```
+
+## TemplateApplySelectWidget
+* 模版下拉 + 「应用模版」按钮：按 `ui:fillByKey` 回填兄弟字段
+* 页面体验地址：[Playground TemplateApply 组件](https://form.lljj.me/#/demo?type=TemplateApply)
+
+### props
+* `value/v-model` 当前选中的模版 key
+* `enumOptions` 下拉选项，由 enum / enumNames 自动生成
+* `fillByKey` 各 key 对应的回填对象
+* `fillFields` 要点击后写入的字段名列表
+* `parentFormData` 当前父级表单对象，用于写入兄弟字段
+* `btnText` 按钮文案，默认 `应用模版`
+
+schema 中可直接配置（也可用 uiSchema）：
+```js
+{
+  template: {
+    type: 'string',
+    title: '模版选择',
+    enum: ['custom', 'qingyun_cs'],
+    enumNames: ['自定义', '青云客服垫词'],
+    'ui:widget': 'TemplateApplySelectWidget',
+    'ui:btnText': '应用模版',
+    'ui:parentFormData': '{{ parentFormData }}',
+    'ui:fillFields': ['system_prompt', 'probability'],
+    'ui:fillByKey': {
+      custom: {},
+      qingyun_cs: { system_prompt: '...', probability: 0.7 }
+    }
   }
 }
 ```
