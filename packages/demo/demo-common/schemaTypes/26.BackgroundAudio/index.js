@@ -19,7 +19,8 @@ export default {
                 'ui:widget': 'BackgroundAudioPreviewWidget',
                 'ui:action': '/bot/background-audio/preview',
                 'ui:btnText': '试听',
-                'ui:stopBtnText': '停止'
+                'ui:stopBtnText': '停止',
+                'ui:parentFormData': '{{ parentFormData }}'
             },
             volume: {
                 title: '音量',

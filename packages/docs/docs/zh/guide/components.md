@@ -220,6 +220,7 @@ schema 中可直接配置（也可用 uiSchema）：
 * `value/v-model` 当前选中的背景音 key
 * `enumOptions` 下拉选项，由 enum / enumNames 自动生成
 * `action` 试听接口地址；未配置时按钮禁用
+* `parentFormData` 当前父级表单对象，读取兄弟字段 `volume` 作为播放音量
 * `btnText` 试听按钮文案，默认 `试听`
 * `stopBtnText` 播放中停止按钮文案，默认 `停止`
 * `placeholder` 下拉占位文案
@@ -240,7 +241,8 @@ schema 中可直接配置（也可用 uiSchema）：
     enumNames: ['办公室背景音一', '办公室背景音二'],
     'ui:widget': 'BackgroundAudioPreviewWidget',
     'ui:action': '/bot/background-audio/preview',
-    'ui:btnText': '试听'
+    'ui:btnText': '试听',
+    'ui:parentFormData': '{{ parentFormData }}'
   }
 }
 ```

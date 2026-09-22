@@ -63,6 +63,10 @@ export default {
         placeholder: {
             type: String,
             default: '请选择'
+        },
+        parentFormData: {
+            type: Object,
+            default: null
         }
     },
     data() {
@@ -71,7 +75,10 @@ export default {
             playing: false,
             audioUrl: null,
             audio: null,
-            abortController: null
+            abortController: null,
+            audioContext: null,
+            mediaSource: null,
+            gainNode: null
         };
     },
     computed: {
@@ -80,6 +87,14 @@ export default {
                 return '';
             }
             return String(this.value).trim();
+        },
+        currentVolume() {
+            const raw = this.parentFormData && this.parentFormData.volume;
+            const n = Number(raw);
+            if (!Number.isFinite(n)) {
+                return 1;
+            }
+            return Math.max(0, n);
         },
         currentBtnText() {
             return this.playing ? this.stopBtnText : this.btnText;
@@ -91,10 +106,17 @@ export default {
     watch: {
         value() {
             this.stopPreview();
+        },
+        currentVolume() {
+            this.applyVolume();
         }
     },
     beforeDestroy() {
         this.stopPreview();
+        if (this.audioContext && typeof this.audioContext.close === 'function') {
+            this.audioContext.close();
+            this.audioContext = null;
+        }
     },
     methods: {
         bindAudioEvents(audio) {
@@ -105,12 +127,61 @@ export default {
             audio.removeEventListener('ended', this.onAudioEnded);
             audio.removeEventListener('pause', this.onAudioPause);
         },
+        disconnectGain() {
+            if (this.mediaSource) {
+                try {
+                    this.mediaSource.disconnect();
+                } catch (e) {
+                    // ignore
+                }
+                this.mediaSource = null;
+            }
+            if (this.gainNode) {
+                try {
+                    this.gainNode.disconnect();
+                } catch (e) {
+                    // ignore
+                }
+                this.gainNode = null;
+            }
+        },
+        applyVolume() {
+            if (this.gainNode) {
+                this.gainNode.gain.value = this.currentVolume;
+                if (this.audio) {
+                    this.audio.volume = 1;
+                }
+                return;
+            }
+            if (this.audio) {
+                this.audio.volume = clamp01(this.currentVolume);
+            }
+        },
+        connectGain(audio) {
+            const Ctx = getAudioContextCtor();
+            if (!Ctx) {
+                this.applyVolume();
+                return Promise.resolve();
+            }
+            if (!this.audioContext) {
+                this.audioContext = new Ctx();
+            }
+            this.disconnectGain();
+            audio.volume = 1;
+            this.mediaSource = this.audioContext.createMediaElementSource(audio);
+            this.gainNode = this.audioContext.createGain();
+            this.gainNode.gain.value = this.currentVolume;
+            this.mediaSource.connect(this.gainNode);
+            this.gainNode.connect(this.audioContext.destination);
+            return resumeAudioContext(this.audioContext);
+        },
         revokeAudio() {
             if (this.audio) {
                 this.unbindAudioEvents(this.audio);
                 this.audio.pause();
                 this.audio = null;
             }
+            this.disconnectGain();
             if (this.audioUrl) {
                 URL.revokeObjectURL(this.audioUrl);
                 this.audioUrl = null;
@@ -201,8 +272,15 @@ export default {
                 this.audioUrl = URL.createObjectURL(blob);
                 this.audio = new Audio(this.audioUrl);
                 this.bindAudioEvents(this.audio);
-                return this.audio.play().then(() => {
-                    this.playing = true;
+                return this.connectGain(this.audio).then(() => {
+                    if (!this.audio) {
+                        return null;
+                    }
+                    return this.audio.play();
+                }).then(() => {
+                    if (this.audio) {
+                        this.playing = true;
+                    }
                 });
             }).catch((err) => {
                 if (isAbortError(err)) {
