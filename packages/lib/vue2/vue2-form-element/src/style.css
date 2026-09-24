@@ -143,6 +143,19 @@
         margin-bottom: 0;
         font-size: 12px;
     }
+    /* 对象/数组/组合类型末尾的校验占位，没有错误时不占行 */
+    .el-form-item.genFormItem.validateWidget:not(.is-error) {
+        display: none;
+        min-height: 0;
+    }
+    .el-form-item.genFormItem.validateWidget.is-error {
+        display: block;
+        min-height: 0;
+        height: auto;
+    }
+    .el-form-item.genFormItem.validateWidget .el-form-item__error {
+        position: static;
+    }
     .el-form-item.genFormItem:before,
     .el-form-item.genFormItem:after {
         display: none;

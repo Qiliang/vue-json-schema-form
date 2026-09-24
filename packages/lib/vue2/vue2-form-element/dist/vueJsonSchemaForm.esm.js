@@ -1,4 +1,4 @@
-/** @license @lljj/vue-json-schema-form v1.20.7 (c) 2020-2026 Liu.Jun License: Apache-2.0 */
+/** @license @lljj/vue-json-schema-form v1.20.16 (c) 2020-2026 Liu.Jun License: Apache-2.0 */
 import Vue from 'vue';
 
 function _typeof(obj) {
@@ -15,42 +15,6 @@ function _typeof(obj) {
   }
 
   return _typeof(obj);
-}
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
 }
 
 function _defineProperty(obj, key, value) {
@@ -9484,7 +9448,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = ".genFromComponent{font-size:14px;line-height:1;word-wrap:break-word;word-break:break-word;padding:0;margin:0}.genFromComponent a,.genFromComponent h1,.genFromComponent h2,.genFromComponent h3,.genFromComponent li,.genFromComponent p,.genFromComponent ul{font-size:14px}.genFromComponent .genFormIcon{width:12px;height:12px;vertical-align:top}.genFromComponent .genFormBtn{display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;background:#fff;border:1px solid #dcdfe6;color:#606266;-webkit-appearance:none;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;outline:none;margin:0;-webkit-transition:.1s;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:12px 20px;font-size:14px;border-radius:4px}.genFromComponent .genFormBtn.is-plain:focus,.genFromComponent .genFormBtn.is-plain:hover{background:#fff;border-color:#409eff;color:#409eff}.genFromComponent .hiddenWidget{display:none}.genFromComponent .fieldGroupWrap+.fieldGroupWrap .fieldGroupWrap_title{margin-top:20px}.genFromComponent .fieldGroupWrap_title{position:relative;display:block;width:100%;line-height:26px;margin-bottom:8px;font-size:15px;font-weight:700;border:0;color:inherit}.genFromComponent .fieldGroupWrap_des{font-size:12px;line-height:20px;margin-bottom:10px;color:#000}.genFromComponent .genFormFieldRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box;margin-bottom:22px}.genFromComponent .genFormItem input,.genFromComponent .genFormItem textarea{background-color:#fff}.genFromComponent .genFormFieldRow_widget{min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box}.genFromComponent .genFormFieldRow_widget>.el-form-item,.genFromComponent .genFormFieldRow_widget>.genFormItem{width:100%;margin-bottom:0}.genFromComponent .genFormWidgetRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0}.genFromComponent .genFormWidgetRow>:first-child{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow--block{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.genFromComponent .genFromWidget_des{padding:0 0 0 12px;margin:0;color:#000;min-width:0}.genFromComponent .genFromWidget_des,.genFromComponent .genFromWidget_des2{font-size:12px;line-height:20px;text-align:left;-webkit-box-sizing:border-box;box-sizing:border-box;word-break:break-word}.genFromComponent .genFromWidget_des2{padding:0;margin-top:0;margin-bottom:2px;color:#999;width:100%;-ms-flex-negative:0;flex-shrink:0}.genFromComponent .genFormWidgetRow--block .genFromWidget_des{margin:8px 0 0;padding:0;width:100%;max-width:100%}.genFromComponent.el-form--label-top .genFormFieldRow{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.genFromComponent.el-form--label-top .genFormFieldRow .genFromWidget_des{padding-bottom:10px}.genFromComponent .formItemErrorBox{margin:0 auto;color:#ff5757;padding-top:2px;position:absolute;top:100%;left:0;display:-webkit-box!important;line-height:16px;text-overflow:ellipsis;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:1;white-space:normal;font-size:12px;text-align:left}.genFromComponent .genFormIcon-qs{fill:#606266;vertical-align:middle;display:inline-block;width:16px;height:16px;margin-left:2px;margin-top:-2px;cursor:pointer}.genFromComponent .genFormItemRequired:before{content:\"*\";color:#f56c6c;margin-right:4px}.genFromComponent .appendCombining_box,.genFromComponent .vjsf-boxed{margin-bottom:22px;padding:10px;background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .appendCombining_box .appendCombining_box,.genFromComponent .appendCombining_box .vjsf-boxed,.genFromComponent .vjsf-boxed .appendCombining_box,.genFromComponent .vjsf-boxed .vjsf-boxed{margin-bottom:10px}.genFromComponent .appendCombining_box .vjsf-boxed>.el-form-item,.genFromComponent .appendCombining_box .vjsf-boxed>.genFormFieldRow_widget>.el-form-item,.genFromComponent .vjsf-boxed .vjsf-boxed>.el-form-item,.genFromComponent .vjsf-boxed .vjsf-boxed>.genFormFieldRow_widget>.el-form-item{background:transparent;-webkit-box-shadow:none;box-shadow:none;padding:0}.genFromComponent .validateWidget{margin-bottom:0!important;width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important;padding:0!important}.genFromComponent .validateWidget .formItemErrorBox{padding:5px 0;position:relative}.genFromComponent .arrayField:not(.genFormItem){margin-bottom:22px}.genFromComponent .arrayField:not(.genFormItem) .arrayField{margin-bottom:10px}.genFromComponent .arrayOrderList{background:hsla(0,0%,94.9%,.8);-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .arrayOrderList_item{position:relative;padding:25px 10px 12px;border-radius:2px;margin-bottom:6px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.genFromComponent .arrayOrderList_bottomAddBtn{text-align:right;padding:15px 10px;margin-bottom:10px}.genFromComponent .bottomAddBtn{width:40%;min-width:10px;max-width:180px}.genFromComponent .arrayListItem_content{padding-top:15px;-webkit-box-flex:1;-ms-flex:1;flex:1;margin:0 auto;-webkit-box-shadow:0 -1px 0 0 rgba(0,0,0,.05);box-shadow:0 -1px 0 0 rgba(0,0,0,.05)}.genFromComponent .arrayListItem_index,.genFromComponent .arrayListItem_operateTool{position:absolute;height:25px}.genFromComponent .arrayListItem_index{top:6px;line-height:18px;height:18px;padding:0 6px;background-color:rgba(0,0,0,.28);color:#fff;font-size:12px;border-radius:2px}.genFromComponent .arrayListItem_operateTool{width:75px;right:9px;top:-1px;text-align:right;font-size:0}.genFromComponent .arrayListItem_btn{vertical-align:top;display:inline-block;padding:6px;margin:0;font-size:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none;border:none;cursor:pointer;text-align:center;background:transparent;color:#666}.genFromComponent .arrayListItem_btn:hover{opacity:.6}.genFromComponent .arrayListItem_btn[disabled]{color:#999;opacity:.3!important;cursor:not-allowed}.genFromComponent .arrayListItem_orderBtn-bottom,.genFromComponent .arrayListItem_orderBtn-top{background-color:#f0f9eb}.genFromComponent .arrayListItem_btn-delete{background-color:#fef0f0}.genFromComponent .formFooter_item{text-align:right;border-top:1px solid rgba(0,0,0,.08);padding-top:10px}.genFromComponent.formInlineFooter>.fieldGroupWrap{display:inline-block;margin-right:10px}.genFromComponent.formInline .validateWidget{margin-right:0}.genFromComponent.formInline .formFooter_item{border-top:none;padding-top:0}.genFromWidget_des_mini{font-size:14px;line-height:1.5715}.layoutColumn .layoutColumn_w100{width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important}.layoutColumn .fieldGroupWrap_box{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-ms-flex-line-pack:start;align-content:flex-start}.layoutColumn .fieldGroupWrap_box>div{width:100%;-ms-flex-preferred-size:100%;flex-basis:100%}.layoutColumn .fieldGroupWrap_box>.genFormItem{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-webkit-box-sizing:border-box;box-sizing:border-box;padding-right:10px}.layoutColumn.layoutColumn-1 .fieldGroupWrap_box>.genFormItem{padding-right:0}.layoutColumn.layoutColumn-2 .fieldGroupWrap_box>.genFormItem{width:50%;-ms-flex-preferred-size:50%;flex-basis:50%}.layoutColumn.layoutColumn-3 .fieldGroupWrap_box>.genFormItem{width:33.333%;-ms-flex-preferred-size:33.333%;flex-basis:33.333%}";
+var css_248z = ".genFromComponent{font-size:14px;line-height:1;word-wrap:break-word;word-break:break-word;padding:0;margin:0}.genFromComponent a,.genFromComponent h1,.genFromComponent h2,.genFromComponent h3,.genFromComponent li,.genFromComponent p,.genFromComponent ul{font-size:14px}.genFromComponent .genFormIcon{width:12px;height:12px;vertical-align:top}.genFromComponent .genFormBtn{display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;background:#fff;border:1px solid #dcdfe6;color:#606266;-webkit-appearance:none;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;outline:none;margin:0;-webkit-transition:.1s;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:12px 20px;font-size:14px;border-radius:4px}.genFromComponent .genFormBtn.is-plain:focus,.genFromComponent .genFormBtn.is-plain:hover{background:#fff;border-color:#409eff;color:#409eff}.genFromComponent .hiddenWidget{display:none}.genFromComponent .fieldGroupWrap+.fieldGroupWrap .fieldGroupWrap_title{margin-top:20px}.genFromComponent .fieldGroupWrap_title{position:relative;display:block;width:100%;line-height:26px;margin-bottom:8px;font-size:15px;font-weight:700;border:0;color:inherit;color:var(--vjsf-label-color,inherit)}.genFromComponent .fieldGroupWrap_des{font-size:12px;line-height:20px;margin-bottom:10px;color:#000;color:var(--vjsf-description-color,#000)}.genFromComponent .genFormFieldRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box;margin-bottom:22px}.genFromComponent .genFormItem input,.genFromComponent .genFormItem textarea{background-color:#fff;background-color:var(--vjsf-background-color,#fff)}.genFromComponent .genFormFieldRow_widget{min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box}.genFromComponent .genFormFieldRow_widget>.el-form-item,.genFromComponent .genFormFieldRow_widget>.genFormItem{width:100%;margin-bottom:0}.genFromComponent .genFormWidgetRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0}.genFromComponent .genFormWidgetRow>:first-child{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow--block{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.genFromComponent .genFromWidget_des{padding:0 0 0 12px;margin:0;color:#000;color:var(--vjsf-description-color,#000);min-width:0}.genFromComponent .genFromWidget_des,.genFromComponent .genFromWidget_des2{font-size:12px;line-height:20px;text-align:left;-webkit-box-sizing:border-box;box-sizing:border-box;word-break:break-word}.genFromComponent .genFromWidget_des2{padding:0;margin-top:0;margin-bottom:2px;color:#999;color:var(--vjsf-description-color,#999);width:100%;-ms-flex-negative:0;flex-shrink:0}.genFromComponent .genFormWidgetRow--block .genFromWidget_des{margin:8px 0 0;padding:0;width:100%;max-width:100%}.genFromComponent.el-form--label-top .genFormFieldRow{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.genFromComponent.el-form--label-top .genFormFieldRow .genFromWidget_des{padding-bottom:10px}.genFromComponent .formItemErrorBox{margin:0 auto;color:#ff5757;padding-top:2px;position:absolute;top:100%;left:0;display:-webkit-box!important;line-height:16px;text-overflow:ellipsis;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:1;white-space:normal;font-size:12px;text-align:left}.genFromComponent .genFormIcon-qs{fill:#606266;vertical-align:middle;display:inline-block;width:16px;height:16px;margin-left:2px;margin-top:-2px;cursor:pointer}.genFromComponent .genFormItemRequired:before{content:\"*\";color:#f56c6c;margin-right:4px}.genFromComponent .appendCombining_box{margin-bottom:22px}.genFromComponent .vjsf-boxed{margin-bottom:22px;padding:10px;background:hsla(0,0%,94.9%,.8);background:var(--vjsf-background-color,hsla(0,0%,94.9%,.8));-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .vjsf-boxed .vjsf-boxed{margin-bottom:10px}.genFromComponent .vjsf-boxed .vjsf-boxed>.el-form-item,.genFromComponent .vjsf-boxed .vjsf-boxed>.genFormFieldRow_widget>.el-form-item{background:transparent;-webkit-box-shadow:none;box-shadow:none;padding:0}.genFromComponent .validateWidget{margin-bottom:0!important;width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important;padding:0!important}.genFromComponent .validateWidget .formItemErrorBox{padding:5px 0;position:relative}.genFromComponent .arrayField:not(.genFormItem){margin-bottom:22px}.genFromComponent .arrayField:not(.genFormItem) .arrayField{margin-bottom:10px}.genFromComponent .arrayOrderList_item{position:relative;padding:25px 10px 12px;border-radius:2px;margin-bottom:6px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.genFromComponent .arrayOrderList_bottomAddBtn{text-align:right;padding:15px 10px;margin-bottom:10px}.genFromComponent .bottomAddBtn{width:40%;min-width:10px;max-width:180px}.genFromComponent .arrayListItem_content{padding-top:15px;-webkit-box-flex:1;-ms-flex:1;flex:1;margin:0 auto;-webkit-box-shadow:0 -1px 0 0 rgba(0,0,0,.05);box-shadow:0 -1px 0 0 rgba(0,0,0,.05)}.genFromComponent .arrayListItem_index,.genFromComponent .arrayListItem_operateTool{position:absolute;height:25px}.genFromComponent .arrayListItem_index{top:6px;line-height:18px;height:18px;padding:0 6px;background-color:rgba(0,0,0,.28);color:#fff;font-size:12px;border-radius:2px}.genFromComponent .arrayListItem_operateTool{width:75px;right:9px;top:-1px;text-align:right;font-size:0}.genFromComponent .arrayListItem_btn{vertical-align:top;display:inline-block;padding:6px;margin:0;font-size:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none;border:none;cursor:pointer;text-align:center;background:transparent;color:#666}.genFromComponent .arrayListItem_btn:hover{opacity:.6}.genFromComponent .arrayListItem_btn[disabled]{color:#999;opacity:.3!important;cursor:not-allowed}.genFromComponent .arrayListItem_orderBtn-bottom,.genFromComponent .arrayListItem_orderBtn-top{background-color:#f0f9eb}.genFromComponent .arrayListItem_btn-delete{background-color:#fef0f0}.genFromComponent .formFooter_item{text-align:right;border-top:1px solid rgba(0,0,0,.08);padding-top:10px}.genFromComponent.formInlineFooter>.fieldGroupWrap{display:inline-block;margin-right:10px}.genFromComponent.formInline .validateWidget{margin-right:0}.genFromComponent.formInline .formFooter_item{border-top:none;padding-top:0}.genFromWidget_des_mini{font-size:14px;line-height:1.5715}:root{--width-column-gutter:10px}.layoutColumn .layoutColumn_w100{width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important}.layoutColumn .fieldGroupWrap_box{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-ms-flex-line-pack:start;align-content:flex-start}.layoutColumn .fieldGroupWrap_box>div{width:100%;-ms-flex-preferred-size:100%;flex-basis:100%}.layoutColumn .fieldGroupWrap_box>.genFormItem{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-webkit-box-sizing:border-box;box-sizing:border-box;padding-right:10px;padding-right:var(--width-column-gutter)}.layoutColumn.layoutColumn-1 .fieldGroupWrap_box>.genFormItem{padding-right:0}.layoutColumn.layoutColumn-2 .fieldGroupWrap_box>.genFormItem{width:50%;-ms-flex-preferred-size:50%;flex-basis:50%}.layoutColumn.layoutColumn-3 .fieldGroupWrap_box>.genFormItem{width:33.333%;-ms-flex-preferred-size:33.333%;flex-basis:33.333%}";
 styleInject(css_248z);
 
 /**
@@ -10263,6 +10227,12 @@ function toCssSize(value) {
   return String(value);
 }
 
+function toCssPx(value) {
+  if (value === undefined || value === null || value === '') return undefined;
+  if (typeof value === 'number') return "".concat(value, "px");
+  return String(value);
+}
+
 function resolveWidgetDesWidths(widgetWidth, descriptionWidth) {
   var widget = toCssSize(widgetWidth);
   var description = toCssSize(descriptionWidth);
@@ -10417,12 +10387,12 @@ var Widget = {
       type: String,
       default: undefined
     },
-    // 字段背景色，配合 ui:boxed 可做成 oneOf 附加区域那样的面板
+    // 字段背景色，配合 ui:boxed 可做成灰底面板
     backgroundColor: {
       type: String,
       default: undefined
     },
-    // 与 oneOf appendCombining_box 相同的灰底+阴影面板
+    // 灰底+阴影面板，需通过 ui:boxed 手动开启
     boxed: {
       type: Boolean,
       default: false
@@ -10556,6 +10526,8 @@ var Widget = {
     var descriptionColor = resolveUiColor$1(self.descriptionColor, self.formProps && self.formProps.descriptionColor);
     var backgroundColor = self.backgroundColor != null && self.backgroundColor !== '' ? self.backgroundColor : self.fieldStyle && (self.fieldStyle.backgroundColor || self.fieldStyle.background);
     var boxed = !!self.boxed;
+    var isAgentNumber = self.formProps && self.formProps.theme === 'agent' && self.widget === 'el-input-number';
+    var numberWidth = isAgentNumber ? toCssPx(self.width) : undefined;
     var itemLabelWidth = self.labelWidth != null && self.labelWidth !== '' ? self.labelWidth : self.formProps && self.formProps.labelWidth;
     var descriptionVNode = self.description ? h('div', {
       domProps: {
@@ -10599,10 +10571,12 @@ var Widget = {
       slot: 'reference'
     })]) : null; // form-item style
 
-    var formItemStyle = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, self.fieldStyle), self.width ? {
+    var formItemStyle = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, self.fieldStyle), self.width && !numberWidth ? {
       width: self.width,
       flexBasis: self.width,
       paddingRight: '10px'
+    } : {}), numberWidth ? {
+      '--vjsf-number-width': numberWidth
     } : {}), labelColor ? {
       '--vjsf-label-color': labelColor
     } : {}), descriptionColor ? {
@@ -10837,7 +10811,8 @@ var ObjectField = {
         labelColor = _getUiOptions.labelColor,
         descriptionColor = _getUiOptions.descriptionColor,
         backgroundColor = _getUiOptions.backgroundColor,
-        boxed = _getUiOptions.boxed;
+        boxed = _getUiOptions.boxed,
+        theme = _getUiOptions.theme;
 
     var properties = Object.keys(schema.properties || {});
     var orderedProperties = orderProperties(properties, order); // 递归参数
@@ -10875,7 +10850,8 @@ var ObjectField = {
         formProps: context.props.formProps
       },
       class: _objectSpread2(_objectSpread2(_objectSpread2({}, context.data.class), fieldClass), {}, {
-        'vjsf-boxed': boxed
+        'vjsf-boxed': boxed,
+        'vjsf-theme-agent': theme === 'agent'
       }),
       attrs: fieldAttrs,
       style: fieldStyle
@@ -11776,12 +11752,21 @@ var SelectLinkageField = {
           // 枚举参数
           widget: 'SelectWidget'
         };
-      }); // title description 回退到 schema 配置，但这里不使用 uiSchema配置
-      // select ui配置需要使用 (oneOf|anyOf)Select
+      }); // title / description / 颜色回退到当前 oneOf|anyOf 字段配置
+      // select 自身的 ui 仍走 (oneOf|anyOf)Select，但 labelColor 等需继承父级，否则全局 ui:labelColor 无法作用到下拉标题
 
+      var parentUiOptions = getUiOptions({
+        schema: this.schema,
+        uiSchema: this.uiSchema,
+        curNodePath: this.curNodePath,
+        rootFormData: this.rootFormData,
+        containsSpec: false
+      });
       selectWidgetConfig.label = selectWidgetConfig.label || this.schema.title;
       selectWidgetConfig.description = selectWidgetConfig.description || this.schema.description;
-      selectWidgetConfig.description2 = selectWidgetConfig.description2 || this.schema.description2; // 下拉列表枚举值
+      selectWidgetConfig.description2 = selectWidgetConfig.description2 || this.schema.description2;
+      selectWidgetConfig.labelColor = selectWidgetConfig.labelColor || parentUiOptions.labelColor;
+      selectWidgetConfig.descriptionColor = selectWidgetConfig.descriptionColor || parentUiOptions.descriptionColor; // 下拉列表枚举值
 
       if (!selectWidgetConfig.uiProps.enumOptions) {
         var uiSchemaSelectList = this.uiSchema[this.combiningType] || [];
@@ -11810,7 +11795,8 @@ var SelectLinkageField = {
           curValue: this.curSelectIndex,
           globalOptions: this.globalOptions,
           rootFormData: this.rootFormData,
-          curNodePath: this.curNodePath
+          curNodePath: this.curNodePath,
+          formProps: this.formProps
         }, selectWidgetConfig),
         on: {
           onOtherDataChange: function onOtherDataChange(event) {
@@ -11890,7 +11876,9 @@ var SelectLinkageField = {
         backgroundColor = _getUiOptions.backgroundColor,
         fieldStyle = _getUiOptions.fieldStyle,
         fieldClass = _getUiOptions.fieldClass,
-        boxed = _getUiOptions.boxed; // is object
+        boxed = _getUiOptions.boxed,
+        labelColor = _getUiOptions.labelColor,
+        descriptionColor = _getUiOptions.descriptionColor; // is object
 
 
     var isTypeObject = this.schema.type === 'object' || this.schema.properties; // 选择附加的节点
@@ -12006,9 +11994,13 @@ var SelectLinkageField = {
         appendCombining_box: true,
         'vjsf-boxed': boxed
       }, _defineProperty(_objectSpread2$1, "".concat(this.combiningType, "_appendBox"), true), _defineProperty(_objectSpread2$1, "".concat(pathClassName, "-appendBox"), true), _objectSpread2$1), fieldClass),
-      style: _objectSpread2(_objectSpread2({}, fieldStyle), backgroundColor ? {
+      style: _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, fieldStyle), backgroundColor ? {
         backgroundColor: backgroundColor,
         '--vjsf-background-color': backgroundColor
+      } : {}), labelColor ? {
+        '--vjsf-label-color': labelColor
+      } : {}), descriptionColor ? {
+        '--vjsf-description-color': descriptionColor
       } : {})
     }, childrenVNodeList)]);
   }
@@ -12255,8 +12247,8 @@ function createForm() {
       var _self$$props$formProp = self.$props.formProps,
           _self$$props$formProp2 = _self$$props$formProp.layoutColumn,
           layoutColumn = _self$$props$formProp2 === void 0 ? 1 : _self$$props$formProp2,
-          inlineFooter = _self$$props$formProp.inlineFooter;
-          _self$$props$formProp.labelSuffix;
+          inlineFooter = _self$$props$formProp.inlineFooter,
+          labelSuffix = _self$$props$formProp.labelSuffix;
           _self$$props$formProp.isMiniDes;
           _self$$props$formProp.defaultSelectFirstOption;
           _self$$props$formProp.popover;
@@ -12277,10 +12269,13 @@ function createForm() {
         rootFormData: this.formData
       });
       var resolvedLabelColor = labelColor !== null && labelColor !== void 0 ? labelColor : rootUiOptions.labelColor;
-      var resolvedDescriptionColor = descriptionColor !== null && descriptionColor !== void 0 ? descriptionColor : rootUiOptions.descriptionColor; // 根 schema 的 ui:labelWidth / ui:labelPosition 优先于 formProps，避免 demo 滑块等默认值盖掉 schema
+      var resolvedDescriptionColor = descriptionColor !== null && descriptionColor !== void 0 ? descriptionColor : rootUiOptions.descriptionColor;
+      var isAgentTheme = (rootUiOptions.theme || self.$props.formProps.theme) === 'agent'; // 根 schema 的 ui:labelWidth / ui:labelPosition 优先于 formProps，避免 demo 滑块等默认值盖掉 schema
+      // agent 是窄样式：未单独指定时使用左标签和 118px 标签列
 
-      var resolvedLabelWidth = (_rootUiOptions$labelW = rootUiOptions.labelWidth) !== null && _rootUiOptions$labelW !== void 0 ? _rootUiOptions$labelW : uiFormProps.labelWidth;
-      var resolvedLabelPosition = (_rootUiOptions$labelP = rootUiOptions.labelPosition) !== null && _rootUiOptions$labelP !== void 0 ? _rootUiOptions$labelP : labelPosition;
+      var resolvedLabelWidth = (_rootUiOptions$labelW = rootUiOptions.labelWidth) !== null && _rootUiOptions$labelW !== void 0 ? _rootUiOptions$labelW : isAgentTheme ? '118px' : uiFormProps.labelWidth;
+      var resolvedLabelPosition = (_rootUiOptions$labelP = rootUiOptions.labelPosition) !== null && _rootUiOptions$labelP !== void 0 ? _rootUiOptions$labelP : isAgentTheme ? 'left' : labelPosition;
+      var formWidth = rootUiOptions.width == null || rootUiOptions.width === '' ? undefined : typeof rootUiOptions.width === 'number' ? "".concat(rootUiOptions.width, "px") : String(rootUiOptions.width);
       var props = {
         schema: this.schema,
         uiSchema: this.uiSchema,
@@ -12294,7 +12289,7 @@ function createForm() {
         // 当前节点路径
         globalOptions: globalOptions,
         // 全局配置，差异化ui框架
-        formProps: _objectSpread2(_objectSpread2({
+        formProps: _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({
           labelSuffix: '：',
           defaultSelectFirstOption: true,
           inline: inline
@@ -12306,6 +12301,10 @@ function createForm() {
           labelPosition: resolvedLabelPosition
         }, resolvedLabelWidth != null && resolvedLabelWidth !== '' ? {
           labelWidth: resolvedLabelWidth
+        } : {}), isAgentTheme && labelSuffix == null ? {
+          labelSuffix: ''
+        } : {}), isAgentTheme ? {
+          theme: 'agent'
         } : {})
       };
       return h(globalOptions.COMPONENT_MAP.form, {
@@ -12313,11 +12312,16 @@ function createForm() {
           genFromComponent: true,
           formInlineFooter: inlineFooter,
           formInline: inline
-        }, _defineProperty(_class, "genFromComponent_".concat(this.schema.id, "Form"), !!this.schema.id), _defineProperty(_class, "layoutColumn", !inline), _defineProperty(_class, "layoutColumn-".concat(layoutColumn), !inline), _class),
-        style: _objectSpread2(_objectSpread2({}, resolvedLabelColor ? {
+        }, _defineProperty(_class, "genFromComponent_".concat(this.schema.id, "Form"), !!this.schema.id), _defineProperty(_class, "layoutColumn", !inline), _defineProperty(_class, "layoutColumn-".concat(layoutColumn), !inline), _defineProperty(_class, 'vjsf-theme-agent', isAgentTheme), _class),
+        style: _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, resolvedLabelColor ? {
           '--vjsf-label-color': resolvedLabelColor
         } : {}), resolvedDescriptionColor ? {
           '--vjsf-description-color': resolvedDescriptionColor
+        } : {}), isAgentTheme ? {
+          '--vjsf-agent-label': resolvedLabelWidth || '118px'
+        } : {}), formWidth ? {
+          width: formWidth,
+          boxSizing: 'border-box'
         } : {}),
         nativeOn: {
           submit: function submit(e) {
@@ -12975,132 +12979,75 @@ var TtsPreviewWidget = {
       a.click();
       document.body.removeChild(a);
     },
+    parsePreviewError: function parsePreviewError(response, contentType) {
+      var fallback = "\u8BD5\u542C\u5931\u8D25 (".concat(response.status, ")");
+
+      if (contentType.includes('application/json')) {
+        return response.json().then(function (data) {
+          if (data && data.detail) {
+            return typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail);
+          }
+
+          return fallback;
+        });
+      }
+
+      return response.text().then(function (text) {
+        return text ? text.slice(0, 200) : fallback;
+      });
+    },
     handlePreview: function handlePreview() {
       var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var response, contentType, detail, data, text, blob;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (_this.canPreview) {
-                  _context.next = 2;
-                  break;
-                }
+      if (!this.canPreview) {
+        return;
+      }
 
-                return _context.abrupt("return");
+      if (!this.ttsParams || _typeof(this.ttsParams) !== 'object') {
+        this.showError('缺少 TTS 配置，无法试听');
+        return;
+      }
 
-              case 2:
-                if (!(!_this.ttsParams || _typeof(_this.ttsParams) !== 'object')) {
-                  _context.next = 5;
-                  break;
-                }
+      this.loading = true;
+      this.revokeAudio();
+      fetch(this.action, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          text: String(this.value).trim(),
+          tts: this.ttsParams
+        })
+      }).then(function (response) {
+        var contentType = (response.headers.get('content-type') || '').toLowerCase();
 
-                _this.showError('缺少 TTS 配置，无法试听');
+        if (!response.ok) {
+          return _this.parsePreviewError(response, contentType).then(function (detail) {
+            throw new Error(detail);
+          });
+        }
 
-                return _context.abrupt("return");
+        if (!contentType.startsWith('audio/')) {
+          throw new Error('试听接口未返回音频');
+        }
 
-              case 5:
-                _this.loading = true;
-
-                _this.revokeAudio();
-
-                _context.prev = 7;
-                _context.next = 10;
-                return fetch(_this.action, {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    text: String(_this.value).trim(),
-                    tts: _this.ttsParams
-                  })
-                });
-
-              case 10:
-                response = _context.sent;
-                contentType = (response.headers.get('content-type') || '').toLowerCase();
-
-                if (response.ok) {
-                  _context.next = 26;
-                  break;
-                }
-
-                detail = "\u8BD5\u542C\u5931\u8D25 (".concat(response.status, ")");
-
-                if (!contentType.includes('application/json')) {
-                  _context.next = 21;
-                  break;
-                }
-
-                _context.next = 17;
-                return response.json();
-
-              case 17:
-                data = _context.sent;
-
-                if (data && data.detail) {
-                  detail = typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail);
-                }
-
-                _context.next = 25;
-                break;
-
-              case 21:
-                _context.next = 23;
-                return response.text();
-
-              case 23:
-                text = _context.sent;
-                if (text) detail = text.slice(0, 200);
-
-              case 25:
-                throw new Error(detail);
-
-              case 26:
-                if (contentType.startsWith('audio/')) {
-                  _context.next = 28;
-                  break;
-                }
-
-                throw new Error('试听接口未返回音频');
-
-              case 28:
-                _context.next = 30;
-                return response.blob();
-
-              case 30:
-                blob = _context.sent;
-                _this.downloadName = buildTtsDownloadName(_this.ttsParams, guessExt(contentType), _this.providerSchema);
-                _this.audioUrl = URL.createObjectURL(blob);
-                _this.audio = new Audio(_this.audioUrl);
-                _context.next = 36;
-                return _this.audio.play();
-
-              case 36:
-                _context.next = 41;
-                break;
-
-              case 38:
-                _context.prev = 38;
-                _context.t0 = _context["catch"](7);
-
-                _this.showError(_context.t0 && _context.t0.message || '试听失败');
-
-              case 41:
-                _context.prev = 41;
-                _this.loading = false;
-                return _context.finish(41);
-
-              case 44:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[7, 38, 41, 44]]);
-      }))();
+        return response.blob().then(function (blob) {
+          return {
+            blob: blob,
+            contentType: contentType
+          };
+        });
+      }).then(function (result) {
+        _this.downloadName = buildTtsDownloadName(_this.ttsParams, guessExt(result.contentType), _this.providerSchema);
+        _this.audioUrl = URL.createObjectURL(result.blob);
+        _this.audio = new Audio(_this.audioUrl);
+        return _this.audio.play();
+      }).catch(function (err) {
+        _this.showError(err && err.message || '试听失败');
+      }).then(function () {
+        _this.loading = false;
+      });
     }
   },
   render: function render() {
@@ -13152,6 +13099,505 @@ var TtsPreviewWidget = {
 };
 
 /**
+ * 模版下拉 + 「应用模版」按钮：按 schema 中的 fillByKey 回填兄弟字段。
+ *
+ * 需通过 schema / uiSchema 配置：
+ * - ui:fillByKey 各选项对应的回填对象，如 { qingyun_cs: { system_prompt, probability, temperature } }
+ * - ui:fillFields 要点击后写入的字段名列表
+ * - ui:parentFormData 当前父级表单对象（可用 {{ parentFormData }}）
+ * - ui:btnText 按钮文案
+ */
+var TemplateApplySelectWidget = {
+  name: 'TemplateApplySelectWidget',
+  props: {
+    value: {
+      type: [String, Number],
+      default: ''
+    },
+    enumOptions: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    fillByKey: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    fillFields: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    parentFormData: {
+      type: Object,
+      default: null
+    },
+    btnText: {
+      type: String,
+      default: '应用模版'
+    },
+    placeholder: {
+      type: String,
+      default: '请选择'
+    }
+  },
+  computed: {
+    currentPayload: function currentPayload() {
+      if (!this.fillByKey || this.value === undefined || this.value === null) {
+        return {};
+      }
+
+      var payload = this.fillByKey[this.value];
+      return payload && _typeof(payload) === 'object' ? payload : {};
+    },
+    canApply: function canApply() {
+      var _this = this;
+
+      if (!this.parentFormData || !this.fillFields || !this.fillFields.length) {
+        return false;
+      }
+
+      return this.fillFields.some(function (field) {
+        return _this.currentPayload[field] !== undefined;
+      });
+    }
+  },
+  methods: {
+    handleApply: function handleApply() {
+      var _this2 = this;
+
+      if (!this.canApply) return;
+      this.fillFields.forEach(function (field) {
+        if (_this2.currentPayload[field] !== undefined) {
+          _this2.$set(_this2.parentFormData, field, _this2.currentPayload[field]);
+        }
+      });
+    }
+  },
+  render: function render() {
+    var _this3 = this;
+
+    var h = this.$createElement;
+    return h('div', {
+      style: {
+        display: 'flex',
+        gap: '8px',
+        alignItems: 'center',
+        width: '100%'
+      }
+    }, [h('el-select', {
+      style: {
+        flex: '1 1 auto'
+      },
+      props: {
+        value: this.value,
+        placeholder: this.placeholder
+      },
+      on: {
+        input: function input(val) {
+          return _this3.$emit('input', val);
+        }
+      }
+    }, (this.enumOptions || []).map(function (item, index) {
+      return h('el-option', {
+        key: index,
+        props: {
+          label: item.label,
+          value: item.value
+        }
+      });
+    })), h('el-button', {
+      props: {
+        type: 'primary',
+        disabled: !this.canApply
+      },
+      on: {
+        click: this.handleApply
+      }
+    }, [this.btnText])]);
+  }
+};
+
+/**
+ * 背景音下拉 + 试听：按当前选中 key 请求后端音频并播放。
+ *
+ * 需通过 schema / uiSchema 配置：
+ * - ui:action 试听接口地址（必填，否则按钮禁用）
+ * - ui:parentFormData 当前父级表单（读 volume，可用 {{ parentFormData }}）
+ * - ui:btnText 试听按钮文案
+ * - ui:stopBtnText 播放中停止按钮文案
+ *
+ * 请求约定：GET {action}?key={value}，成功时返回 audio/*
+ */
+function buildPreviewUrl(action, key) {
+  var sep = action.indexOf('?') >= 0 ? '&' : '?';
+  return "".concat(action).concat(sep, "key=").concat(encodeURIComponent(key));
+}
+
+function isAbortError(err) {
+  return Boolean(err && (err.name === 'AbortError' || err.code === 20));
+}
+
+function clamp01(value) {
+  return Math.max(0, Math.min(1, value));
+}
+
+function getAudioContextCtor() {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  return window.AudioContext || window.webkitAudioContext || null;
+}
+
+function resumeAudioContext(ctx) {
+  if (ctx && ctx.state === 'suspended' && typeof ctx.resume === 'function') {
+    return ctx.resume();
+  }
+
+  return Promise.resolve();
+}
+
+var BackgroundAudioPreviewWidget = {
+  name: 'BackgroundAudioPreviewWidget',
+  props: {
+    value: {
+      type: [String, Number],
+      default: ''
+    },
+    enumOptions: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    action: {
+      type: String,
+      default: ''
+    },
+    btnText: {
+      type: String,
+      default: '试听'
+    },
+    stopBtnText: {
+      type: String,
+      default: '停止'
+    },
+    placeholder: {
+      type: String,
+      default: '请选择'
+    },
+    parentFormData: {
+      type: Object,
+      default: null
+    }
+  },
+  data: function data() {
+    return {
+      loading: false,
+      playing: false,
+      audioUrl: null,
+      audio: null,
+      abortController: null,
+      audioContext: null,
+      mediaSource: null,
+      gainNode: null
+    };
+  },
+  computed: {
+    selectedKey: function selectedKey() {
+      if (this.value === undefined || this.value === null) {
+        return '';
+      }
+
+      return String(this.value).trim();
+    },
+    currentVolume: function currentVolume() {
+      var raw = this.parentFormData && this.parentFormData.volume;
+      var n = Number(raw);
+
+      if (!Number.isFinite(n)) {
+        return 1;
+      }
+
+      return Math.max(0, n);
+    },
+    currentBtnText: function currentBtnText() {
+      return this.playing ? this.stopBtnText : this.btnText;
+    },
+    canStart: function canStart() {
+      return Boolean(this.action && !this.loading && !this.playing && this.selectedKey);
+    }
+  },
+  watch: {
+    value: function value() {
+      this.stopPreview();
+    },
+    currentVolume: function currentVolume() {
+      this.applyVolume();
+    }
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.stopPreview();
+
+    if (this.audioContext && typeof this.audioContext.close === 'function') {
+      this.audioContext.close();
+      this.audioContext = null;
+    }
+  },
+  methods: {
+    bindAudioEvents: function bindAudioEvents(audio) {
+      audio.addEventListener('ended', this.onAudioEnded);
+      audio.addEventListener('pause', this.onAudioPause);
+    },
+    unbindAudioEvents: function unbindAudioEvents(audio) {
+      audio.removeEventListener('ended', this.onAudioEnded);
+      audio.removeEventListener('pause', this.onAudioPause);
+    },
+    disconnectGain: function disconnectGain() {
+      if (this.mediaSource) {
+        try {
+          this.mediaSource.disconnect();
+        } catch (e) {// ignore
+        }
+
+        this.mediaSource = null;
+      }
+
+      if (this.gainNode) {
+        try {
+          this.gainNode.disconnect();
+        } catch (e) {// ignore
+        }
+
+        this.gainNode = null;
+      }
+    },
+    applyVolume: function applyVolume() {
+      if (this.gainNode) {
+        this.gainNode.gain.value = this.currentVolume;
+
+        if (this.audio) {
+          this.audio.volume = 1;
+        }
+
+        return;
+      }
+
+      if (this.audio) {
+        this.audio.volume = clamp01(this.currentVolume);
+      }
+    },
+    connectGain: function connectGain(audio) {
+      var Ctx = getAudioContextCtor();
+
+      if (!Ctx) {
+        this.applyVolume();
+        return Promise.resolve();
+      }
+
+      if (!this.audioContext) {
+        this.audioContext = new Ctx();
+      }
+
+      this.disconnectGain();
+      audio.volume = 1;
+      this.mediaSource = this.audioContext.createMediaElementSource(audio);
+      this.gainNode = this.audioContext.createGain();
+      this.gainNode.gain.value = this.currentVolume;
+      this.mediaSource.connect(this.gainNode);
+      this.gainNode.connect(this.audioContext.destination);
+      return resumeAudioContext(this.audioContext);
+    },
+    revokeAudio: function revokeAudio() {
+      if (this.audio) {
+        this.unbindAudioEvents(this.audio);
+        this.audio.pause();
+        this.audio = null;
+      }
+
+      this.disconnectGain();
+
+      if (this.audioUrl) {
+        URL.revokeObjectURL(this.audioUrl);
+        this.audioUrl = null;
+      }
+
+      this.playing = false;
+    },
+    abortRequest: function abortRequest() {
+      if (this.abortController) {
+        this.abortController.abort();
+        this.abortController = null;
+      }
+    },
+    stopPreview: function stopPreview() {
+      this.abortRequest();
+      this.revokeAudio();
+      this.loading = false;
+    },
+    onAudioEnded: function onAudioEnded() {
+      this.playing = false;
+      this.revokeAudio();
+    },
+    onAudioPause: function onAudioPause() {
+      if (this.audio && this.audio.ended) {
+        return;
+      }
+
+      this.playing = false;
+    },
+    showError: function showError(message) {
+      if (this.$message) {
+        this.$message.error(message);
+      } else {
+        // eslint-disable-next-line no-console
+        console.error(message);
+      }
+    },
+    parsePreviewError: function parsePreviewError(response, contentType) {
+      var fallback = "\u8BD5\u542C\u5931\u8D25 (".concat(response.status, ")");
+
+      if (contentType.includes('application/json')) {
+        return response.json().then(function (data) {
+          if (data && data.detail) {
+            return typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail);
+          }
+
+          return fallback;
+        });
+      }
+
+      return response.text().then(function (text) {
+        return text ? text.slice(0, 200) : fallback;
+      });
+    },
+    handleClick: function handleClick() {
+      if (this.playing) {
+        this.stopPreview();
+        return;
+      }
+
+      this.handlePreview();
+    },
+    handlePreview: function handlePreview() {
+      var _this = this;
+
+      if (!this.canStart) {
+        return;
+      }
+
+      this.stopPreview();
+      this.loading = true;
+      var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      this.abortController = controller;
+      var request = controller ? {
+        method: 'GET',
+        signal: controller.signal
+      } : {
+        method: 'GET'
+      };
+      fetch(buildPreviewUrl(this.action, this.selectedKey), request).then(function (response) {
+        var contentType = (response.headers.get('content-type') || '').toLowerCase();
+
+        if (!response.ok) {
+          return _this.parsePreviewError(response, contentType).then(function (detail) {
+            throw new Error(detail);
+          });
+        }
+
+        if (!contentType.startsWith('audio/')) {
+          throw new Error('试听接口未返回音频');
+        }
+
+        return response.blob();
+      }).then(function (blob) {
+        if (controller && _this.abortController !== controller) {
+          return null;
+        }
+
+        _this.audioUrl = URL.createObjectURL(blob);
+        _this.audio = new Audio(_this.audioUrl);
+
+        _this.bindAudioEvents(_this.audio);
+
+        return _this.connectGain(_this.audio).then(function () {
+          if (!_this.audio) {
+            return null;
+          }
+
+          return _this.audio.play();
+        }).then(function () {
+          if (_this.audio) {
+            _this.playing = true;
+          }
+        });
+      }).catch(function (err) {
+        if (isAbortError(err)) {
+          return;
+        }
+
+        _this.showError(err && err.message || '试听失败');
+
+        _this.playing = false;
+      }).then(function () {
+        if (!controller || _this.abortController === controller) {
+          _this.loading = false;
+          _this.abortController = null;
+        }
+      });
+    }
+  },
+  render: function render() {
+    var _this2 = this;
+
+    var h = this.$createElement;
+    return h('div', {
+      style: {
+        display: 'flex',
+        gap: '8px',
+        alignItems: 'center',
+        width: '100%'
+      }
+    }, [h('el-select', {
+      style: {
+        flex: '1 1 auto'
+      },
+      props: {
+        value: this.value,
+        placeholder: this.placeholder
+      },
+      on: {
+        input: function input(val) {
+          return _this2.$emit('input', val);
+        }
+      }
+    }, (this.enumOptions || []).map(function (item, index) {
+      return h('el-option', {
+        key: index,
+        props: {
+          label: item.label,
+          value: item.value
+        }
+      });
+    })), h('el-button', {
+      props: {
+        type: this.playing ? 'default' : 'primary',
+        loading: this.loading,
+        disabled: !this.playing && !this.canStart
+      },
+      on: {
+        click: this.handleClick
+      }
+    }, [this.currentBtnText])]);
+  }
+};
+
+/**
  * Created by Liu.Jun on 2020/5/17 10:41 下午.
  */
 // const files = require.context('.', true, /\.js|vue$/);
@@ -13170,7 +13616,9 @@ var widgetComponents = {
   DatePickerWidget: DatePickerWidget,
   DateTimePickerWidget: DateTimePickerWidget,
   UploadWidget: UploadWidget,
-  TtsPreviewWidget: TtsPreviewWidget
+  TtsPreviewWidget: TtsPreviewWidget,
+  TemplateApplySelectWidget: TemplateApplySelectWidget,
+  BackgroundAudioPreviewWidget: BackgroundAudioPreviewWidget
 };
 
 /**
@@ -13206,7 +13654,7 @@ var WIDGET_MAP = {
   widgetComponents: widgetComponents
 };
 
-var css_248z$1 = ".genFromComponent.el-form--label-top .el-form-item__label{line-height:26px;padding-bottom:6px;font-size:14px}.genFromComponent .el-form-item__label{color:#606266}.genFromComponent .el-form-item__label .genFormLabel{color:inherit}.genFromComponent .genFormItem .el-input__inner,.genFromComponent .genFormItem .el-textarea__inner{background-color:#fff}.genFromComponent .el-checkbox,.genFromComponent .el-color-picker{vertical-align:top}.genFromComponent .genFormWidgetRow .el-cascader,.genFromComponent .genFormWidgetRow .el-date-editor,.genFromComponent .genFormWidgetRow .el-input,.genFromComponent .genFormWidgetRow .el-select,.genFromComponent .genFormWidgetRow .el-slider,.genFromComponent .genFormWidgetRow .el-textarea{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow .el-input-number{-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto}.genFromComponent .genFormFieldRow_widget .el-cascader,.genFromComponent .genFormFieldRow_widget .el-date-editor,.genFromComponent .genFormFieldRow_widget .el-input,.genFromComponent .genFormFieldRow_widget .el-select,.genFromComponent .genFormFieldRow_widget .el-slider,.genFromComponent .genFormFieldRow_widget .el-textarea{width:100%}";
+var css_248z$1 = ".genFromComponent.el-form--label-top .el-form-item__label{line-height:26px;padding-bottom:6px;font-size:14px}.genFromComponent .el-form-item__label{color:#606266;color:var(--vjsf-label-color,#606266)}.genFromComponent .el-form-item__label .genFormLabel{color:inherit;color:var(--vjsf-label-color,inherit)}.genFromComponent .genFormItem .el-input__inner,.genFromComponent .genFormItem .el-textarea__inner{background-color:#fff;background-color:var(--vjsf-background-color,#fff)}.genFromComponent .el-checkbox,.genFromComponent .el-color-picker{vertical-align:top}.genFromComponent .genFormWidgetRow .el-cascader,.genFromComponent .genFormWidgetRow .el-date-editor,.genFromComponent .genFormWidgetRow .el-input,.genFromComponent .genFormWidgetRow .el-select,.genFromComponent .genFormWidgetRow .el-slider,.genFromComponent .genFormWidgetRow .el-textarea{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow .el-input-number{-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto}.genFromComponent .genFormFieldRow_widget .el-cascader,.genFromComponent .genFormFieldRow_widget .el-date-editor,.genFromComponent .genFormFieldRow_widget .el-input,.genFromComponent .genFormFieldRow_widget .el-select,.genFromComponent .genFormFieldRow_widget .el-slider,.genFromComponent .genFormFieldRow_widget .el-textarea{width:100%}.vjsf-theme-agent{--vjsf-agent-label:118px;--vjsf-agent-ink:#243044;--vjsf-agent-secondary:#6f7e92;--vjsf-agent-border:#e4e9f0;--vjsf-agent-input-border:#dce3ed;--vjsf-agent-primary:#315ee8;--vjsf-agent-header:#fafbfd;max-width:100%;color:var(--vjsf-agent-ink);font-family:Inter,PingFang SC,Microsoft YaHei,sans-serif;font-size:12px}.vjsf-theme-agent,.vjsf-theme-agent *,.vjsf-theme-agent :after,.vjsf-theme-agent :before{-webkit-box-sizing:border-box;box-sizing:border-box}.vjsf-theme-agent.fieldGroupWrap:has(>.fieldGroupWrap_title),.vjsf-theme-agent .fieldGroupWrap:has(>.fieldGroupWrap_title){display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;margin:8px 0;border:1px solid var(--vjsf-agent-border);border-radius:8px;background:#fff;overflow:hidden}.vjsf-theme-agent .fieldGroupWrap+.fieldGroupWrap .fieldGroupWrap_title{margin-top:0}.vjsf-theme-agent.fieldGroupWrap:has(>.fieldGroupWrap_title)>.fieldGroupWrap_title,.vjsf-theme-agent .fieldGroupWrap:has(>.fieldGroupWrap_title)>.fieldGroupWrap_title{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:auto;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto;min-height:38px;margin:0;padding:0 10px;line-height:38px;font-size:12px;font-weight:600;color:#43536a;background:var(--vjsf-agent-header);border:0}.vjsf-theme-agent.fieldGroupWrap:has(>.fieldGroupWrap_title)>.fieldGroupWrap_des,.vjsf-theme-agent .fieldGroupWrap:has(>.fieldGroupWrap_title)>.fieldGroupWrap_des{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-height:38px;margin:0;padding:0 10px 0 0;line-height:1.4;font-size:12px;font-weight:400;color:#98a4b4;background:var(--vjsf-agent-header)}.vjsf-theme-agent .el-checkbox-group,.vjsf-theme-agent .el-form-item.genFormItem,.vjsf-theme-agent .el-form-item__content,.vjsf-theme-agent .el-input,.vjsf-theme-agent .el-input-number,.vjsf-theme-agent .el-radio-group,.vjsf-theme-agent .el-select,.vjsf-theme-agent .el-slider,.vjsf-theme-agent .el-textarea,.vjsf-theme-agent .fieldGroupWrap,.vjsf-theme-agent .fieldGroupWrap_box{max-width:100%;min-width:0}.vjsf-theme-agent.fieldGroupWrap:has(>.fieldGroupWrap_title)>.fieldGroupWrap_box,.vjsf-theme-agent .fieldGroupWrap:has(>.fieldGroupWrap_title)>.fieldGroupWrap_box{width:100%;max-width:100%;-webkit-box-flex:1;-ms-flex:1 1 100%;flex:1 1 100%;min-width:0;padding:2px 10px 11px;border-top:1px solid #edf0f4}.vjsf-theme-agent .el-form-item.genFormItem{display:grid;grid-template-columns:var(--vjsf-agent-label) minmax(0,1fr);gap:9px;-webkit-box-align:center;-ms-flex-align:center;align-items:center;min-height:39px;margin-bottom:0;font-size:12px}.vjsf-theme-agent .el-form-item.genFormItem.validateWidget:not(.is-error){display:none;min-height:0}.vjsf-theme-agent .el-form-item.genFormItem.validateWidget.is-error{display:block;min-height:0;height:auto}.vjsf-theme-agent .el-form-item.genFormItem.validateWidget .el-form-item__error{position:static}.vjsf-theme-agent .el-form-item.genFormItem:after,.vjsf-theme-agent .el-form-item.genFormItem:before{display:none;content:none}.vjsf-theme-agent .el-form-item__label{grid-column:1;grid-row:1;float:none!important;width:auto!important;height:auto;line-height:1.4!important;padding:0!important;text-align:left;color:var(--vjsf-agent-secondary);font-size:12px}.vjsf-theme-agent .el-form-item__content{grid-column:2;grid-row:1;margin-left:0!important;line-height:32px;font-size:12px;min-width:0}.vjsf-theme-agent .el-form-item:has(.el-textarea){grid-template-columns:minmax(0,1fr);-webkit-box-align:start;-ms-flex-align:start;align-items:start}.vjsf-theme-agent .el-form-item:has(.el-textarea) .el-form-item__label{grid-column:1;grid-row:1;margin-top:7px}.vjsf-theme-agent .el-form-item:has(.el-textarea) .el-form-item__content{grid-column:1;grid-row:2}.vjsf-theme-agent .el-input__inner,.vjsf-theme-agent .el-textarea__inner{border:1px solid var(--vjsf-agent-input-border);border-radius:7px;color:#405169;font-size:12px;background:#fff}.vjsf-theme-agent .el-input__inner{height:32px;line-height:32px;padding:0 8px}.vjsf-theme-agent .el-textarea__inner{min-height:58px;padding:7px 8px;line-height:1.55}.vjsf-theme-agent .el-input__inner:focus,.vjsf-theme-agent .el-textarea__inner:focus{border-color:#8ca5ef}.vjsf-theme-agent .el-form-item:has(.el-switch) .el-form-item__content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}.vjsf-theme-agent .el-switch__core{width:36px!important;height:20px;border:0;border-radius:10px;background:#d8dee8}.vjsf-theme-agent .el-switch__core:after{width:16px;height:16px;top:2px;left:2px;-webkit-box-shadow:0 1px 3px rgba(32,48,68,.18824);box-shadow:0 1px 3px rgba(32,48,68,.18824)}.vjsf-theme-agent .el-switch.is-checked .el-switch__core{background:var(--vjsf-agent-primary);border-color:var(--vjsf-agent-primary)}.vjsf-theme-agent .el-switch.is-checked .el-switch__core:after{margin-left:-18px}.vjsf-theme-agent .el-input-number{width:200px;width:var(--vjsf-number-width,200px);line-height:30px}.vjsf-theme-agent .el-input-number .el-input__inner{height:32px;line-height:32px;padding-left:38px;padding-right:38px;text-align:center}.vjsf-theme-agent .el-input-number__decrease,.vjsf-theme-agent .el-input-number__increase{width:38px;height:30px;background:#fff;color:#536176;font-size:16px;border-color:#e1e7ef}.vjsf-theme-agent .el-checkbox,.vjsf-theme-agent .el-radio{font-size:12px;color:#405169;margin-right:12px}.vjsf-theme-agent .el-checkbox__input.is-checked .el-checkbox__inner,.vjsf-theme-agent .el-radio__input.is-checked .el-radio__inner{border-color:var(--vjsf-agent-primary);background:var(--vjsf-agent-primary)}.vjsf-theme-agent .el-checkbox__input.is-checked+.el-checkbox__label,.vjsf-theme-agent .el-radio__input.is-checked+.el-radio__label{color:var(--vjsf-agent-primary)}.vjsf-theme-agent .el-slider__bar{background-color:var(--vjsf-agent-primary)}.vjsf-theme-agent .el-slider__button{border-color:var(--vjsf-agent-primary)}.vjsf-theme-agent .el-button{min-height:30px;padding:0 9px;border-radius:8px;border-color:#d7dee8;font-size:12px;font-weight:500}.vjsf-theme-agent .el-button--primary{color:#fff;border-color:var(--vjsf-agent-primary);background:var(--vjsf-agent-primary)}.vjsf-theme-agent .el-button--primary:focus,.vjsf-theme-agent .el-button--primary:hover{background:#244ed1;border-color:#244ed1}.vjsf-theme-agent .genFormFieldRow{display:block;margin-bottom:0}.vjsf-theme-agent .genFormFieldRow_widget,.vjsf-theme-agent .genFormFieldRow_widget>.el-form-item{width:100%!important;-webkit-box-flex:0!important;-ms-flex:none!important;flex:none!important}.vjsf-theme-agent .genFromWidget_des{width:auto!important;-webkit-box-flex:0!important;-ms-flex:none!important;flex:none!important;margin:0;padding:0 0 4px var(--vjsf-agent-label);color:#98a4b4;font-size:12px;line-height:1.4}.vjsf-theme-agent .genFormFieldRow:has(.el-textarea) .genFromWidget_des{padding-left:0}.vjsf-theme-agent .formItemErrorBox{position:static;padding-top:2px;color:#cf3d4f}.vjsf-theme-agent .arrayField:not(.genFormItem),.vjsf-theme-agent .arrayOrderList_item{border:1px solid var(--vjsf-agent-border);border-radius:8px;background:#fff}.vjsf-theme-agent .arrayOrderList_item{padding:8px 10px 4px;margin-bottom:8px}.vjsf-theme-agent .arrayListItem_index{background:#eef3ff;color:var(--vjsf-agent-primary);border-radius:6px}.vjsf-theme-agent .vjsf-boxed{background:#fff;-webkit-box-shadow:none;box-shadow:none;border:1px solid var(--vjsf-agent-border);border-radius:8px}.vjsf-theme-agent .formFooter_item{border-top:1px solid #e7ebf1;padding-top:10px}";
 styleInject(css_248z$1);
 
 /**
