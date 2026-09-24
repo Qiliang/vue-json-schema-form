@@ -45,3 +45,297 @@
         }
     }
 }
+
+/* ui:theme = agent，窄样式，对齐画布调试参考界面的表单 */
+.vjsf-theme-agent {
+    --vjsf-agent-label: 118px;
+    --vjsf-agent-ink: #243044;
+    --vjsf-agent-secondary: #6f7e92;
+    --vjsf-agent-border: #e4e9f0;
+    --vjsf-agent-input-border: #dce3ed;
+    --vjsf-agent-primary: #315ee8;
+    --vjsf-agent-header: #fafbfd;
+    box-sizing: border-box;
+    max-width: 100%;
+    color: var(--vjsf-agent-ink);
+    font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 12px;
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+
+    .fieldGroupWrap:has(> .fieldGroupWrap_title),
+    &.fieldGroupWrap:has(> .fieldGroupWrap_title) {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        margin: 8px 0;
+        border: 1px solid var(--vjsf-agent-border);
+        border-radius: 8px;
+        background: #fff;
+        overflow: hidden;
+    }
+    .fieldGroupWrap + .fieldGroupWrap .fieldGroupWrap_title {
+        margin-top: 0;
+    }
+    .fieldGroupWrap:has(> .fieldGroupWrap_title) > .fieldGroupWrap_title,
+    &.fieldGroupWrap:has(> .fieldGroupWrap_title) > .fieldGroupWrap_title {
+        display: flex;
+        align-items: center;
+        width: auto;
+        flex: 0 0 auto;
+        min-height: 38px;
+        margin: 0;
+        padding: 0 10px;
+        line-height: 38px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #43536a;
+        background: var(--vjsf-agent-header);
+        border: 0;
+    }
+    .fieldGroupWrap:has(> .fieldGroupWrap_title) > .fieldGroupWrap_des,
+    &.fieldGroupWrap:has(> .fieldGroupWrap_title) > .fieldGroupWrap_des {
+        display: flex;
+        align-items: center;
+        flex: 1 1 auto;
+        min-height: 38px;
+        margin: 0;
+        padding: 0 10px 0 0;
+        line-height: 1.4;
+        font-size: 12px;
+        font-weight: 400;
+        color: #98a4b4;
+        background: var(--vjsf-agent-header);
+    }
+    .fieldGroupWrap,
+    .fieldGroupWrap_box,
+    .el-form-item.genFormItem,
+    .el-form-item__content,
+    .el-input,
+    .el-select,
+    .el-textarea,
+    .el-input-number,
+    .el-slider,
+    .el-radio-group,
+    .el-checkbox-group {
+        max-width: 100%;
+        min-width: 0;
+    }
+    .fieldGroupWrap:has(> .fieldGroupWrap_title) > .fieldGroupWrap_box,
+    &.fieldGroupWrap:has(> .fieldGroupWrap_title) > .fieldGroupWrap_box {
+        width: 100%;
+        max-width: 100%;
+        flex: 1 1 100%;
+        min-width: 0;
+        padding: 2px 10px 11px;
+        border-top: 1px solid #edf0f4;
+    }
+    .el-form-item.genFormItem {
+        display: grid;
+        grid-template-columns: var(--vjsf-agent-label) minmax(0, 1fr);
+        gap: 9px;
+        align-items: center;
+        min-height: 39px;
+        margin-bottom: 0;
+        font-size: 12px;
+    }
+    .el-form-item.genFormItem:before,
+    .el-form-item.genFormItem:after {
+        display: none;
+        content: none;
+    }
+    .el-form-item__label {
+        grid-column: 1;
+        grid-row: 1;
+        float: none !important;
+        width: auto !important;
+        height: auto;
+        line-height: 1.4 !important;
+        padding: 0 !important;
+        text-align: left;
+        color: var(--vjsf-agent-secondary);
+        font-size: 12px;
+    }
+    .el-form-item__content {
+        grid-column: 2;
+        grid-row: 1;
+        margin-left: 0 !important;
+        line-height: 32px;
+        font-size: 12px;
+        min-width: 0;
+    }
+    .el-form-item:has(.el-textarea) {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: start;
+    }
+    .el-form-item:has(.el-textarea) .el-form-item__label {
+        grid-column: 1;
+        grid-row: 1;
+        margin-top: 7px;
+    }
+    .el-form-item:has(.el-textarea) .el-form-item__content {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .el-input__inner,
+    .el-textarea__inner {
+        border: 1px solid var(--vjsf-agent-input-border);
+        border-radius: 7px;
+        color: #405169;
+        font-size: 12px;
+        background: #fff;
+    }
+    .el-input__inner {
+        height: 32px;
+        line-height: 32px;
+        padding: 0 8px;
+    }
+    .el-textarea__inner {
+        min-height: 58px;
+        padding: 7px 8px;
+        line-height: 1.55;
+    }
+    .el-input__inner:focus,
+    .el-textarea__inner:focus {
+        border-color: #8ca5ef;
+    }
+    .el-form-item:has(.el-switch) .el-form-item__content {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .el-switch__core {
+        width: 36px !important;
+        height: 20px;
+        border: 0;
+        border-radius: 10px;
+        background: #d8dee8;
+    }
+    .el-switch__core:after {
+        width: 16px;
+        height: 16px;
+        top: 2px;
+        left: 2px;
+        box-shadow: 0 1px 3px #20304430;
+    }
+    .el-switch.is-checked .el-switch__core {
+        background: var(--vjsf-agent-primary);
+        border-color: var(--vjsf-agent-primary);
+    }
+    .el-switch.is-checked .el-switch__core:after {
+        margin-left: -18px;
+    }
+    .el-input-number {
+        width: 100%;
+        line-height: 30px;
+    }
+    .el-input-number .el-input__inner {
+        height: 32px;
+        line-height: 32px;
+        padding-left: 38px;
+        padding-right: 38px;
+        text-align: center;
+    }
+    .el-input-number__decrease,
+    .el-input-number__increase {
+        width: 38px;
+        height: 30px;
+        background: #fff;
+        color: #536176;
+        font-size: 16px;
+        border-color: #e1e7ef;
+    }
+    .el-radio,
+    .el-checkbox {
+        font-size: 12px;
+        color: #405169;
+        margin-right: 12px;
+    }
+    .el-radio__input.is-checked .el-radio__inner,
+    .el-checkbox__input.is-checked .el-checkbox__inner {
+        border-color: var(--vjsf-agent-primary);
+        background: var(--vjsf-agent-primary);
+    }
+    .el-radio__input.is-checked + .el-radio__label,
+    .el-checkbox__input.is-checked + .el-checkbox__label {
+        color: var(--vjsf-agent-primary);
+    }
+    .el-slider__bar {
+        background-color: var(--vjsf-agent-primary);
+    }
+    .el-slider__button {
+        border-color: var(--vjsf-agent-primary);
+    }
+    .el-button {
+        min-height: 30px;
+        padding: 0 9px;
+        border-radius: 8px;
+        border-color: #d7dee8;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .el-button--primary {
+        color: #fff;
+        border-color: var(--vjsf-agent-primary);
+        background: var(--vjsf-agent-primary);
+    }
+    .el-button--primary:hover,
+    .el-button--primary:focus {
+        background: #244ed1;
+        border-color: #244ed1;
+    }
+    .genFormFieldRow {
+        display: block;
+        margin-bottom: 0;
+    }
+    .genFormFieldRow_widget,
+    .genFormFieldRow_widget > .el-form-item {
+        width: 100% !important;
+        flex: none !important;
+    }
+    .genFromWidget_des {
+        width: auto !important;
+        flex: none !important;
+        margin: 0;
+        padding: 0 0 4px var(--vjsf-agent-label);
+        color: #98a4b4;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+    .genFormFieldRow:has(.el-textarea) .genFromWidget_des {
+        padding-left: 0;
+    }
+    .formItemErrorBox {
+        position: static;
+        padding-top: 2px;
+        color: #cf3d4f;
+    }
+    .arrayOrderList_item,
+    .arrayField:not(.genFormItem) {
+        border: 1px solid var(--vjsf-agent-border);
+        border-radius: 8px;
+        background: #fff;
+    }
+    .arrayOrderList_item {
+        padding: 8px 10px 4px;
+        margin-bottom: 8px;
+    }
+    .arrayListItem_index {
+        background: #eef3ff;
+        color: var(--vjsf-agent-primary);
+        border-radius: 6px;
+    }
+    .vjsf-boxed {
+        background: #fff;
+        box-shadow: none;
+        border: 1px solid var(--vjsf-agent-border);
+        border-radius: 8px;
+    }
+    .formFooter_item {
+        border-top: 1px solid #e7ebf1;
+        padding-top: 10px;
+    }
+}

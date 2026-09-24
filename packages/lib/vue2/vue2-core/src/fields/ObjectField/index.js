@@ -59,7 +59,7 @@ export default {
 
         const {
             title, description, showTitle, showDescription, order, fieldClass, fieldAttrs, fieldStyle, onlyShowIfDependent,
-            labelColor, descriptionColor, backgroundColor, boxed
+            labelColor, descriptionColor, backgroundColor, boxed, theme
         } = getUiOptions({
             schema,
             uiSchema,
@@ -107,7 +107,12 @@ export default {
                     boxed,
                     formProps: context.props.formProps
                 },
-                class: { ...context.data.class, ...fieldClass, 'vjsf-boxed': boxed },
+                class: {
+                    ...context.data.class,
+                    ...fieldClass,
+                    'vjsf-boxed': boxed,
+                    'vjsf-theme-agent': theme === 'agent'
+                },
                 attrs: fieldAttrs,
                 style: fieldStyle
             },

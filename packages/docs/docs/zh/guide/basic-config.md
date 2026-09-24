@@ -216,6 +216,15 @@ uiSchema = {
     // 当前字段背景色。可单独使用，也可和 ui:boxed 一起改面板颜色
     'ui:backgroundColor': 'rgba(242,242,242,0.8)',
 
+    // 可选表单样式。写在根 schema 上作用于整张表，写在 object 上只作用于该分组
+    // agent：窄样式，对齐画布调试参考界面（左标签 118px、32px 圆角输入、分组卡片）
+    // 不配置时保持现有 Element 样式
+    'ui:theme': 'agent',
+
+    // 写在根 schema 上时，指定整张表的宽度，例如 '600px'。数字会按 px 处理
+    // 写在具体字段上时，仍只控制该表单项宽度
+    'ui:width': '600px',
+
     'ui:options': {
             // scoped slots 使用render函数来实现
             // 配置 renderScopedSlots 返回对象key为slotName，函数体返回vnode

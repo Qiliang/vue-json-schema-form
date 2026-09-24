@@ -103,33 +103,34 @@
             <el-row :gutter="25">
                 <el-col
                     :class="$style.middleBox"
-                    :span="16"
+                    :span="12"
                 >
-                    <el-row :gutter="6">
-                        <el-col :span="10">
-                            <CodeEditor
-                                v-model="curFormDataCode"
-                                title="FormData"
-                            ></CodeEditor>
-                        </el-col>
-                        <el-col :span="14">
+                    <el-row>
+                        <el-col :span="24">
                             <CodeEditor
                                 v-model="curSchemaCode"
                                 title="Schema"
                             ></CodeEditor>
                         </el-col>
                     </el-row>
-                    <el-row
-                        :gutter="6"
-                        style="margin-top: 10px;"
-                    >
-                        <el-col :span="12">
+                    <el-row style="margin-top: 10px;">
+                        <el-col :span="24">
+                            <CodeEditor
+                                v-model="curFormDataCode"
+                                title="FormData"
+                            ></CodeEditor>
+                        </el-col>
+                    </el-row>
+                    <el-row style="margin-top: 10px;">
+                        <el-col :span="24">
                             <CodeEditor
                                 v-model="curUiSchemaCode"
                                 title="Ui Schema"
                             ></CodeEditor>
                         </el-col>
-                        <el-col :span="12">
+                    </el-row>
+                    <el-row style="margin-top: 10px;">
+                        <el-col :span="24">
                             <CodeEditor
                                 v-model="curErrorSchemaCode"
                                 title="Error Schema"
@@ -139,7 +140,7 @@
                 </el-col>
                 <el-col
                     :class="[$style.middleBox, $style.middleBox_form]"
-                    :span="8"
+                    :span="12"
                 >
                     <el-card
                         shadow="hover"

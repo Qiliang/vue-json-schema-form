@@ -158,9 +158,14 @@ export default function createForm(globalOptions = {}) {
 
             const resolvedLabelColor = labelColor ?? rootUiOptions.labelColor;
             const resolvedDescriptionColor = descriptionColor ?? rootUiOptions.descriptionColor;
+            const isAgentTheme = (rootUiOptions.theme || self.$props.formProps.theme) === 'agent';
             // 根 schema 的 ui:labelWidth / ui:labelPosition 优先于 formProps，避免 demo 滑块等默认值盖掉 schema
-            const resolvedLabelWidth = rootUiOptions.labelWidth ?? uiFormProps.labelWidth;
-            const resolvedLabelPosition = rootUiOptions.labelPosition ?? labelPosition;
+            // agent 是窄样式：未单独指定时使用左标签和 118px 标签列
+            const resolvedLabelWidth = rootUiOptions.labelWidth ?? (isAgentTheme ? '118px' : uiFormProps.labelWidth);
+            const resolvedLabelPosition = rootUiOptions.labelPosition ?? (isAgentTheme ? 'left' : labelPosition);
+            const formWidth = rootUiOptions.width == null || rootUiOptions.width === ''
+                ? undefined
+                : (typeof rootUiOptions.width === 'number' ? `${rootUiOptions.width}px` : String(rootUiOptions.width));
 
             const props = {
                 schema: this.schema,
@@ -182,7 +187,8 @@ export default function createForm(globalOptions = {}) {
                     labelColor: resolvedLabelColor,
                     descriptionColor: resolvedDescriptionColor,
                     labelPosition: resolvedLabelPosition,
-                    ...(resolvedLabelWidth != null && resolvedLabelWidth !== '' ? { labelWidth: resolvedLabelWidth } : {})
+                    ...(resolvedLabelWidth != null && resolvedLabelWidth !== '' ? { labelWidth: resolvedLabelWidth } : {}),
+                    ...(isAgentTheme && labelSuffix == null ? { labelSuffix: '' } : {})
                 }
             };
 
@@ -195,11 +201,14 @@ export default function createForm(globalOptions = {}) {
                         formInline: inline,
                         [`genFromComponent_${this.schema.id}Form`]: !!this.schema.id,
                         layoutColumn: !inline,
-                        [`layoutColumn-${layoutColumn}`]: !inline
+                        [`layoutColumn-${layoutColumn}`]: !inline,
+                        'vjsf-theme-agent': isAgentTheme
                     },
                     style: {
                         ...(resolvedLabelColor ? { '--vjsf-label-color': resolvedLabelColor } : {}),
-                        ...(resolvedDescriptionColor ? { '--vjsf-description-color': resolvedDescriptionColor } : {})
+                        ...(resolvedDescriptionColor ? { '--vjsf-description-color': resolvedDescriptionColor } : {}),
+                        ...(isAgentTheme ? { '--vjsf-agent-label': resolvedLabelWidth || '118px' } : {}),
+                        ...(formWidth ? { width: formWidth, boxSizing: 'border-box' } : {})
                     },
                     nativeOn: {
                         submit(e) {
