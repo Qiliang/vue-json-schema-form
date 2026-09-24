@@ -38,7 +38,8 @@ export default {
                         title: '降噪系数',
                         default: 2,
                         minimum: 0,
-                        maximum: 10
+                        maximum: 10,
+                        'ui:width': '160px'
                     },
                     enhanced: {
                         type: 'boolean',

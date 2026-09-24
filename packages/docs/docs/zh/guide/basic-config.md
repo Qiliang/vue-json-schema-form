@@ -223,6 +223,7 @@ uiSchema = {
 
     // 写在根 schema 上时，指定整张表的宽度，例如 '600px'。数字会按 px 处理
     // 写在具体字段上时，仍只控制该表单项宽度
+    // agent 主题下写在 number / integer 字段上时，改为控制数字输入框宽度，默认 200px
     'ui:width': '600px',
 
     'ui:options': {

@@ -188,7 +188,8 @@ export default function createForm(globalOptions = {}) {
                     descriptionColor: resolvedDescriptionColor,
                     labelPosition: resolvedLabelPosition,
                     ...(resolvedLabelWidth != null && resolvedLabelWidth !== '' ? { labelWidth: resolvedLabelWidth } : {}),
-                    ...(isAgentTheme && labelSuffix == null ? { labelSuffix: '' } : {})
+                    ...(isAgentTheme && labelSuffix == null ? { labelSuffix: '' } : {}),
+                    ...(isAgentTheme ? { theme: 'agent' } : {})
                 }
             };
 

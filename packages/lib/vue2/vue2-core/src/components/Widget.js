@@ -16,6 +16,12 @@ function toCssSize(value) {
     return String(value);
 }
 
+function toCssPx(value) {
+    if (value === undefined || value === null || value === '') return undefined;
+    if (typeof value === 'number') return `${value}px`;
+    return String(value);
+}
+
 function resolveWidgetDesWidths(widgetWidth, descriptionWidth) {
     const widget = toCssSize(widgetWidth);
     const description = toCssSize(descriptionWidth);
@@ -272,6 +278,9 @@ export default {
             ? self.backgroundColor
             : (self.fieldStyle && (self.fieldStyle.backgroundColor || self.fieldStyle.background));
         const boxed = !!self.boxed;
+        const isAgentNumber = self.formProps && self.formProps.theme === 'agent'
+            && self.widget === 'el-input-number';
+        const numberWidth = isAgentNumber ? toCssPx(self.width) : undefined;
         const itemLabelWidth = (self.labelWidth != null && self.labelWidth !== '')
             ? self.labelWidth
             : (self.formProps && self.formProps.labelWidth);
@@ -332,11 +341,12 @@ export default {
         // form-item style
         const formItemStyle = {
             ...self.fieldStyle,
-            ...(self.width ? {
+            ...(self.width && !numberWidth ? {
                 width: self.width,
                 flexBasis: self.width,
                 paddingRight: '10px'
             } : {}),
+            ...(numberWidth ? { '--vjsf-number-width': numberWidth } : {}),
             ...(labelColor ? { '--vjsf-label-color': labelColor } : {}),
             ...(descriptionColor ? { '--vjsf-description-color': descriptionColor } : {}),
             ...(backgroundColor ? {

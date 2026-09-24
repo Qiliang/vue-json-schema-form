@@ -205,7 +205,7 @@
     }
     .el-form-item:has(.el-switch) .el-form-item__content {
         display: flex;
-        justify-content: flex-end;
+        justify-content: flex-start;
     }
     .el-switch__core {
         width: 36px !important;
@@ -229,7 +229,7 @@
         margin-left: -18px;
     }
     .el-input-number {
-        width: 100%;
+        width: var(--vjsf-number-width, 200px);
         line-height: 30px;
     }
     .el-input-number .el-input__inner {
