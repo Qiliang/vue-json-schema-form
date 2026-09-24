@@ -47,7 +47,6 @@ module.exports = {
             },
             { text: 'Playground', link: 'https://form.lljj.me' },
             { text: '表单Schema生成器', link: 'https://form.lljj.me/schema-generator.html' },
-            { text: '活动编辑器', link: 'https://form.lljj.me/vue-editor.html#/editor' },
             { text: 'Github', link: 'https://github.com/lljj-x/vue-json-schema-form' },
         ],
 

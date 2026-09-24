@@ -26,14 +26,6 @@
                     Playground
                 </a>
             </el-menu-item>
-            <el-menu-item index="3">
-                <a
-                    :class="$style.menuLink"
-                    href="/vue-editor.html#/editor"
-                >
-                    活动编辑器
-                </a>
-            </el-menu-item>
             <el-menu-item index="4">
                 <a
                     :class="$style.menuLink"

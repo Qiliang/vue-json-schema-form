@@ -252,9 +252,10 @@ export default {
                 return this.audio.play();
             }).catch((err) => {
                 this.showError((err && err.message) || '试听失败');
-            }).then(() => {
-                this.loading = false;
-            });
+            })
+                .then(() => {
+                    this.loading = false;
+                });
         }
     },
     render() {

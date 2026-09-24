@@ -24,21 +24,15 @@
 
 ## 如何启动相关编辑器页面
 
-![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vue-editor.jpg)
-
-* **_活动编辑器项目已经独立了新的仓库，请直接使用 https://github.com/lljj-x/vjsf-demo-editor_**
-* **_活动编辑器项目已经独立了新的仓库，请直接使用 https://github.com/lljj-x/vjsf-demo-editor_**
-
 1、 安装依赖
 ```ssh
 yarn install
 ```
 
-2、 同时运行 `Playground/表单Schema生成器/活动编辑器`
+2、 同时运行 `Playground/表单Schema生成器`
 ```ssh
 # Playground http://127.0.0.1:8800/
 # 可视化表单Schema编辑器 http://127.0.0.1:8800/schema-generator.html
-# （H5）活动编辑器 http://127.0.0.1:8800/vue-editor.html
 
 yarn run demo:dev
 ```
@@ -50,9 +44,6 @@ yarn run demo:dev --dir=index
 
 # 只运行 表单Schema生成器
 yarn run demo:dev --dir=schema-generator
-
-# 只运行（H5）活动编辑器
-yarn run demo:dev --dir=vue-editor
 ```
 
 ### 说明

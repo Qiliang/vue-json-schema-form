@@ -13,7 +13,6 @@ footer: Apache2.0 Licensed | Copyright © 2020-2023 Jun
 * [Live playground](https://form.lljj.me/ "Vue JSON Schema Form Demo")
 * [Document](https://vue-json-schema-form.lljj.me/ "Vue JSON Schema Docs")
 * [Github](https://github.com/lljj-x/vue-json-schema-form "Vue JSON Schema github")
-* [Usage scenario - visual activity editor](https://form.lljj.me/vue-editor.html)
 * [Partial plan and update plans are not supported](/zh/guide/todo.html)
 
 ``` bash

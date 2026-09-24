@@ -7,7 +7,6 @@ This fork only maintains and publishes the Vue2 + ElementUI package (`@xiaoql/vu
 * [Live playground](https://form.lljj.me/ "Vue JSON Schema Form Demo")
 * [Document](https://vue-json-schema-form.lljj.me/en/ "Vue JSON Schema Docs")
 * [Github](https://github.com/lljj-x/vue-json-schema-form "Vue JSON Schema github")
-* [Usage scenario - visual activity editor](https://form.lljj.me/vue-editor.html)
 * [Todo](https://vue-json-schema-form.lljj.me/en/guide/todo.html)
 
 ![](https://7.luochongfei.top/vue-json-schema-form.gif?1)
@@ -68,16 +67,16 @@ yarn add @xiaoql/vue-json-schema-form
 # Install
 yarn install
 
-# Run (Run form editor and activity editor at the same time)
-# Form editor http://127.0.0.1:8800/
-# Activity editor http://127.0.0.1:8800/vue-editor.html
+# Run playground and schema generator
+# Playground http://127.0.0.1:8800/
+# Schema generator http://127.0.0.1:8800/schema-generator.html
 yarn run demo:dev
 
-# Only run form editor
+# Only run playground
 yarn run demo:dev --dir=index
 
-# Only run activity editor
-yarn run demo:dev --dir=vue-editor
+# Only run schema generator
+yarn run demo:dev --dir=schema-generator
 
 ```
 
