@@ -5,7 +5,6 @@ on:
     branches: [master]
     paths:
       - 'package.json'
-      - 'packages/lib/vue2/vue2-form-element/package.json'
       - 'scripts/publish-npm.js'
       - '.github/workflows/publish.yml'
   workflow_dispatch:
@@ -33,10 +32,10 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build libraries
-        run: yarn lib:build
+      - name: Build
+        run: yarn build
 
-      - name: Publish packages with new versions
+      - name: Publish package when version is new
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: node scripts/publish-npm.js

@@ -1,54 +1,69 @@
 {
-    "private": true,
-    "description": "基于 Vue 、JSON Schema 快速构建一个带完整校验的form表单",
-    "repository": "https://github.com/lljj-x/vue-json-schema-form",
-    "homepage": "https://github.com/lljj-x/vue-json-schema-form",
-    "author": "Liu.Jun",
-    "workspaces": [
-        "packages/lib/utils",
-        "packages/lib/vue2/vue2-core",
-        "packages/lib/vue2/vue2-form-element",
-        "packages/docs",
-        "packages/demo/demo-common",
-        "packages/demo/demo-v2"
+    "name": "@xiaoql/vue2-form-element",
+    "version": "1.21.0",
+    "description": "基于 Vue2、ElementUI、JSON Schema 快速构建带完整校验的 form 表单",
+    "main": "dist/vueJsonSchemaForm.umd.min.js",
+    "module": "dist/vueJsonSchemaForm.esm.min.js",
+    "typings": "types/index.d.ts",
+    "files": [
+        "dist/*.js",
+        "types/*.d.ts"
     ],
     "scripts": {
-        "docs:dev": "yarn workspace docs dev",
-        "docs:build": "yarn workspace docs build",
-        "lib:build": "yarn lib-element:build",
-        "lib-element:watch": "yarn workspace @lljj/vue-json-schema-form watch",
-        "lib-element:build": "yarn workspace @lljj/vue-json-schema-form build",
-        "demo:dev": "yarn workspace demo dev",
-        "demo:build": "yarn workspace demo build",
-        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 2",
-        "clean": "lerna clean && rm -rf node_modules",
-        "packages:diff": "lerna diff",
-        "packages:list": "lerna ls -l",
-        "packages:changed": "lerna changed",
-        "packages:build": "lerna run --stream --sort build",
-        "publish1": "yarn run lib:build && lerna publish",
-        "autoPublish": "lerna publish --conventional-commits --yes",
-        "autoVersion": "lerna version --conventional-commits --yes"
+        "build": "node scripts/build.js",
+        "watch": "node scripts/watch.js",
+        "demo": "python3 -m http.server 4173"
     },
-    "config": {
-        "commitizen": {
-            "path": "./node_modules/cz-conventional-changelog"
-        }
-    },
-    "dependencies": {},
-    "husky": {
-        "hooks": {
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-        }
+    "keywords": [
+        "vue",
+        "vue2",
+        "element-ui",
+        "form",
+        "jsonSchema"
+    ],
+    "peerDependencies": {
+        "vue": "^2.6.10",
+        "element-ui": "^2.13.0"
     },
     "devDependencies": {
-        "@commitlint/cli": "^8.3.5",
-        "@commitlint/config-conventional": "^8.3.4",
-        "commitizen": "^4.1.2",
-        "conventional-changelog-cli": "^2.0.34",
-        "cz-conventional-changelog": "^3.2.0",
-        "husky": "^4.2.5",
-        "lerna": "^3.22.1"
+        "@babel/core": "^7.12.10",
+        "@babel/plugin-proposal-class-properties": "^7.12.1",
+        "@babel/plugin-proposal-decorators": "^7.12.12",
+        "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+        "@babel/preset-env": "^7.12.11",
+        "ajv": "^6.10.2",
+        "cssnano": "^4.1.10",
+        "postcss-color-mod-function": "^3.0.3",
+        "postcss-cssnext": "^3.1.0",
+        "postcss-import": "^12.0.1",
+        "postcss-mixins": "^6.2.0",
+        "postcss-nested": "^4.1.0",
+        "rollup": "^2.12.0",
+        "rollup-plugin-babel": "^4.4.0",
+        "rollup-plugin-commonjs": "^10.1.0",
+        "rollup-plugin-delete": "^1.2.0",
+        "rollup-plugin-filesize": "^9.0.0",
+        "rollup-plugin-json": "^4.0.0",
+        "rollup-plugin-node-resolve": "^5.2.0",
+        "rollup-plugin-postcss": "^3.1.1",
+        "rollup-plugin-terser": "^6.1.0",
+        "rollup-plugin-visualizer": "^4.0.4",
+        "rollup-plugin-vue": "^5.1.9",
+        "vue": "^2.6.10",
+        "vue-template-compiler": "^2.6.10"
     },
-    "version": "0.1.0"
+    "repository": "https://github.com/Qiliang/vue-json-schema-form",
+    "homepage": "https://github.com/Qiliang/vue-json-schema-form",
+    "license": "Apache-2.0",
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
+    "author": "xiaoql",
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ]
 }

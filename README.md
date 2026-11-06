@@ -1,71 +1,78 @@
-## 赞助
-本项目 CDN 加速及安全防护由 [Tencent EdgeOne](https://edgeone.ai/zh?from=github) 赞助
-[![image](https://github.com/user-attachments/assets/9211a407-9b9e-478a-96f3-0828fcf94705)](https://edgeone.ai/zh?from=github)
+# @xiaoql/vue2-form-element
 
-## vue-json-schema-form
+基于 Vue2、[ElementUI](https://element.eleme.io/)、[JSON Schema](https://json-schema.org/understanding-json-schema/index.html) 生成带完整校验的表单。
 
-基于 Vue2、 [JSON Schema](https://json-schema.org/understanding-json-schema/index.html) 生成带完整校验的Form表单，你的 :star2: :star2: :star2: 就是最大的支持
+## 安装
 
-本仓库仅维护并发布 **Vue2 + ElementUI** 版本（npm: `@xiaoql/vue-json-schema-form`）。
+```bash
+npm install @xiaoql/vue2-form-element vue@2 element-ui
+```
 
-[查看文档](https://vue-json-schema-form.lljj.me) - [Playground](https://form.lljj.me) - [可视化表单Schema生成器](https://form.lljj.me/schema-generator.html)
+`vue` 和 `element-ui` 是 peer dependency，需要由业务项目安装。
 
-## ui框架支持
-* [vue2 ElementUi](https://github.com/lljj-x/vue-json-schema-form/tree/master/packages/lib/vue2/vue2-form-element)
+## 使用
 
+```html
+<VueForm
+    v-model="formData"
+    :schema="schema"
+>
+</VueForm>
+```
 
-![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vue-json-schema-form.gif)
+```js
+import VueForm from '@xiaoql/vue2-form-element';
 
-## 问题反馈
+export default {
+    name: 'Demo',
+    components: {
+        VueForm
+    },
+    data() {
+        return {
+            formData: {},
+            schema: {
+                type: 'object',
+                required: ['userName'],
+                properties: {
+                    userName: {
+                        type: 'string',
+                        title: '用户名',
+                        default: 'Liu.Jun'
+                    }
+                }
+            }
+        };
+    }
+};
+```
 
-**使用问题请优先通过 [Github issue](https://github.com/lljj-x/vue-json-schema-form/issues) 提交**
+页面中需要先引入 ElementUI。浏览器直接使用 UMD 时，全局变量名为 `vueJsonSchemaForm`。
 
-![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vjsf11.jpg)
+## CDN 验证页
 
-## 如何启动相关编辑器页面
+先构建，再启动静态服务：
 
-1、 安装依赖
-```ssh
+```bash
+yarn build
+yarn demo
+```
+
+打开 [http://127.0.0.1:4173/demo/](http://127.0.0.1:4173/demo/)。页面通过 jsDelivr 引入 Vue 2 和 Element UI，再用 script 标签引入 `dist/vueJsonSchemaForm.umd.min.js`。发布后可以把该地址换成：
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@xiaoql/vue2-form-element/dist/vueJsonSchemaForm.umd.min.js"></script>
+```
+
+## 本地构建
+
+```bash
 yarn install
+yarn build
 ```
 
-2、 同时运行 `Playground/表单Schema生成器`
-```ssh
-# Playground http://127.0.0.1:8800/
-# 可视化表单Schema编辑器 http://127.0.0.1:8800/schema-generator.html
-
-yarn run demo:dev
-```
-
-3、 单个运行（指定entry编译更快）
-```ssh
-# 只运行 Playground
-yarn run demo:dev --dir=index
-
-# 只运行 表单Schema生成器
-yarn run demo:dev --dir=schema-generator
-```
-
-### 说明
-* 遵循 `JSON Schema` 规范，只需要给定 `JSON Schema`，即可生成对应的form表单
-* 快速配置个性化ui视图和校验错误信息，可适配常用的ui库
-* 表单schema校验使用  [ajv](https://github.com/epoberezkin/ajv)
-* 设计思想和对schema解析索引参考 [react-jsonschema-form](https://github.com/rjsf-team/react-jsonschema-form)
-
-## 相关资料
-[JSON Schema](https://json-schema.org/understanding-json-schema/index.html) |
-[Vue](https://cn.vuejs.org/)
-
-### 为何开发
-在做前端可视化编辑时，为了解决数据配置表单的通用性，所以使用 `JSON Schema` 描述数据结构，动态生成表单。
-
-这样做的好处除了解决在每个配置表单的重复工作，服务端也可以基于同一份schema保持和前端一致的校验规则，不过对于使用 vue elementUi并未找到合适库可以直接使用，所以在后面一段时间决定自己实现一个 。
-
-## 问题或建议
-* [标准 JSON Schema 不支持部分和更新计划](https://vue-json-schema-form.lljj.me/zh/guide/todo.html)
-
-有任何使用问题或者建议都可以通过 [Github issue](https://github.com/lljj-x/vue-json-schema-form/issues) 提交给我
-
+产物在 `dist/`，类型声明在 `types/`。
 
 ## License
+
 Apache-2.0
