@@ -1,0 +1,279 @@
+
+
+
+
+{
+  "title": "活动配置",
+  "description": "顶部是分组标题和说明。ui:layoutColumn 为 2 时字段并排；普通 description 在控件右侧，description2 在标题旁悬停显示。",
+  "type": "object",
+  "required": [
+    "userName",
+    "age"
+  ],
+
+  "ui:layoutColumn": 2,
+  "ui:labelPosition": "top",
+  "ui:labelSuffix": "",
+  "ui:labelColor": "#303133",
+  "ui:descriptionColor": "#909399",
+  "ui:widgetWidth": "62%",
+  "ui:descriptionWidth": "38%",
+"$defs": {
+ "AlwaysUserMuteStrategyParams_v1_0": {
+      "properties": {
+        "name": {
+          "const": "always",
+          "default": "always",
+          "title": "Name",
+          "type": "string",
+          "ui:widget": "HiddenWidget"
+        },
+        "include_llm_request": {
+          "default": false,
+          "description": "启用后，从发起Agent请求开始即不能被打断，而不只是机器人开始说话时。",
+          "title": "包含思考时间",
+          "type": "boolean"
+        },
+        "text_tag_interrupt": {
+          "default": false,
+          "description": "启用后，话术中用 [int]...[/int] 包起来的部分可以被打断，其余部分仍不能打断。欢迎语同样生效。例如：您好，请问您要办理什么业务。[int]您可以对我说，取消订单、查看账号状态等。[/int]",
+          "title": "文本标签打断",
+          "type": "boolean"
+        }
+      },
+      "title": "说话时不能被打断",
+      "type": "object"
+    },"AnytimeInterruptUserMuteStrategyParams_v1_0": {
+      "properties": {
+        "name": {
+          "const": "disabled",
+          "default": "disabled",
+          "title": "Name",
+          "type": "string",
+          "ui:widget": "HiddenWidget"
+        }
+      },
+      "title": "可以随时打断",
+      "type": "object"
+    },"FirstSpeechUserMuteStrategyParams_v1_0": {
+      "properties": {
+        "name": {
+          "const": "first_speech",
+          "default": "first_speech",
+          "title": "Name",
+          "type": "string",
+          "ui:widget": "HiddenWidget"
+        }
+      },
+      "title": "首句不能被打断",
+      "type": "object"
+    }
+
+},
+  "properties": {
+"UserMuteStrategySettings_v1_0": {
+      "properties": {
+        "provider": {
+          "default": {
+            "name": "first_speech"
+          },
+          "description2": "随时打断：用户可随时打断机器人的说话。<br />说话时不能被打断：不能打断机器人说话<br />首句不能打断：机器人首句发言时不能被打断；从第二句开始，用户可打断机器人。",
+          "discriminator": {
+            "mapping": {
+              "always": "#/$defs/AlwaysUserMuteStrategyParams_v1_0",
+              "disabled": "#/$defs/AnytimeInterruptUserMuteStrategyParams_v1_0",
+              "first_speech": "#/$defs/FirstSpeechUserMuteStrategyParams_v1_0"
+            },
+            "propertyName": "name"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AnytimeInterruptUserMuteStrategyParams_v1_0"
+            },
+            {
+              "$ref": "#/$defs/AlwaysUserMuteStrategyParams_v1_0"
+            },
+            {
+              "$ref": "#/$defs/FirstSpeechUserMuteStrategyParams_v1_0"
+            }
+          ],
+          "title": "策略"
+        }
+      },
+      "title": "打断策略配置",
+      "type": "object"
+    },
+    "userName": {
+      "type": "string",
+      "title": "用户名",
+      "minLength": 2,
+      "default": "小明",
+      "description": "右侧说明，至少 2 个字符"
+    },
+    "age": {
+      "type": "integer",
+      "title": "年龄",
+      "minimum": 1,
+      "maximum": 120,
+      "default": 18,
+      "description2": "悬停标题旁的问号查看。整数使用数字输入框。"
+    },
+    "city": {
+      "type": "string",
+      "title": "城市",
+      "enum": [
+        "beijing",
+        "shanghai",
+        "shenzhen"
+      ],
+      "enumNames": [
+        "北京",
+        "上海",
+        "深圳"
+      ],
+      "default": "shanghai",
+      "description": "枚举渲染为下拉框"
+    },
+    "themeColor": {
+      "type": "string",
+      "title": "主题色",
+      "format": "color",
+      "default": "#409EFF",
+      "description": "format: color"
+    },
+    "birthday": {
+      "type": "string",
+      "title": "生日",
+      "format": "date",
+      "description": "format: date"
+    },
+    "agree": {
+      "type": "boolean",
+      "title": "同意协议",
+      "default": false,
+      "description": "布尔值使用开关"
+    },
+    "bio": {
+      "type": "string",
+      "title": "签名",
+      "description": "多行文本占满一行，说明显示在输入框下方",
+      "ui:fieldClass": {
+        "layoutColumn_w100": true
+      },
+      "ui:options": {
+        "placeholder": "请输入签名",
+        "type": "textarea",
+        "rows": 3
+      }
+    },
+    "previewText": {
+      "type": "string",
+      "title": "试听文本",
+      "default": "你好，欢迎使用智能语音。",
+      "description": "文本框加按钮。ui:widget 使用 TtsPreviewWidget，ui:btnText 改按钮文案，ui:action 是点击后请求的地址",
+      "ui:widget": "TtsPreviewWidget",
+      "ui:btnText": "试听",
+      "ui:downloadBtnText": "下载",
+      "ui:rows": 2,
+      "ui:action": "https://example.com/tts/preview",
+      "ui:placeholder": "输入要试听的文本",
+      "ui:fieldClass": {
+        "layoutColumn_w100": true
+      }
+    },
+    "profile": {
+      "type": "object",
+      "title": "联系方式",
+      "description": "嵌套对象单独成组，ui:boxed 打开灰底面板",
+      "ui:boxed": true,
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "邮箱",
+          "format": "email",
+          "description": "需要包含 @"
+        },
+        "phone": {
+          "type": "string",
+          "title": "手机",
+          "pattern": "^1\\d{10}$",
+          "ui:options": {
+            "placeholder": "11 位手机号"
+          }
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "title": "标签",
+      "uniqueItems": true,
+      "description": "多选枚举渲染为复选框",
+      "default": [
+        "dev"
+      ],
+      "ui:fieldClass": {
+        "layoutColumn_w100": true
+      },
+      "items": {
+        "type": "string",
+        "enum": [
+          "design",
+          "dev",
+          "product"
+        ],
+        "enumNames": [
+          "设计",
+          "研发",
+          "产品"
+        ]
+      }
+    },
+    "contacts": {
+      "type": "array",
+      "title": "联系人",
+      "description": "对象数组可以新增、删除和排序",
+      "minItems": 1,
+      "default": [
+        {
+          "name": "小明",
+          "role": "owner"
+        }
+      ],
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "姓名"
+          },
+          "role": {
+            "type": "string",
+            "title": "角色",
+            "enum": [
+              "owner",
+              "member"
+            ],
+            "enumNames": [
+              "负责人",
+              "成员"
+            ],
+            "default": "member"
+          }
+        }
+      }
+    },
+    "traceId": {
+      "type": "string",
+      "title": "追踪 ID",
+      "default": "demo-trace",
+      "ui:hidden": true,
+      "description": "隐藏字段仍会出现在 formData 中"
+    }
+  }
+}

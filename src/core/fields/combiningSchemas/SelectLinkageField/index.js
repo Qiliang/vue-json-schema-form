@@ -45,6 +45,15 @@ export default {
             return getMatchingOption(formData, this.selectList, this.rootSchema, true);
         },
 
+        // oneOf / anyOf 项经常只有 $ref，title 在被引用的定义上
+        resolveOptionSchema(option) {
+            try {
+                return retrieveSchema(option, this.rootSchema) || option;
+            } catch (e) {
+                return option;
+            }
+        },
+
         // 下拉选项 VNode
         getSelectBoxVNode() {
             // 下拉选项参数
@@ -79,7 +88,7 @@ export default {
                 const uiSchemaSelectList = this.uiSchema[this.combiningType] || [];
                 selectWidgetConfig.uiProps.enumOptions = this.selectList.map((option, index) => {
                     const curUiOptions = getUiOptions({
-                        schema: option,
+                        schema: this.resolveOptionSchema(option),
                         uiSchema: uiSchemaSelectList[index],
                         containsSpec: false,
                         // curNodePath: this.curNodePath,

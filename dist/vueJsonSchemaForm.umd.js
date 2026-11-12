@@ -1,4 +1,4 @@
-/** @license @xiaoql/vue2-form-element v1.20.18 (c) 2020-2026 Liu.Jun License: Apache-2.0 */
+/** @license @xiaoql/vue2-form-element v1.21.0 (c) 2020-2026 xiaoql License: Apache-2.0 */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue')) :
   typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory) :
@@ -11480,10 +11480,18 @@
       computedCurSelectIndexByFormData: function computedCurSelectIndexByFormData(formData) {
         return getMatchingOption(formData, this.selectList, this.rootSchema, true);
       },
+      // oneOf / anyOf 项经常只有 $ref，title 在被引用的定义上
+      resolveOptionSchema: function resolveOptionSchema(option) {
+        try {
+          return retrieveSchema(option, this.rootSchema) || option;
+        } catch (e) {
+          return option;
+        }
+      },
       // 下拉选项 VNode
       getSelectBoxVNode: function getSelectBoxVNode() {
-        var _class,
-          _this = this;
+        var _this = this,
+          _class;
         // 下拉选项参数
         var selectWidgetConfig = getWidgetConfig({
           schema: this.schema[this.combiningType + "Select"] || {},
@@ -11519,7 +11527,7 @@
           var uiSchemaSelectList = this.uiSchema[this.combiningType] || [];
           selectWidgetConfig.uiProps.enumOptions = this.selectList.map(function (option, index) {
             var curUiOptions = getUiOptions({
-              schema: option,
+              schema: _this.resolveOptionSchema(option),
               uiSchema: uiSchemaSelectList[index],
               containsSpec: false
               // curNodePath: this.curNodePath,
