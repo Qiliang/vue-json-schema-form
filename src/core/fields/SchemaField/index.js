@@ -35,7 +35,8 @@ export default {
             rootFormData: props.rootFormData,
             rootSchema
         };
-        // 开发模式：根 schema mode 为 dev，且当前节点 dev_show 为 true 时，把原本隐藏的节点显示出来
+        // dev：dev_show 为 true 的隐藏节点显示出来
+        // dev_show_all：所有 HiddenWidget 都显示出来
         const { hidden: hiddenWidget, revealInDev } = resolveHiddenState(hiddenOptions);
         const renderSchema = revealInDev ? omitHiddenWidget(schema) : schema;
         const renderUiSchema = revealInDev ? omitHiddenWidget(props.uiSchema) : props.uiSchema;

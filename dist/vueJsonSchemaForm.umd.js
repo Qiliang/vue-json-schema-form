@@ -1,4 +1,4 @@
-/** @license @xiaoql/vue2-form-element v1.21.2 (c) 2020-2026 xiaoql License: Apache-2.0 */
+/** @license @xiaoql/vue2-form-element v1.21.4 (c) 2020-2026 xiaoql License: Apache-2.0 */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue')) :
   typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory) :
@@ -8285,14 +8285,31 @@
     var options = source['ui:options'];
     return isObject(options) && options[key] === true;
   }
+  function getSchemaMode(rootSchema) {
+    if (rootSchema === void 0) {
+      rootSchema = {};
+    }
+    if (!isObject(rootSchema)) return '';
+    return rootSchema.mode || rootSchema['ui:mode'] || '';
+  }
+  function isHiddenWidgetNode(schema, uiSchema) {
+    if (schema === void 0) {
+      schema = {};
+    }
+    if (uiSchema === void 0) {
+      uiSchema = {};
+    }
+    var widget = isObject(uiSchema) && uiSchema['ui:widget'] || schema['ui:widget'];
+    return widget === 'HiddenWidget' || widget === 'hidden';
+  }
 
   // 根 schema mode 为 dev 时打开开发模式
   function isDevMode(rootSchema) {
     if (rootSchema === void 0) {
       rootSchema = {};
     }
-    if (!isObject(rootSchema)) return false;
-    return rootSchema.mode === 'dev' || rootSchema['ui:mode'] === 'dev';
+    var mode = getSchemaMode(rootSchema);
+    return mode === 'dev' || mode === 'dev_show_all';
   }
 
   // 隐藏节点上显式标记 dev_show，开发模式才显示
@@ -8344,7 +8361,12 @@
       _options$rootSchema = _options.rootSchema,
       rootSchema = _options$rootSchema === void 0 ? {} : _options$rootSchema;
     var configuredHidden = isConfiguredHidden(options);
-    var revealInDev = configuredHidden && isDevMode(rootSchema) && hasDevShow(schema, uiSchema);
+    var mode = getSchemaMode(rootSchema);
+    // dev：只显示标记了 dev_show 的隐藏节点
+    // dev_show_all：所有 HiddenWidget 都显示，标记了 dev_show 的 ui:hidden 节点也显示
+    var revealMarked = (mode === 'dev' || mode === 'dev_show_all') && hasDevShow(schema, uiSchema);
+    var revealAllHiddenWidgets = mode === 'dev_show_all' && isHiddenWidgetNode(schema, uiSchema);
+    var revealInDev = configuredHidden && (revealMarked || revealAllHiddenWidgets);
     return {
       hidden: configuredHidden && !revealInDev,
       revealInDev: revealInDev
@@ -11917,7 +11939,8 @@
         rootFormData: props.rootFormData,
         rootSchema: rootSchema
       };
-      // 开发模式：根 schema mode 为 dev，且当前节点 dev_show 为 true 时，把原本隐藏的节点显示出来
+      // dev：dev_show 为 true 的隐藏节点显示出来
+      // dev_show_all：所有 HiddenWidget 都显示出来
       var _resolveHiddenState = resolveHiddenState(hiddenOptions),
         hiddenWidget = _resolveHiddenState.hidden,
         revealInDev = _resolveHiddenState.revealInDev;

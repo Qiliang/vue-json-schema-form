@@ -50,10 +50,20 @@ function readFlag(source, key) {
     return isObject(options) && options[key] === true;
 }
 
+function getSchemaMode(rootSchema = {}) {
+    if (!isObject(rootSchema)) return '';
+    return rootSchema.mode || rootSchema['ui:mode'] || '';
+}
+
+function isHiddenWidgetNode(schema = {}, uiSchema = {}) {
+    const widget = (isObject(uiSchema) && uiSchema['ui:widget']) || schema['ui:widget'];
+    return widget === 'HiddenWidget' || widget === 'hidden';
+}
+
 // 根 schema mode 为 dev 时打开开发模式
 export function isDevMode(rootSchema = {}) {
-    if (!isObject(rootSchema)) return false;
-    return rootSchema.mode === 'dev' || rootSchema['ui:mode'] === 'dev';
+    const mode = getSchemaMode(rootSchema);
+    return mode === 'dev' || mode === 'dev_show_all';
 }
 
 // 隐藏节点上显式标记 dev_show，开发模式才显示
@@ -92,7 +102,12 @@ function isConfiguredHidden({
 export function resolveHiddenState(options = {}) {
     const { schema = {}, uiSchema = {}, rootSchema = {} } = options;
     const configuredHidden = isConfiguredHidden(options);
-    const revealInDev = configuredHidden && isDevMode(rootSchema) && hasDevShow(schema, uiSchema);
+    const mode = getSchemaMode(rootSchema);
+    // dev：只显示标记了 dev_show 的隐藏节点
+    // dev_show_all：所有 HiddenWidget 都显示，标记了 dev_show 的 ui:hidden 节点也显示
+    const revealMarked = (mode === 'dev' || mode === 'dev_show_all') && hasDevShow(schema, uiSchema);
+    const revealAllHiddenWidgets = mode === 'dev_show_all' && isHiddenWidgetNode(schema, uiSchema);
+    const revealInDev = configuredHidden && (revealMarked || revealAllHiddenWidgets);
     return {
         hidden: configuredHidden && !revealInDev,
         revealInDev
