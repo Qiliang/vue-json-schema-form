@@ -184,6 +184,7 @@
                     },
                     schema: {
                         title: '活动配置',
+                        mode: 'dev',
                         description: '顶部是分组标题和说明。ui:layoutColumn 为 2 时字段并排；普通 description 在控件右侧，description2 在标题旁悬停显示。',
                         type: 'object',
                         required: ['userName', 'age'],
@@ -334,7 +335,23 @@
                                 title: '追踪 ID',
                                 default: 'demo-trace',
                                 'ui:hidden': true,
-                                description: '隐藏字段仍会出现在 formData 中'
+                                dev_show: true,
+                                description: 'ui:hidden。mode 为 dev 且 dev_show 为 true 时显示'
+                            },
+                            strategyName: {
+                                type: 'string',
+                                title: '策略标识',
+                                default: 'first_speech',
+                                'ui:widget': 'HiddenWidget',
+                                dev_show: true,
+                                description: 'HiddenWidget。开发模式显示，去掉 mode 或 dev_show 后重新隐藏'
+                            },
+                            keepHidden: {
+                                type: 'string',
+                                title: '仍然隐藏',
+                                default: 'secret',
+                                'ui:widget': 'HiddenWidget',
+                                description: '没有 dev_show，开发模式也不显示'
                             }
                         }
                     },

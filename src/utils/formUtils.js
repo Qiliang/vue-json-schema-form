@@ -43,8 +43,29 @@ export function replaceArrayIndex({ schema, uiSchema } = {}, index) {
     }, {});
 }
 
-// 是否为 hidden Widget
-export function isHiddenWidget({
+function readFlag(source, key) {
+    if (!isObject(source)) return false;
+    if (source[key] === true) return true;
+    const options = source['ui:options'];
+    return isObject(options) && options[key] === true;
+}
+
+// 根 schema mode 为 dev 时打开开发模式
+export function isDevMode(rootSchema = {}) {
+    if (!isObject(rootSchema)) return false;
+    return rootSchema.mode === 'dev' || rootSchema['ui:mode'] === 'dev';
+}
+
+// 隐藏节点上显式标记 dev_show，开发模式才显示
+export function hasDevShow(schema = {}, uiSchema = {}) {
+    return readFlag(schema, 'dev_show')
+        || readFlag(schema, 'ui:dev_show')
+        || readFlag(uiSchema, 'dev_show')
+        || readFlag(uiSchema, 'ui:dev_show');
+}
+
+// 配置上本来就会隐藏：HiddenWidget 或 ui:hidden
+function isConfiguredHidden({
     schema = {},
     uiSchema = {},
     curNodePath = '',
@@ -65,6 +86,37 @@ export function isHiddenWidget({
             // 配置了常量 ？？
             return hiddenExpression;
         });
+}
+
+// 一次算出是否隐藏，以及是否因开发模式被重新显示
+export function resolveHiddenState(options = {}) {
+    const { schema = {}, uiSchema = {}, rootSchema = {} } = options;
+    const configuredHidden = isConfiguredHidden(options);
+    const revealInDev = configuredHidden && isDevMode(rootSchema) && hasDevShow(schema, uiSchema);
+    return {
+        hidden: configuredHidden && !revealInDev,
+        revealInDev
+    };
+}
+
+// 开发模式里被重新显示出来的隐藏节点
+export function isDevRevealField(options = {}) {
+    return resolveHiddenState(options).revealInDev;
+}
+
+// 是否为 hidden Widget
+export function isHiddenWidget(options = {}) {
+    return resolveHiddenState(options).hidden;
+}
+
+// HiddenWidget 不是真实组件。开发模式显示时去掉它，回退到字段类型默认控件
+export function omitHiddenWidget(schema) {
+    if (!isObject(schema)) return schema;
+    const widget = schema['ui:widget'];
+    if (widget !== 'HiddenWidget' && widget !== 'hidden') return schema;
+    const next = { ...schema };
+    delete next['ui:widget'];
+    return next;
 }
 
 // 解析当前节点 ui field

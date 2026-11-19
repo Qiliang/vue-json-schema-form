@@ -1,4 +1,4 @@
-/** @license @xiaoql/vue2-form-element v1.21.0 (c) 2020-2026 xiaoql License: Apache-2.0 */
+/** @license @xiaoql/vue2-form-element v1.21.2 (c) 2020-2026 xiaoql License: Apache-2.0 */
 import Vue from 'vue';
 
 function _arrayLikeToArray(r, a) {
@@ -8271,9 +8271,35 @@ function replaceArrayIndex(_temp, index) {
     return preVal;
   }, {});
 }
+function readFlag(source, key) {
+  if (!isObject(source)) return false;
+  if (source[key] === true) return true;
+  var options = source['ui:options'];
+  return isObject(options) && options[key] === true;
+}
 
-// 是否为 hidden Widget
-function isHiddenWidget(_ref2) {
+// 根 schema mode 为 dev 时打开开发模式
+function isDevMode(rootSchema) {
+  if (rootSchema === void 0) {
+    rootSchema = {};
+  }
+  if (!isObject(rootSchema)) return false;
+  return rootSchema.mode === 'dev' || rootSchema['ui:mode'] === 'dev';
+}
+
+// 隐藏节点上显式标记 dev_show，开发模式才显示
+function hasDevShow(schema, uiSchema) {
+  if (schema === void 0) {
+    schema = {};
+  }
+  if (uiSchema === void 0) {
+    uiSchema = {};
+  }
+  return readFlag(schema, 'dev_show') || readFlag(schema, 'ui:dev_show') || readFlag(uiSchema, 'dev_show') || readFlag(uiSchema, 'ui:dev_show');
+}
+
+// 配置上本来就会隐藏：HiddenWidget 或 ui:hidden
+function isConfiguredHidden(_ref2) {
   var _ref2$schema = _ref2.schema,
     schema = _ref2$schema === void 0 ? {} : _ref2$schema,
     _ref2$uiSchema = _ref2.uiSchema,
@@ -8295,6 +8321,52 @@ function isHiddenWidget(_ref2) {
     // 配置了常量 ？？
     return hiddenExpression;
   });
+}
+
+// 一次算出是否隐藏，以及是否因开发模式被重新显示
+function resolveHiddenState(options) {
+  if (options === void 0) {
+    options = {};
+  }
+  var _options = options,
+    _options$schema = _options.schema,
+    schema = _options$schema === void 0 ? {} : _options$schema,
+    _options$uiSchema = _options.uiSchema,
+    uiSchema = _options$uiSchema === void 0 ? {} : _options$uiSchema,
+    _options$rootSchema = _options.rootSchema,
+    rootSchema = _options$rootSchema === void 0 ? {} : _options$rootSchema;
+  var configuredHidden = isConfiguredHidden(options);
+  var revealInDev = configuredHidden && isDevMode(rootSchema) && hasDevShow(schema, uiSchema);
+  return {
+    hidden: configuredHidden && !revealInDev,
+    revealInDev: revealInDev
+  };
+}
+
+// 开发模式里被重新显示出来的隐藏节点
+function isDevRevealField(options) {
+  if (options === void 0) {
+    options = {};
+  }
+  return resolveHiddenState(options).revealInDev;
+}
+
+// 是否为 hidden Widget
+function isHiddenWidget(options) {
+  if (options === void 0) {
+    options = {};
+  }
+  return resolveHiddenState(options).hidden;
+}
+
+// HiddenWidget 不是真实组件。开发模式显示时去掉它，回退到字段类型默认控件
+function omitHiddenWidget(schema) {
+  if (!isObject(schema)) return schema;
+  var widget = schema['ui:widget'];
+  if (widget !== 'HiddenWidget' && widget !== 'hidden') return schema;
+  var next = _objectSpread2({}, schema);
+  delete next['ui:widget'];
+  return next;
 }
 
 // 解析当前节点 ui field
@@ -8692,7 +8764,12 @@ function fallbackLabel(oriLabel, isFallback, curNodePath) {
 var formUtils = /*#__PURE__*/Object.freeze({
   __proto__: null,
   replaceArrayIndex: replaceArrayIndex,
+  isDevMode: isDevMode,
+  hasDevShow: hasDevShow,
+  resolveHiddenState: resolveHiddenState,
+  isDevRevealField: isDevRevealField,
   isHiddenWidget: isHiddenWidget,
+  omitHiddenWidget: omitHiddenWidget,
   getUiField: getUiField,
   getUserUiOptions: getUserUiOptions,
   getUiOptions: getUiOptions,
@@ -9253,7 +9330,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z$1 = ".genFromComponent{font-size:14px;line-height:1;word-wrap:break-word;word-break:break-word;padding:0;margin:0}.genFromComponent a,.genFromComponent h1,.genFromComponent h2,.genFromComponent h3,.genFromComponent li,.genFromComponent p,.genFromComponent ul{font-size:14px}.genFromComponent .genFormIcon{width:12px;height:12px;vertical-align:top}.genFromComponent .genFormBtn{display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;background:#fff;border:1px solid #dcdfe6;color:#606266;-webkit-appearance:none;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;outline:none;margin:0;-webkit-transition:.1s;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:12px 20px;font-size:14px;border-radius:4px}.genFromComponent .genFormBtn.is-plain:focus,.genFromComponent .genFormBtn.is-plain:hover{background:#fff;border-color:#409eff;color:#409eff}.genFromComponent .hiddenWidget{display:none}.genFromComponent .fieldGroupWrap+.fieldGroupWrap .fieldGroupWrap_title{margin-top:20px}.genFromComponent .fieldGroupWrap_title{position:relative;display:block;width:100%;line-height:26px;margin-bottom:8px;font-size:15px;font-weight:700;border:0;color:inherit;color:var(--vjsf-label-color,inherit)}.genFromComponent .fieldGroupWrap_des{font-size:12px;line-height:20px;margin-bottom:10px;color:#000;color:var(--vjsf-description-color,#000)}.genFromComponent .genFormFieldRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box;margin-bottom:22px}.genFromComponent .genFormItem input,.genFromComponent .genFormItem textarea{background-color:#fff;background-color:var(--vjsf-background-color,#fff)}.genFromComponent .genFormFieldRow_widget{min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box}.genFromComponent .genFormFieldRow_widget>.el-form-item,.genFromComponent .genFormFieldRow_widget>.genFormItem{width:100%;margin-bottom:0}.genFromComponent .genFormWidgetRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0}.genFromComponent .genFormWidgetRow>:first-child{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow--block{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.genFromComponent .genFromWidget_des{padding:0 0 0 12px;margin:0;color:#000;color:var(--vjsf-description-color,#000);min-width:0}.genFromComponent .genFromWidget_des,.genFromComponent .genFromWidget_des2{font-size:12px;line-height:20px;text-align:left;-webkit-box-sizing:border-box;box-sizing:border-box;word-break:break-word}.genFromComponent .genFromWidget_des2{padding:0;margin-top:0;margin-bottom:2px;color:#999;color:var(--vjsf-description-color,#999);width:100%;-ms-flex-negative:0;flex-shrink:0}.genFromComponent .genFormWidgetRow--block .genFromWidget_des{margin:8px 0 0;padding:0;width:100%;max-width:100%}.genFromComponent.el-form--label-top .genFormFieldRow{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.genFromComponent.el-form--label-top .genFormFieldRow .genFromWidget_des{padding-bottom:10px}.genFromComponent .formItemErrorBox{margin:0 auto;color:#ff5757;padding-top:2px;position:absolute;top:100%;left:0;display:-webkit-box!important;line-height:16px;text-overflow:ellipsis;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:1;white-space:normal;font-size:12px;text-align:left}.genFromComponent .genFormIcon-qs{fill:#606266;vertical-align:middle;display:inline-block;width:16px;height:16px;margin-left:2px;margin-top:-2px;cursor:pointer}.genFromComponent .genFormItemRequired:before{content:\"*\";color:#f56c6c;margin-right:4px}.genFromComponent .appendCombining_box{margin-bottom:22px}.genFromComponent .vjsf-boxed{margin-bottom:22px;padding:10px;background:hsla(0,0%,94.9%,.8);background:var(--vjsf-background-color,hsla(0,0%,94.9%,.8));-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .vjsf-boxed .vjsf-boxed{margin-bottom:10px}.genFromComponent .vjsf-boxed .vjsf-boxed>.el-form-item,.genFromComponent .vjsf-boxed .vjsf-boxed>.genFormFieldRow_widget>.el-form-item{background:transparent;-webkit-box-shadow:none;box-shadow:none;padding:0}.genFromComponent .validateWidget{margin-bottom:0!important;width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important;padding:0!important}.genFromComponent .validateWidget .formItemErrorBox{padding:5px 0;position:relative}.genFromComponent .arrayField:not(.genFormItem){margin-bottom:22px}.genFromComponent .arrayField:not(.genFormItem) .arrayField{margin-bottom:10px}.genFromComponent .arrayOrderList_item{position:relative;padding:25px 10px 12px;border-radius:2px;margin-bottom:6px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.genFromComponent .arrayOrderList_bottomAddBtn{text-align:right;padding:15px 10px;margin-bottom:10px}.genFromComponent .bottomAddBtn{width:40%;min-width:10px;max-width:180px}.genFromComponent .arrayListItem_content{padding-top:15px;-webkit-box-flex:1;-ms-flex:1;flex:1;margin:0 auto;-webkit-box-shadow:0 -1px 0 0 rgba(0,0,0,.05);box-shadow:0 -1px 0 0 rgba(0,0,0,.05)}.genFromComponent .arrayListItem_index,.genFromComponent .arrayListItem_operateTool{position:absolute;height:25px}.genFromComponent .arrayListItem_index{top:6px;line-height:18px;height:18px;padding:0 6px;background-color:rgba(0,0,0,.28);color:#fff;font-size:12px;border-radius:2px}.genFromComponent .arrayListItem_operateTool{width:75px;right:9px;top:-1px;text-align:right;font-size:0}.genFromComponent .arrayListItem_btn{vertical-align:top;display:inline-block;padding:6px;margin:0;font-size:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none;border:none;cursor:pointer;text-align:center;background:transparent;color:#666}.genFromComponent .arrayListItem_btn:hover{opacity:.6}.genFromComponent .arrayListItem_btn[disabled]{color:#999;opacity:.3!important;cursor:not-allowed}.genFromComponent .arrayListItem_orderBtn-bottom,.genFromComponent .arrayListItem_orderBtn-top{background-color:#f0f9eb}.genFromComponent .arrayListItem_btn-delete{background-color:#fef0f0}.genFromComponent .formFooter_item{text-align:right;border-top:1px solid rgba(0,0,0,.08);padding-top:10px}.genFromComponent.formInlineFooter>.fieldGroupWrap{display:inline-block;margin-right:10px}.genFromComponent.formInline .validateWidget{margin-right:0}.genFromComponent.formInline .formFooter_item{border-top:none;padding-top:0}.genFromWidget_des_mini{font-size:14px;line-height:1.5715}:root{--width-column-gutter:10px}.layoutColumn .layoutColumn_w100{width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important}.layoutColumn .fieldGroupWrap_box{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-ms-flex-line-pack:start;align-content:flex-start}.layoutColumn .fieldGroupWrap_box>div{width:100%;-ms-flex-preferred-size:100%;flex-basis:100%}.layoutColumn .fieldGroupWrap_box>.genFormItem{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-webkit-box-sizing:border-box;box-sizing:border-box;padding-right:10px;padding-right:var(--width-column-gutter)}.layoutColumn.layoutColumn-1 .fieldGroupWrap_box>.genFormItem{padding-right:0}.layoutColumn.layoutColumn-2 .fieldGroupWrap_box>.genFormItem{width:50%;-ms-flex-preferred-size:50%;flex-basis:50%}.layoutColumn.layoutColumn-3 .fieldGroupWrap_box>.genFormItem{width:33.333%;-ms-flex-preferred-size:33.333%;flex-basis:33.333%}";
+var css_248z$1 = ".genFromComponent{font-size:14px;line-height:1;word-wrap:break-word;word-break:break-word;padding:0;margin:0}.genFromComponent a,.genFromComponent h1,.genFromComponent h2,.genFromComponent h3,.genFromComponent li,.genFromComponent p,.genFromComponent ul{font-size:14px}.genFromComponent .genFormIcon{width:12px;height:12px;vertical-align:top}.genFromComponent .genFormBtn{display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;background:#fff;border:1px solid #dcdfe6;color:#606266;-webkit-appearance:none;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;outline:none;margin:0;-webkit-transition:.1s;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:12px 20px;font-size:14px;border-radius:4px}.genFromComponent .genFormBtn.is-plain:focus,.genFromComponent .genFormBtn.is-plain:hover{background:#fff;border-color:#409eff;color:#409eff}.genFromComponent .hiddenWidget{display:none}.genFromComponent .devShowField{outline:1px dashed #e6a23c;outline-offset:2px;border-radius:4px}.genFromComponent .fieldGroupWrap+.fieldGroupWrap .fieldGroupWrap_title{margin-top:20px}.genFromComponent .fieldGroupWrap_title{position:relative;display:block;width:100%;line-height:26px;margin-bottom:8px;font-size:15px;font-weight:700;border:0;color:inherit;color:var(--vjsf-label-color,inherit)}.genFromComponent .fieldGroupWrap_des{font-size:12px;line-height:20px;margin-bottom:10px;color:#000;color:var(--vjsf-description-color,#000)}.genFromComponent .genFormFieldRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box;margin-bottom:22px}.genFromComponent .genFormItem input,.genFromComponent .genFormItem textarea{background-color:#fff;background-color:var(--vjsf-background-color,#fff)}.genFromComponent .genFormFieldRow_widget{min-width:0;-webkit-box-sizing:border-box;box-sizing:border-box}.genFromComponent .genFormFieldRow_widget>.el-form-item,.genFromComponent .genFormFieldRow_widget>.genFormItem{width:100%;margin-bottom:0}.genFromComponent .genFormWidgetRow{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;min-width:0}.genFromComponent .genFormWidgetRow>:first-child{-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;min-width:0}.genFromComponent .genFormWidgetRow--block{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.genFromComponent .genFromWidget_des{padding:0 0 0 12px;margin:0;color:#000;color:var(--vjsf-description-color,#000);min-width:0}.genFromComponent .genFromWidget_des,.genFromComponent .genFromWidget_des2{font-size:12px;line-height:20px;text-align:left;-webkit-box-sizing:border-box;box-sizing:border-box;word-break:break-word}.genFromComponent .genFromWidget_des2{padding:0;margin-top:0;margin-bottom:2px;color:#999;color:var(--vjsf-description-color,#999);width:100%;-ms-flex-negative:0;flex-shrink:0}.genFromComponent .genFormWidgetRow--block .genFromWidget_des{margin:8px 0 0;padding:0;width:100%;max-width:100%}.genFromComponent.el-form--label-top .genFormFieldRow{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.genFromComponent.el-form--label-top .genFormFieldRow .genFromWidget_des{padding-bottom:10px}.genFromComponent .formItemErrorBox{margin:0 auto;color:#ff5757;padding-top:2px;position:absolute;top:100%;left:0;display:-webkit-box!important;line-height:16px;text-overflow:ellipsis;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:1;white-space:normal;font-size:12px;text-align:left}.genFromComponent .genFormIcon-qs{fill:#606266;vertical-align:middle;display:inline-block;width:16px;height:16px;margin-left:2px;margin-top:-2px;cursor:pointer}.genFromComponent .genFormItemRequired:before{content:\"*\";color:#f56c6c;margin-right:4px}.genFromComponent .appendCombining_box{margin-bottom:22px}.genFromComponent .vjsf-boxed{margin-bottom:22px;padding:10px;background:hsla(0,0%,94.9%,.8);background:var(--vjsf-background-color,hsla(0,0%,94.9%,.8));-webkit-box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 0 3px 1px rgba(0,0,0,.1)}.genFromComponent .vjsf-boxed .vjsf-boxed{margin-bottom:10px}.genFromComponent .vjsf-boxed .vjsf-boxed>.el-form-item,.genFromComponent .vjsf-boxed .vjsf-boxed>.genFormFieldRow_widget>.el-form-item{background:transparent;-webkit-box-shadow:none;box-shadow:none;padding:0}.genFromComponent .validateWidget{margin-bottom:0!important;width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important;padding:0!important}.genFromComponent .validateWidget .formItemErrorBox{padding:5px 0;position:relative}.genFromComponent .arrayField:not(.genFormItem){margin-bottom:22px}.genFromComponent .arrayField:not(.genFormItem) .arrayField{margin-bottom:10px}.genFromComponent .arrayOrderList_item{position:relative;padding:25px 10px 12px;border-radius:2px;margin-bottom:6px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.genFromComponent .arrayOrderList_bottomAddBtn{text-align:right;padding:15px 10px;margin-bottom:10px}.genFromComponent .bottomAddBtn{width:40%;min-width:10px;max-width:180px}.genFromComponent .arrayListItem_content{padding-top:15px;-webkit-box-flex:1;-ms-flex:1;flex:1;margin:0 auto;-webkit-box-shadow:0 -1px 0 0 rgba(0,0,0,.05);box-shadow:0 -1px 0 0 rgba(0,0,0,.05)}.genFromComponent .arrayListItem_index,.genFromComponent .arrayListItem_operateTool{position:absolute;height:25px}.genFromComponent .arrayListItem_index{top:6px;line-height:18px;height:18px;padding:0 6px;background-color:rgba(0,0,0,.28);color:#fff;font-size:12px;border-radius:2px}.genFromComponent .arrayListItem_operateTool{width:75px;right:9px;top:-1px;text-align:right;font-size:0}.genFromComponent .arrayListItem_btn{vertical-align:top;display:inline-block;padding:6px;margin:0;font-size:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none;border:none;cursor:pointer;text-align:center;background:transparent;color:#666}.genFromComponent .arrayListItem_btn:hover{opacity:.6}.genFromComponent .arrayListItem_btn[disabled]{color:#999;opacity:.3!important;cursor:not-allowed}.genFromComponent .arrayListItem_orderBtn-bottom,.genFromComponent .arrayListItem_orderBtn-top{background-color:#f0f9eb}.genFromComponent .arrayListItem_btn-delete{background-color:#fef0f0}.genFromComponent .formFooter_item{text-align:right;border-top:1px solid rgba(0,0,0,.08);padding-top:10px}.genFromComponent.formInlineFooter>.fieldGroupWrap{display:inline-block;margin-right:10px}.genFromComponent.formInline .validateWidget{margin-right:0}.genFromComponent.formInline .formFooter_item{border-top:none;padding-top:0}.genFromWidget_des_mini{font-size:14px;line-height:1.5715}:root{--width-column-gutter:10px}.layoutColumn .layoutColumn_w100{width:100%!important;-ms-flex-preferred-size:100%!important;flex-basis:100%!important}.layoutColumn .fieldGroupWrap_box{width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-ms-flex-line-pack:start;align-content:flex-start}.layoutColumn .fieldGroupWrap_box>div{width:100%;-ms-flex-preferred-size:100%;flex-basis:100%}.layoutColumn .fieldGroupWrap_box>.genFormItem{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-webkit-box-sizing:border-box;box-sizing:border-box;padding-right:10px;padding-right:var(--width-column-gutter)}.layoutColumn.layoutColumn-1 .fieldGroupWrap_box>.genFormItem{padding-right:0}.layoutColumn.layoutColumn-2 .fieldGroupWrap_box>.genFormItem{width:50%;-ms-flex-preferred-size:50%;flex-basis:50%}.layoutColumn.layoutColumn-3 .fieldGroupWrap_box>.genFormItem{width:33.333%;-ms-flex-preferred-size:33.333%;flex-basis:33.333%}";
 styleInject(css_248z$1);
 
 /**
@@ -11821,34 +11898,40 @@ var SchemaField = {
     // const schema = retrieveSchema(props.schema, rootSchema, formData);
     var schema = retrieveSchema(props.schema, rootSchema);
 
-    // 当前参数
-    var curProps = _objectSpread2(_objectSpread2({}, props), {}, {
-      schema: schema
-    });
-
     // 空数据
     if (Object.keys(schema).length === 0) {
       return null;
     }
+    var hiddenOptions = {
+      schema: schema,
+      uiSchema: props.uiSchema,
+      curNodePath: props.curNodePath,
+      rootFormData: props.rootFormData,
+      rootSchema: rootSchema
+    };
+    // 开发模式：根 schema mode 为 dev，且当前节点 dev_show 为 true 时，把原本隐藏的节点显示出来
+    var _resolveHiddenState = resolveHiddenState(hiddenOptions),
+      hiddenWidget = _resolveHiddenState.hidden,
+      revealInDev = _resolveHiddenState.revealInDev;
+    var renderSchema = revealInDev ? omitHiddenWidget(schema) : schema;
+    var renderUiSchema = revealInDev ? omitHiddenWidget(props.uiSchema) : props.uiSchema;
+
+    // 当前参数
+    var curProps = _objectSpread2(_objectSpread2({}, props), {}, {
+      schema: renderSchema,
+      uiSchema: renderUiSchema
+    });
 
     // 获取节点Ui配置渲染field组件
     var _getUiField = getUiField(FIELDS_MAP, curProps),
       fieldComponent = _getUiField.field,
       fieldProps = _getUiField.fieldProps;
-
-    // hidden
-    var hiddenWidget = isHiddenWidget({
-      schema: schema,
-      uiSchema: props.uiSchema,
-      curNodePath: props.curNodePath,
-      rootFormData: props.rootFormData
-    });
     var pathClassName = nodePath2ClassName(props.curNodePath);
     if (schema.anyOf && schema.anyOf.length > 0 && !isSelect(schema)) {
       var _class;
       // anyOf
       return h(FIELDS_MAP.anyOf, {
-        class: (_class = {}, _class[pathClassName + "-anyOf"] = true, _class.fieldItem = true, _class.anyOfField = true, _class),
+        class: (_class = {}, _class[pathClassName + "-anyOf"] = true, _class.fieldItem = true, _class.anyOfField = true, _class.devShowField = revealInDev, _class),
         props: curProps
       });
     }
@@ -11856,7 +11939,7 @@ var SchemaField = {
       var _class2;
       // oneOf
       return h(FIELDS_MAP.oneOf, {
-        class: (_class2 = {}, _class2[pathClassName + "-oneOf"] = true, _class2.fieldItem = true, _class2.oneOfField = true, _class2),
+        class: (_class2 = {}, _class2[pathClassName + "-oneOf"] = true, _class2.fieldItem = true, _class2.oneOfField = true, _class2.devShowField = revealInDev, _class2),
         props: curProps
       });
     }
@@ -11864,7 +11947,7 @@ var SchemaField = {
       props: _objectSpread2(_objectSpread2({}, curProps), {}, {
         fieldProps: fieldProps
       }),
-      class: _objectSpread2(_objectSpread2({}, context.data.class), {}, (_objectSpread2$1 = {}, _objectSpread2$1[lowerCase(fieldComponent.name) || fieldComponent] = true, _objectSpread2$1.hiddenWidget = hiddenWidget, _objectSpread2$1.fieldItem = true, _objectSpread2$1[pathClassName] = true, _objectSpread2$1))
+      class: _objectSpread2(_objectSpread2({}, context.data.class), {}, (_objectSpread2$1 = {}, _objectSpread2$1[lowerCase(fieldComponent.name) || fieldComponent] = true, _objectSpread2$1.hiddenWidget = hiddenWidget, _objectSpread2$1.devShowField = revealInDev, _objectSpread2$1.fieldItem = true, _objectSpread2$1[pathClassName] = true, _objectSpread2$1))
     }) : null;
   }
 };

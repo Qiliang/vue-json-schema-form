@@ -4,6 +4,7 @@
 
 {
   "title": "活动配置",
+  "mode": "dev",
   "description": "顶部是分组标题和说明。ui:layoutColumn 为 2 时字段并排；普通 description 在控件右侧，description2 在标题旁悬停显示。",
   "type": "object",
   "required": [
@@ -26,7 +27,8 @@
           "default": "always",
           "title": "Name",
           "type": "string",
-          "ui:widget": "HiddenWidget"
+          "ui:widget": "HiddenWidget",
+          "dev_show": true
         },
         "include_llm_request": {
           "default": false,
@@ -50,7 +52,8 @@
           "default": "disabled",
           "title": "Name",
           "type": "string",
-          "ui:widget": "HiddenWidget"
+          "ui:widget": "HiddenWidget",
+          "dev_show": true
         }
       },
       "title": "可以随时打断",
@@ -62,7 +65,8 @@
           "default": "first_speech",
           "title": "Name",
           "type": "string",
-          "ui:widget": "HiddenWidget"
+          "ui:widget": "HiddenWidget",
+          "dev_show": true
         }
       },
       "title": "首句不能被打断",
@@ -273,7 +277,8 @@
       "title": "追踪 ID",
       "default": "demo-trace",
       "ui:hidden": true,
-      "description": "隐藏字段仍会出现在 formData 中"
+      "dev_show": true,
+      "description": "隐藏字段仍会出现在 formData 中。mode 为 dev 且 dev_show 为 true 时显示"
     }
   }
 }

@@ -52,6 +52,11 @@
     .hiddenWidget {
         display: none;
     }
+    .devShowField {
+        outline: 1px dashed #e6a23c;
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
     .fieldGroupWrap+.fieldGroupWrap {
         .fieldGroupWrap_title {
             margin-top: 20px;

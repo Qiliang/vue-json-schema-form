@@ -2,7 +2,9 @@
  * Created by Liu.Jun on 2020/4/20 9:55 下午.
  */
 
-import { getUiField, isSelect, isHiddenWidget } from '../../../utils/formUtils';
+import {
+    getUiField, isSelect, resolveHiddenState, omitHiddenWidget
+} from '../../../utils/formUtils';
 import { nodePath2ClassName } from '../../../utils/vueUtils';
 import { lowerCase } from '../../../utils/utils';
 import retrieveSchema from '../../../utils/schema/retriev';
@@ -21,30 +23,35 @@ export default {
         // const schema = retrieveSchema(props.schema, rootSchema, formData);
         const schema = retrieveSchema(props.schema, rootSchema);
 
-        // 当前参数
-        const curProps = {
-            ...props,
-            schema
-        };
-
         // 空数据
         if (Object.keys(schema).length === 0) {
             return null;
         }
+
+        const hiddenOptions = {
+            schema,
+            uiSchema: props.uiSchema,
+            curNodePath: props.curNodePath,
+            rootFormData: props.rootFormData,
+            rootSchema
+        };
+        // 开发模式：根 schema mode 为 dev，且当前节点 dev_show 为 true 时，把原本隐藏的节点显示出来
+        const { hidden: hiddenWidget, revealInDev } = resolveHiddenState(hiddenOptions);
+        const renderSchema = revealInDev ? omitHiddenWidget(schema) : schema;
+        const renderUiSchema = revealInDev ? omitHiddenWidget(props.uiSchema) : props.uiSchema;
+
+        // 当前参数
+        const curProps = {
+            ...props,
+            schema: renderSchema,
+            uiSchema: renderUiSchema
+        };
 
         // 获取节点Ui配置渲染field组件
         const {
             field: fieldComponent,
             fieldProps
         } = getUiField(FIELDS_MAP, curProps);
-
-        // hidden
-        const hiddenWidget = isHiddenWidget({
-            schema,
-            uiSchema: props.uiSchema,
-            curNodePath: props.curNodePath,
-            rootFormData: props.rootFormData
-        });
 
         const pathClassName = nodePath2ClassName(props.curNodePath);
 
@@ -54,7 +61,8 @@ export default {
                 class: {
                     [`${pathClassName}-anyOf`]: true,
                     fieldItem: true,
-                    anyOfField: true
+                    anyOfField: true,
+                    devShowField: revealInDev
                 },
                 props: curProps
             });
@@ -64,7 +72,8 @@ export default {
                 class: {
                     [`${pathClassName}-oneOf`]: true,
                     fieldItem: true,
-                    oneOfField: true
+                    oneOfField: true,
+                    devShowField: revealInDev
                 },
                 props: curProps
             });
@@ -78,6 +87,7 @@ export default {
                 ...context.data.class,
                 [lowerCase(fieldComponent.name) || fieldComponent]: true,
                 hiddenWidget,
+                devShowField: revealInDev,
                 fieldItem: true,
                 [pathClassName]: true
             }
